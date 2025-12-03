@@ -46,5 +46,10 @@ namespace Proyecto_Final_PrograIV
         {
 
         }
+
+        private void ticketsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
