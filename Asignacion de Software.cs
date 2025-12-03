@@ -16,5 +16,10 @@ namespace Proyecto_Final_PrograIV
         {
             InitializeComponent();
         }
+
+        private void btnAcrualizar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
