@@ -77,6 +77,7 @@
             this.btnIniciar.TabIndex = 4;
             this.btnIniciar.Text = "Iniciar Sesión";
             this.btnIniciar.UseVisualStyleBackColor = true;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
             // 
             // btnSalir
             // 

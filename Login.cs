@@ -16,5 +16,10 @@ namespace Proyecto_Final_PrograIV
         {
             InitializeComponent();
         }
+
+        private void btnIniciar_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
