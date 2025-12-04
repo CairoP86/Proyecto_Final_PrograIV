@@ -76,7 +76,7 @@
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(103, 334);
+            this.btnIngresar.Location = new System.Drawing.Point(54, 295);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(79, 28);
             this.btnIngresar.TabIndex = 5;
@@ -86,7 +86,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(207, 334);
+            this.btnSalir.Location = new System.Drawing.Point(207, 295);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(85, 28);
             this.btnSalir.TabIndex = 6;
@@ -101,7 +101,7 @@
             this.textBox1.Size = new System.Drawing.Size(238, 22);
             this.textBox1.TabIndex = 3;
             // 
-            // Form1
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -114,7 +114,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "Login";
             this.Text = "Sistema de Tickets";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
