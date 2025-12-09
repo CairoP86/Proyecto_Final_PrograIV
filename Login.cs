@@ -17,9 +17,9 @@ namespace Proyecto_Final_PrograIV
             InitializeComponent();
         }
 
-        // ============================================================
+        
         // LOAD
-        // ============================================================
+        
         private void Login_Load(object sender, EventArgs e)
         {
             SetPlaceholder(txtCedula, "Ejemplo: 050112233");
@@ -31,9 +31,9 @@ namespace Proyecto_Final_PrograIV
         }
 
 
-        // ============================================================
+        
         // BOTÓN INICIAR SESIÓN
-        // ============================================================
+       
         private void btnIniciar_Click(object sender, EventArgs e)
         {
             string cedula = txtCedula.Text.Trim();
@@ -54,17 +54,16 @@ namespace Proyecto_Final_PrograIV
         }
 
            
-        // ============================================================
+       
         // BOTÓN SALIR
-        // ============================================================
+      
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        // ============================================================
         // PLACEHOLDER FUNCTIONS
-        // ============================================================
+        
         private void SetPlaceholder(TextBox txt, string placeholder)
         {
             if (string.IsNullOrWhiteSpace(txt.Text))
@@ -83,44 +82,26 @@ namespace Proyecto_Final_PrograIV
             }
         }
 
-        // ============================================================
+        
         // CÉDULA EVENTS
-        // ============================================================
+        
         private void txtCedula_Enter(object sender, EventArgs e)
         {
             RemovePlaceholder(txtCedula, "Ejemplo: 050112233");
         }
 
-        private void txtCedula_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        // ============================================================
+        
         // CONTRASEÑA EVENTS
-        // ============================================================
+       
         private void txtClave_Enter(object sender, EventArgs e)
         {
-            if (txtClave.Text == "Ingrese su contraseña")
-            {
-                txtClave.Clear();
-                txtClave.ForeColor = Color.Black;
 
-                // 🔥 ESTE ES EL QUE SIEMPRE OCULTA
-                txtClave.UseSystemPasswordChar = true;
-            }
         }
 
 
         private void txtClave_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtClave.Text))
-            {
-                // 🔥 Placeholder visible sin ocultar
-                txtClave.UseSystemPasswordChar = false;
-                txtClave.Text = "Ingrese su contraseña";
-                txtClave.ForeColor = Color.Gray;
-            }
+
         }
 
         private void btnSalir_Click_1(object sender, EventArgs e)

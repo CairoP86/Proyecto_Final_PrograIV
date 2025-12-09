@@ -43,6 +43,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRol = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFechaHora = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +76,7 @@
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
             this.menuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip2.Size = new System.Drawing.Size(967, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(817, 28);
             this.menuStrip2.TabIndex = 4;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -146,6 +147,7 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
+            this.toolStripStatusLabelUsuario,
             this.toolStripStatusLabelRol,
             this.toolStripStatusLabelFechaHora});
             this.statusStrip1.Location = new System.Drawing.Point(0, 624);
@@ -164,14 +166,20 @@
             // toolStripStatusLabelRol
             // 
             this.toolStripStatusLabelRol.Name = "toolStripStatusLabelRol";
-            this.toolStripStatusLabelRol.Size = new System.Drawing.Size(63, 20);
-            this.toolStripStatusLabelRol.Text = "Usuario ";
+            this.toolStripStatusLabelRol.Size = new System.Drawing.Size(31, 20);
+            this.toolStripStatusLabelRol.Text = "Rol";
             // 
             // toolStripStatusLabelFechaHora
             // 
             this.toolStripStatusLabelFechaHora.Name = "toolStripStatusLabelFechaHora";
             this.toolStripStatusLabelFechaHora.Size = new System.Drawing.Size(83, 20);
             this.toolStripStatusLabelFechaHora.Text = "Fecha/hora";
+            // 
+            // toolStripStatusLabelUsuario
+            // 
+            this.toolStripStatusLabelUsuario.Name = "toolStripStatusLabelUsuario";
+            this.toolStripStatusLabelUsuario.Size = new System.Drawing.Size(59, 20);
+            this.toolStripStatusLabelUsuario.Text = "Usuario";
             // 
             // Principal
             // 
@@ -211,5 +219,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFechaHora;
         private System.Windows.Forms.ToolStripMenuItem instalacionDeSoftwareToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUsuario;
     }
 }

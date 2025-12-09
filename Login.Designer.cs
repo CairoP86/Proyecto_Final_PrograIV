@@ -43,7 +43,7 @@
             this.label1.Location = new System.Drawing.Point(83, 149);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 20);
+            this.label1.Size = new System.Drawing.Size(53, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Cedula:";
             // 
@@ -64,6 +64,8 @@
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(275, 22);
             this.txtCedula.TabIndex = 2;
+            this.txtCedula.Enter += new System.EventHandler(this.Login_Load);
+            this.txtCedula.Leave += new System.EventHandler(this.txtCedula_Enter);
             // 
             // txtClave
             // 
@@ -72,6 +74,8 @@
             this.txtClave.Name = "txtClave";
             this.txtClave.Size = new System.Drawing.Size(275, 22);
             this.txtClave.TabIndex = 3;
+            this.txtClave.Enter += new System.EventHandler(this.txtCedula_Enter);
+            this.txtClave.Leave += new System.EventHandler(this.txtClave_Leave);
             // 
             // btnIniciar
             // 

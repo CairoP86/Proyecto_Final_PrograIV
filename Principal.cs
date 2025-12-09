@@ -59,7 +59,7 @@ namespace Proyecto_Final_PrograIV
             UsuarioDAO dao = new UsuarioDAO();
             string nombreUsuario = dao.ObtenerNombreUsuario(cedulaUsuario);
 
-            toolStripStatusLabelRol.Text = $"Usuario: {nombreUsuario}";
+            toolStripStatusLabelUsuario.Text = $"Usuario: {nombreUsuario}";
             toolStripStatusLabelRol.Text = $"Rol: {rolUsuario}";
 
             toolStripStatusLabelFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
@@ -76,7 +76,7 @@ namespace Proyecto_Final_PrograIV
 
 
 
-        // ============================
+       
         // MÉTODO SEGURO PARA ABRIR FORMULARIOS
         // ============================
         private void AbrirFormulario(Form form)
