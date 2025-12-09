@@ -21,5 +21,10 @@ namespace Proyecto_Final_PrograIV
         {
             
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
