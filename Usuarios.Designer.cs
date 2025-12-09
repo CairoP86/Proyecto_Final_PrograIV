@@ -31,6 +31,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cmbRol = new System.Windows.Forms.ComboBox();
+            this.txtClave = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtCedula = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -44,22 +48,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvDatosUsuario = new System.Windows.Forms.DataGridView();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtClave = new System.Windows.Forms.TextBox();
-            this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.actualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosUsuario)).BeginInit();
-            this.statusStrip1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -106,12 +97,51 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // cmbRol
+            // 
+            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRol.FormattingEnabled = true;
+            this.cmbRol.Items.AddRange(new object[] {
+            "Empleado",
+            "Tecnico",
+            "TI"});
+            this.cmbRol.Location = new System.Drawing.Point(138, 292);
+            this.cmbRol.Name = "cmbRol";
+            this.cmbRol.Size = new System.Drawing.Size(199, 24);
+            this.cmbRol.TabIndex = 19;
+            // 
+            // txtClave
+            // 
+            this.txtClave.Location = new System.Drawing.Point(138, 247);
+            this.txtClave.Name = "txtClave";
+            this.txtClave.Size = new System.Drawing.Size(199, 22);
+            this.txtClave.TabIndex = 18;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(27, 295);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 16);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Rol";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(33, 247);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 16);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Clave: ";
+            // 
             // txtCedula
             // 
             this.txtCedula.Location = new System.Drawing.Point(138, 57);
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(199, 22);
             this.txtCedula.TabIndex = 16;
+            this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
             // label7
             // 
@@ -176,6 +206,8 @@
             this.txtApellido1.Name = "txtApellido1";
             this.txtApellido1.Size = new System.Drawing.Size(199, 22);
             this.txtApellido1.TabIndex = 9;
+            this.txtApellido1.TextChanged += new System.EventHandler(this.txtApellido1_TextChanged);
+            this.txtApellido1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido1_KeyPress);
             // 
             // txtApellido2
             // 
@@ -183,6 +215,7 @@
             this.txtApellido2.Name = "txtApellido2";
             this.txtApellido2.Size = new System.Drawing.Size(199, 22);
             this.txtApellido2.TabIndex = 8;
+            this.txtApellido2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido2_KeyPress);
             // 
             // txtNombre
             // 
@@ -191,6 +224,7 @@
             this.txtNombre.Size = new System.Drawing.Size(199, 22);
             this.txtNombre.TabIndex = 6;
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // label5
             // 
@@ -227,109 +261,15 @@
             this.dgvDatosUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatosUsuario_CellClick);
             this.dgvDatosUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatosUsuario_CellContentClick);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 619);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1014, 22);
-            this.statusStrip1.TabIndex = 8;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 16);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 247);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 16);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Clave: ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 295);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(28, 16);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Rol";
-            // 
-            // txtClave
-            // 
-            this.txtClave.Location = new System.Drawing.Point(138, 247);
-            this.txtClave.Name = "txtClave";
-            this.txtClave.Size = new System.Drawing.Size(199, 22);
-            this.txtClave.TabIndex = 18;
-            // 
-            // cmbRol
-            // 
-            this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Items.AddRange(new object[] {
-            "Empleado",
-            "Tecnico",
-            "TI"});
-            this.cmbRol.Location = new System.Drawing.Point(138, 292);
-            this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(199, 24);
-            this.cmbRol.TabIndex = 19;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agregarToolStripMenuItem,
-            this.actualizarToolStripMenuItem,
-            this.eliminarToolStripMenuItem,
-            this.buscarToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1014, 28);
-            this.menuStrip1.TabIndex = 9;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // agregarToolStripMenuItem
-            // 
-            this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
-            this.agregarToolStripMenuItem.Text = "Agregar";
-            // 
-            // actualizarToolStripMenuItem
-            // 
-            this.actualizarToolStripMenuItem.Name = "actualizarToolStripMenuItem";
-            this.actualizarToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
-            this.actualizarToolStripMenuItem.Text = "Actualizar";
-            // 
-            // eliminarToolStripMenuItem
-            // 
-            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
-            this.eliminarToolStripMenuItem.Text = "Eliminar";
-            // 
-            // buscarToolStripMenuItem
-            // 
-            this.buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
-            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
-            this.buscarToolStripMenuItem.Text = "Buscar";
-            // 
             // Usuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1014, 641);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dgvDatosUsuario);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Usuarios";
             this.Text = "Usuarios";
             this.Load += new System.EventHandler(this.Usuarios_Load);
@@ -338,12 +278,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosUsuario)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -362,8 +297,6 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtCedula;
         private System.Windows.Forms.Label label7;
@@ -371,10 +304,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.ComboBox cmbRol;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem agregarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem actualizarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem buscarToolStripMenuItem;
     }
 }
