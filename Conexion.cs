@@ -10,7 +10,7 @@ namespace Proyecto_Final_PrograIV
 {
     internal class Conexion
     {
-        private static string cadenaConexion = "Data Source=KEVIN\\SQLEXPRESS;Initial Catalog=db_SoporteTI;Integrated Security=True";
+        private static string cadenaConexion = "Data Source=.\\SQLEXPRESS;Initial Catalog=db_SoporteTI;Integrated Security=True";
 
         public static SqlConnection ObtenerConexion()
         {

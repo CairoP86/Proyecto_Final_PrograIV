@@ -188,5 +188,48 @@ namespace Proyecto_Final_PrograIV
             txtClave.Text = dgvDatosUsuario.CurrentRow.Cells[4].Value.ToString();
             cmbRol.Text = dgvDatosUsuario.CurrentRow.Cells[5].Value.ToString();
         }
+
+        private void txtCedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla
+            }
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) &&
+                !char.IsControl(e.KeyChar) &&
+                !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla
+            }
+        }
+
+        private void txtApellido1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) &&
+                !char.IsControl(e.KeyChar) &&
+                !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla
+            }
+        }
+
+        private void txtApellido1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtApellido2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) &&
+                !char.IsControl(e.KeyChar) &&
+                !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla
+            }
+        }
     }
 }
