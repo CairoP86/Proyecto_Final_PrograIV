@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cbmSoftware = new System.Windows.Forms.ComboBox();
             this.cbmComputadora = new System.Windows.Forms.ComboBox();
@@ -40,7 +41,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -58,12 +58,20 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Location = new System.Drawing.Point(28, 71);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(300, 221);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(151, 123);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(126, 20);
+            this.textBox1.TabIndex = 17;
             // 
             // label8
             // 
@@ -79,7 +87,7 @@
             // 
             this.cbmSoftware.FormattingEnabled = true;
             this.cbmSoftware.Location = new System.Drawing.Point(151, 26);
-            this.cbmSoftware.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbmSoftware.Margin = new System.Windows.Forms.Padding(2);
             this.cbmSoftware.Name = "cbmSoftware";
             this.cbmSoftware.Size = new System.Drawing.Size(126, 21);
             this.cbmSoftware.TabIndex = 13;
@@ -88,10 +96,11 @@
             // 
             this.cbmComputadora.FormattingEnabled = true;
             this.cbmComputadora.Location = new System.Drawing.Point(151, 58);
-            this.cbmComputadora.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbmComputadora.Margin = new System.Windows.Forms.Padding(2);
             this.cbmComputadora.Name = "cbmComputadora";
             this.cbmComputadora.Size = new System.Drawing.Size(126, 21);
             this.cbmComputadora.TabIndex = 14;
+            this.cbmComputadora.SelectedIndexChanged += new System.EventHandler(this.cbmComputadora_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -106,7 +115,7 @@
             // txtFecha
             // 
             this.txtFecha.Location = new System.Drawing.Point(151, 87);
-            this.txtFecha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFecha.Margin = new System.Windows.Forms.Padding(2);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(127, 20);
             this.txtFecha.TabIndex = 9;
@@ -114,7 +123,7 @@
             // btnInstalar
             // 
             this.btnInstalar.Location = new System.Drawing.Point(54, 161);
-            this.btnInstalar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnInstalar.Margin = new System.Windows.Forms.Padding(2);
             this.btnInstalar.Name = "btnInstalar";
             this.btnInstalar.Size = new System.Drawing.Size(196, 41);
             this.btnInstalar.TabIndex = 6;
@@ -154,9 +163,9 @@
             // 
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(28, 29);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(300, 37);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
@@ -172,14 +181,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Proceso de Instalacion Software";
             // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(151, 123);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(126, 20);
-            this.textBox1.TabIndex = 17;
-            // 
             // Asignacion_de_Software
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -188,7 +189,7 @@
             this.ClientSize = new System.Drawing.Size(368, 309);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Asignacion_de_Software";
             this.Text = "Asignacion_de_Software";
             this.Load += new System.EventHandler(this.Asignacion_de_Software_Load);

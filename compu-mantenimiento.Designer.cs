@@ -80,17 +80,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 212);
+            this.label2.Location = new System.Drawing.Point(7, 212);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = " Asignado :";
+            this.label2.Text = " Empleado Asignado :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 157);
+            this.label3.Location = new System.Drawing.Point(76, 154);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
@@ -100,7 +100,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(47, 128);
+            this.label4.Location = new System.Drawing.Point(76, 125);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 13);
@@ -110,7 +110,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(41, 101);
+            this.label5.Location = new System.Drawing.Point(76, 101);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
@@ -148,7 +148,12 @@
             // 
             // cmbDepartamento
             // 
+            this.cmbDepartamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDepartamento.FormattingEnabled = true;
+            this.cmbDepartamento.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
             this.cmbDepartamento.Location = new System.Drawing.Point(123, 181);
             this.cmbDepartamento.Margin = new System.Windows.Forms.Padding(2);
             this.cmbDepartamento.Name = "cmbDepartamento";
@@ -158,17 +163,17 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 187);
+            this.label7.Location = new System.Drawing.Point(36, 181);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 13);
+            this.label7.Size = new System.Drawing.Size(77, 13);
             this.label7.TabIndex = 17;
-            this.label7.Text = "Departamento";
+            this.label7.Text = "Departamento:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 76);
+            this.label8.Location = new System.Drawing.Point(15, 79);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(101, 13);
@@ -209,10 +214,10 @@
             // 
             this.btnBuscar.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
             this.btnBuscar.BackColor = System.Drawing.SystemColors.Window;
-            this.btnBuscar.Location = new System.Drawing.Point(192, 254);
+            this.btnBuscar.Location = new System.Drawing.Point(176, 254);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(56, 23);
+            this.btnBuscar.Size = new System.Drawing.Size(74, 23);
             this.btnBuscar.TabIndex = 12;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
@@ -220,7 +225,12 @@
             // 
             // cbmAsignado
             // 
+            this.cbmAsignado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbmAsignado.FormattingEnabled = true;
+            this.cbmAsignado.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
             this.cbmAsignado.Location = new System.Drawing.Point(123, 209);
             this.cbmAsignado.Margin = new System.Windows.Forms.Padding(2);
             this.cbmAsignado.Name = "cbmAsignado";
@@ -256,10 +266,10 @@
             // 
             this.btnEliminar.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
             this.btnEliminar.BackColor = System.Drawing.SystemColors.Window;
-            this.btnEliminar.Location = new System.Drawing.Point(192, 296);
+            this.btnEliminar.Location = new System.Drawing.Point(176, 296);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(56, 23);
+            this.btnEliminar.Size = new System.Drawing.Size(72, 23);
             this.btnEliminar.TabIndex = 7;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
@@ -269,10 +279,10 @@
             // 
             this.btnActualizar.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
             this.btnActualizar.BackColor = System.Drawing.SystemColors.Window;
-            this.btnActualizar.Location = new System.Drawing.Point(125, 296);
+            this.btnActualizar.Location = new System.Drawing.Point(103, 296);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(2);
             this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(56, 23);
+            this.btnActualizar.Size = new System.Drawing.Size(69, 23);
             this.btnActualizar.TabIndex = 6;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
@@ -282,10 +292,10 @@
             // 
             this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
             this.btnAgregar.BackColor = System.Drawing.SystemColors.Window;
-            this.btnAgregar.Location = new System.Drawing.Point(125, 254);
+            this.btnAgregar.Location = new System.Drawing.Point(103, 254);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(56, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(69, 23);
             this.btnAgregar.TabIndex = 5;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = false;

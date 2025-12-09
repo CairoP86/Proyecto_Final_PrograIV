@@ -16,7 +16,7 @@ namespace Proyecto_Final_PrograIV
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Usuarios());
+            Application.Run(new Asignacion_de_Software());
         }
     }
 }

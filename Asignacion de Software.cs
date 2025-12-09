@@ -53,7 +53,7 @@ namespace Proyecto_Final_PrograIV
                 {
                     con.Open();
 
-                    string query = "SELECT Computadoras, Marca FROM Computadoras";
+                    string query = "SELECT IdComputadora, IdComputadora FROM Computadoras";
 
                     SqlCommand cmd = new SqlCommand(query, con);
                     SqlDataReader dr = cmd.ExecuteReader();
@@ -62,7 +62,7 @@ namespace Proyecto_Final_PrograIV
                     dt.Load(dr);
 
                     cbmComputadora.DataSource = dt;
-                    cbmComputadora.DisplayMember = "Marca";
+                    cbmComputadora.DisplayMember = "IdComputadora";
                     cbmComputadora.ValueMember = "IdComputadora";
                 }
             }
@@ -78,6 +78,11 @@ namespace Proyecto_Final_PrograIV
             cargarCompus();
             txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
             //Falta jalar el login actual 
+        }
+
+        private void cbmComputadora_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
