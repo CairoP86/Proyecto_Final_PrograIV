@@ -18,6 +18,68 @@ namespace Proyecto_Final_PrograIV
             InitializeComponent();
         }
 
+        private void cargarDepartamentos()
+        {
+            try
+            {
+                using (SqlConnection con = Conexion.ObtenerConexion())
+                {
+                    con.Open();
+
+                    string consulta = "SELECT IdDepartamento, Nombre FROM Departamentos";
+
+                    SqlCommand cmd = new SqlCommand(consulta, con);
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    DataTable dt = new DataTable();
+                    dt.Load(dr);
+
+                    cmbDepartamento.DataSource = dt;
+                    cmbDepartamento.DisplayMember = "Nombre";          // Lo que se muestra
+                    cmbDepartamento.ValueMember = "IdDepartamento";    // Lo que se guarda
+                    cmbDepartamento.SelectedIndex = -1;                // Nada seleccionado al inicio
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error cargando departamentos: " + ex.Message);
+            }
+        }
+
+        private void cargarEmpleadosPorDepartamento(int idDepartamento)
+        {
+            try
+            {
+                using (SqlConnection con = Conexion.ObtenerConexion())
+                {
+                    con.Open();
+
+                    string consulta = @"
+                SELECT Usuarios.Cedula, 
+                       Usuarios.Nombre + ' ' + Usuarios.Apellido1 AS NombreCompleto
+                FROM Usuarios
+                INNER JOIN Empleados ON Usuarios.Cedula = Empleados.Cedula
+                WHERE Empleados.IdDepartamento = @dep";  
+
+                    SqlCommand cmd = new SqlCommand(consulta, con);
+                    cmd.Parameters.AddWithValue("@dep", idDepartamento);
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    dt.Load(dr);
+
+                    cbmAsignado.DataSource = dt;
+                    cbmAsignado.DisplayMember = "NombreCompleto";
+                    cbmAsignado.ValueMember = "Cedula";
+                    cbmAsignado.SelectedIndex = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar empleados: " + ex.Message);
+            }
+        }
+
         private void cargarComputadoras() {
             DataTable dt = new DataTable();
             string consulta = "SELECT * FROM Computadoras";
@@ -35,7 +97,7 @@ namespace Proyecto_Final_PrograIV
         {
             txtMarca.Clear();
             txtSerie.Clear();
-            cmbTipo.SelectedIndex = -1;
+            cbmTipo.SelectedIndex = -1;
             cmbDepartamento.SelectedIndex = -1;
             cbmAsignado.SelectedIndex = -1;
 
@@ -61,10 +123,10 @@ namespace Proyecto_Final_PrograIV
                 parametros.Add(new SqlParameter("@serie", txtSerie.Text));
             }
 
-            if (!string.IsNullOrWhiteSpace(cmbTipo.Text))
+            if (!string.IsNullOrWhiteSpace(cbmTipo.Text))
             {
                 filtros.Add("TipoEquipo = @tipo");
-                parametros.Add(new SqlParameter("@tipo", cmbTipo.Text));
+                parametros.Add(new SqlParameter("@tipo", cbmTipo.Text));
             }
 
             if (!string.IsNullOrWhiteSpace(cmbDepartamento.Text))
@@ -104,22 +166,38 @@ namespace Proyecto_Final_PrograIV
 
         private void cbmCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbmDato.SelectedIndex = -1;
-            cbmDato.Items.Clear();
+            if (cbmCampo.SelectedItem == null)
+                return;
 
             string columna = cbmCampo.SelectedItem.ToString();
-            string consulta = $"SELECT DISTINCT {columna} FROM Computadoras WHERE {columna} IS NOT NULL";
 
-            using (SqlConnection con = Conexion.ObtenerConexion())
-            using (SqlCommand cmd = new SqlCommand(consulta, con))
+            // Limpiar datos previos
+            cbmDato.Items.Clear();
+            cbmDato.Text = "";
+            cbmDato.SelectedIndex = -1;
+
+            string consulta = $"SELECT DISTINCT {columna} FROM Computadoras ORDER BY {columna}";
+
+            try
             {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (SqlConnection con = Conexion.ObtenerConexion())
+                using (SqlCommand cmd = new SqlCommand(consulta, con))
                 {
-                    cbmDato.Items.Add(reader[columna].ToString());
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        if (dr[columna] != DBNull.Value)
+                        {
+                            cbmDato.Items.Add(dr[columna].ToString());
+                        }
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error cargando datos: " + ex.Message);
             }
         }
 
@@ -139,11 +217,21 @@ namespace Proyecto_Final_PrograIV
                 cbmCampo.Items.Add(nombre.ColumnName);
             }
 
+            
+            cbmTipo.Items.Clear();
+            cbmTipo.Items.Add("Laptop");
+            cbmTipo.Items.Add("Escritorio");
+            cbmTipo.SelectedIndex = 0;
+            cargarDepartamentos();
             cargarComputadoras();
+
         }
 
         private void cbmDato_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbmCampo.SelectedItem == null || cbmDato.SelectedItem == null)
+                return;
+
             string columna = cbmCampo.SelectedItem.ToString();
             string valor = cbmDato.SelectedItem.ToString();
 
@@ -156,24 +244,11 @@ namespace Proyecto_Final_PrograIV
             {
                 cmd.Parameters.AddWithValue("@valor", valor);
 
-                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                {
-                    da.Fill(dt);
-                }
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
             }
 
             dtvComputadoras.DataSource = dt;
-
-            if (dt.Rows.Count > 0)
-            {
-                DataRow row = dt.Rows[0];
-
-                txtMarca.Text = row["Marca"].ToString();
-                cmbTipo.Text = row["TipoEquipo"].ToString();
-                txtSerie.Text = row["Serie"].ToString();
-                cmbDepartamento.Text = row["IdDepartamento"].ToString();
-                cbmAsignado.Text = row["IdEmpleado"].ToString();
-            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -181,7 +256,7 @@ namespace Proyecto_Final_PrograIV
             
             if (string.IsNullOrWhiteSpace(txtMarca.Text) ||
                 string.IsNullOrWhiteSpace(txtSerie.Text) ||
-                string.IsNullOrWhiteSpace(cmbTipo.Text) ||
+                string.IsNullOrWhiteSpace(cbmTipo.Text) ||
                 string.IsNullOrWhiteSpace(cmbDepartamento.Text) ||
                 string.IsNullOrWhiteSpace(cbmAsignado.Text))
             {
@@ -198,10 +273,10 @@ namespace Proyecto_Final_PrograIV
             using (SqlCommand cmd = new SqlCommand(consulta, con))
             {
                 cmd.Parameters.AddWithValue("@marca", txtMarca.Text);
-                cmd.Parameters.AddWithValue("@tipo", cmbTipo.Text);
+                cmd.Parameters.AddWithValue("@tipo", cbmTipo.Text);
                 cmd.Parameters.AddWithValue("@serie", txtSerie.Text);
                 cmd.Parameters.AddWithValue("@dep", cmbDepartamento.Text);
-                cmd.Parameters.AddWithValue("@emp", cbmAsignado.Text);
+                cmd.Parameters.AddWithValue("@emp", cbmAsignado.SelectedValue);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -228,7 +303,7 @@ namespace Proyecto_Final_PrograIV
 
             if (string.IsNullOrWhiteSpace(txtMarca.Text) ||
                 string.IsNullOrWhiteSpace(txtSerie.Text) ||
-                string.IsNullOrWhiteSpace(cmbTipo.Text) ||
+                string.IsNullOrWhiteSpace(cbmTipo.Text) ||
                 string.IsNullOrWhiteSpace(cmbDepartamento.Text) ||
                 string.IsNullOrWhiteSpace(cbmAsignado.Text))
             {
@@ -249,10 +324,10 @@ namespace Proyecto_Final_PrograIV
             using (SqlCommand cmd = new SqlCommand(consulta, con))
             {
                 cmd.Parameters.AddWithValue("@marca", txtMarca.Text);
-                cmd.Parameters.AddWithValue("@tipo", cmbTipo.Text);
+                cmd.Parameters.AddWithValue("@tipo", cbmTipo.Text);
                 cmd.Parameters.AddWithValue("@serie", txtSerie.Text);
                 cmd.Parameters.AddWithValue("@dep", cmbDepartamento.Text);
-                cmd.Parameters.AddWithValue("@emp", cbmAsignado.Text);
+                cmd.Parameters.AddWithValue("@emp", cbmAsignado.SelectedValue);
                 cmd.Parameters.AddWithValue("@id", id);
 
                 con.Open();
@@ -266,17 +341,22 @@ namespace Proyecto_Final_PrograIV
             limpiarCampos();
         }
 
-        private void dtvComputadoras_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dtvComputadoras_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow fila = dtvComputadoras.Rows[e.RowIndex];
 
                 txtMarca.Text = fila.Cells["Marca"].Value.ToString();
-                cmbTipo.Text = fila.Cells["TipoEquipo"].Value.ToString();
+                cbmTipo.Text = fila.Cells["TipoEquipo"].Value.ToString();
                 txtSerie.Text = fila.Cells["Serie"].Value.ToString();
-                cmbDepartamento.Text = fila.Cells["IdDepartamento"].Value.ToString();
-                cbmAsignado.Text = fila.Cells["IdEmpleado"].Value.ToString();
+
+                int idDep = Convert.ToInt32(fila.Cells["IdDepartamento"].Value);
+                cmbDepartamento.SelectedValue = idDep;
+
+                cargarEmpleadosPorDepartamento(idDep);
+
+                cbmAsignado.SelectedValue = fila.Cells["IdEmpleado"].Value;
             }
         }
 
@@ -289,7 +369,6 @@ namespace Proyecto_Final_PrograIV
                 return;
             }
 
-            // Tomamos el ID directamente del DataGridView
             int id = Convert.ToInt32(dtvComputadoras.CurrentRow.Cells["IdComputadora"].Value);
 
             
@@ -317,6 +396,26 @@ namespace Proyecto_Final_PrograIV
 
             cargarComputadoras();
             limpiarCampos();
+        }
+
+        private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbDepartamento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDepartamento.SelectedItem == null)
+                return;
+
+         
+            DataRowView fila = (DataRowView)cmbDepartamento.SelectedItem;
+
+           
+            int idDep = Convert.ToInt32(fila["IdDepartamento"]);
+
+       
+            cargarEmpleadosPorDepartamento(idDep);
         }
     }
 }

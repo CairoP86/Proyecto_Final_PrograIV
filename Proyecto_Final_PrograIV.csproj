@@ -64,20 +64,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asignacion de Software.cs">
+    <Compile Include="Asignacion-Software.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Asignacion de Software.Designer.cs">
-      <DependentUpon>Asignacion de Software.cs</DependentUpon>
+    <Compile Include="Asignacion-Software.Designer.cs">
+      <DependentUpon>Asignacion-Software.cs</DependentUpon>
     </Compile>
-    <Compile Include="claseDAO.cs" />
-    <Compile Include="compu-mantenimiento.cs">
+    <Compile Include="Reportes-TI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="compu-mantenimiento.Designer.cs">
-      <DependentUpon>compu-mantenimiento.cs</DependentUpon>
+    <Compile Include="Reportes-TI.Designer.cs">
+      <DependentUpon>Reportes-TI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioDAO.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="Gestion-Computadoras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion-Computadoras.Designer.cs">
+      <DependentUpon>Gestion-Computadoras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,11 +116,11 @@
     <Compile Include="Usuarios.Designer.cs">
       <DependentUpon>Usuarios.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Asignacion de Software.resx">
-      <DependentUpon>Asignacion de Software.cs</DependentUpon>
+    <EmbeddedResource Include="Asignacion-Software.resx">
+      <DependentUpon>Asignacion-Software.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="compu-mantenimiento.resx">
-      <DependentUpon>compu-mantenimiento.cs</DependentUpon>
+    <EmbeddedResource Include="Gestion-Computadoras.resx">
+      <DependentUpon>Gestion-Computadoras.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -131,6 +137,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reportes-TI.resx">
+      <DependentUpon>Reportes-TI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Software.resx">
       <DependentUpon>Software.cs</DependentUpon>
     </EmbeddedResource>

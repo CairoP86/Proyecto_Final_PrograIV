@@ -45,7 +45,7 @@
             this.cbmAsignado = new System.Windows.Forms.ComboBox();
             this.txtSerie = new System.Windows.Forms.TextBox();
             this.txtMarca = new System.Windows.Forms.TextBox();
-            this.cmbTipo = new System.Windows.Forms.ComboBox();
+            this.cbmTipo = new System.Windows.Forms.ComboBox();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -129,7 +129,7 @@
             this.groupBox2.Controls.Add(this.cbmAsignado);
             this.groupBox2.Controls.Add(this.txtSerie);
             this.groupBox2.Controls.Add(this.txtMarca);
-            this.groupBox2.Controls.Add(this.cmbTipo);
+            this.groupBox2.Controls.Add(this.cbmTipo);
             this.groupBox2.Controls.Add(this.btnEliminar);
             this.groupBox2.Controls.Add(this.btnActualizar);
             this.groupBox2.Controls.Add(this.btnAgregar);
@@ -159,6 +159,7 @@
             this.cmbDepartamento.Name = "cmbDepartamento";
             this.cmbDepartamento.Size = new System.Drawing.Size(125, 21);
             this.cmbDepartamento.TabIndex = 18;
+            this.cmbDepartamento.SelectedIndexChanged += new System.EventHandler(this.cmbDepartamento_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -253,14 +254,15 @@
             this.txtMarca.Size = new System.Drawing.Size(125, 20);
             this.txtMarca.TabIndex = 9;
             // 
-            // cmbTipo
+            // cbmTipo
             // 
-            this.cmbTipo.FormattingEnabled = true;
-            this.cmbTipo.Location = new System.Drawing.Point(123, 125);
-            this.cmbTipo.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbTipo.Name = "cmbTipo";
-            this.cmbTipo.Size = new System.Drawing.Size(125, 21);
-            this.cmbTipo.TabIndex = 8;
+            this.cbmTipo.FormattingEnabled = true;
+            this.cbmTipo.Location = new System.Drawing.Point(123, 125);
+            this.cbmTipo.Margin = new System.Windows.Forms.Padding(2);
+            this.cbmTipo.Name = "cbmTipo";
+            this.cbmTipo.Size = new System.Drawing.Size(125, 21);
+            this.cbmTipo.TabIndex = 8;
+            this.cbmTipo.SelectedIndexChanged += new System.EventHandler(this.cmbTipo_SelectedIndexChanged);
             // 
             // btnEliminar
             // 
@@ -312,7 +314,7 @@
             this.dtvComputadoras.RowTemplate.Height = 24;
             this.dtvComputadoras.Size = new System.Drawing.Size(315, 344);
             this.dtvComputadoras.TabIndex = 6;
-            this.dtvComputadoras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvComputadoras_CellContentClick);
+            this.dtvComputadoras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvComputadoras_CellClick);
             // 
             // compu_mantenimiento
             // 
@@ -325,7 +327,7 @@
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "compu_mantenimiento";
-            this.Text = "compu_mantenimiento";
+            this.Text = "Gestion de Computadoras";
             this.Load += new System.EventHandler(this.compu_mantenimiento_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -345,7 +347,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox cmbTipo;
+        private System.Windows.Forms.ComboBox cbmTipo;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnAgregar;

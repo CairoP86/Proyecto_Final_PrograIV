@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTecnico = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cbmSoftware = new System.Windows.Forms.ComboBox();
             this.cbmComputadora = new System.Windows.Forms.ComboBox();
@@ -47,7 +47,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.txtTecnico);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.cbmSoftware);
             this.groupBox2.Controls.Add(this.cbmComputadora);
@@ -65,13 +65,14 @@
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             // 
-            // textBox1
+            // txtTecnico
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(151, 123);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(126, 20);
-            this.textBox1.TabIndex = 17;
+            this.txtTecnico.Enabled = false;
+            this.txtTecnico.Location = new System.Drawing.Point(151, 123);
+            this.txtTecnico.Name = "txtTecnico";
+            this.txtTecnico.Size = new System.Drawing.Size(126, 20);
+            this.txtTecnico.TabIndex = 17;
+            this.txtTecnico.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label8
             // 
@@ -114,6 +115,7 @@
             // 
             // txtFecha
             // 
+            this.txtFecha.Enabled = false;
             this.txtFecha.Location = new System.Drawing.Point(151, 87);
             this.txtFecha.Margin = new System.Windows.Forms.Padding(2);
             this.txtFecha.Name = "txtFecha";
@@ -129,6 +131,7 @@
             this.btnInstalar.TabIndex = 6;
             this.btnInstalar.Text = "Instalar";
             this.btnInstalar.UseVisualStyleBackColor = true;
+            this.btnInstalar.Click += new System.EventHandler(this.btnInstalar_Click);
             // 
             // label5
             // 
@@ -214,6 +217,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTecnico;
     }
 }

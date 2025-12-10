@@ -135,7 +135,7 @@ namespace Proyecto_Final_PrograIV
         // ========================
         private void instalacionDeSoftwareToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Asignacion_de_Software form = new Asignacion_de_Software();
+            Asignacion_de_Software form = new Asignacion_de_Software(cedulaUsuario);
             form.StartPosition = FormStartPosition.CenterScreen;
             form.BringToFront();
             form.Show();
@@ -174,6 +174,24 @@ namespace Proyecto_Final_PrograIV
             Login login = new Login();
             login.Show();
             this.Close();
+        }
+
+        private void reporteDeComputadorasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void reportesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reportes_TI form = new Reportes_TI();
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.BringToFront();
+            form.Show();
+        }
+
+        private void toolStripStatusLabelUsuario_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

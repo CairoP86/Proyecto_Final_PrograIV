@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Proyecto_Final_PrograIV
 {
@@ -29,7 +30,7 @@ namespace Proyecto_Final_PrograIV
                     rol = result.ToString();
             }
 
-            return rol;  // Devuelve: Empleado, Tecnico o TI
+            return rol;  
         }
 
 
@@ -47,7 +48,6 @@ namespace Proyecto_Final_PrograIV
                     con);
 
                 cmd.Parameters.AddWithValue("@ced", cedula);
-
                 var result = cmd.ExecuteScalar();
 
                 if (result != null)
