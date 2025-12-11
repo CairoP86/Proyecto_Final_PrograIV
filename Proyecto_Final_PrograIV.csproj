@@ -76,6 +76,24 @@
     <Compile Include="Reportes-TI.Designer.cs">
       <DependentUpon>Reportes-TI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tiquete-Empleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tiquete-Empleado.Designer.cs">
+      <DependentUpon>Tiquete-Empleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tiquete-Encargado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tiquete-Encargado.Designer.cs">
+      <DependentUpon>Tiquete-Encargado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tiquete-Tecnico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tiquete-Tecnico.Designer.cs">
+      <DependentUpon>Tiquete-Tecnico.cs</DependentUpon>
+    </Compile>
     <Compile Include="UsuarioDAO.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Gestion-Computadoras.cs">
@@ -103,12 +121,6 @@
     </Compile>
     <Compile Include="Software.Designer.cs">
       <DependentUpon>Software.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Tickets.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tickets.Designer.cs">
-      <DependentUpon>Tickets.cs</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.cs">
       <SubType>Form</SubType>
@@ -143,8 +155,14 @@
     <EmbeddedResource Include="Software.resx">
       <DependentUpon>Software.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tickets.resx">
-      <DependentUpon>Tickets.cs</DependentUpon>
+    <EmbeddedResource Include="Tiquete-Empleado.resx">
+      <DependentUpon>Tiquete-Empleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tiquete-Encargado.resx">
+      <DependentUpon>Tiquete-Encargado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tiquete-Tecnico.resx">
+      <DependentUpon>Tiquete-Tecnico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Usuarios.resx">
       <DependentUpon>Usuarios.cs</DependentUpon>

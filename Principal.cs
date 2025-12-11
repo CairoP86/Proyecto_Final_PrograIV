@@ -14,6 +14,7 @@ namespace Proyecto_Final_PrograIV
 
     public partial class Principal : Form
     {
+
         string rolUsuario;
         string cedulaUsuario;
 
@@ -21,7 +22,8 @@ namespace Proyecto_Final_PrograIV
         public Principal(string rol, string cedula)
         {
             InitializeComponent();
-            rolUsuario = rol;
+            rolUsuario = rol.Trim().ToLower();
+            
             cedulaUsuario = cedula;
 
             AplicarPermisosSegunRol();
@@ -29,15 +31,16 @@ namespace Proyecto_Final_PrograIV
 
         private void AplicarPermisosSegunRol()
         {
-            if (rolUsuario == "Empleado")
+            if (rolUsuario == "empleado")
             {
                 computadorasToolStripMenuItem.Enabled = false;
                 softwareToolStripMenuItem.Enabled = false;
                 instalacionDeSoftwareToolStripMenuItem.Enabled = false;
                 ticketsToolStripMenuItem.Enabled = true;
+                reportesToolStripMenuItem.Enabled = false;
             }
 
-            if (rolUsuario == "Tecnico")
+            if (rolUsuario == "tecnico")
             {
                 computadorasToolStripMenuItem.Enabled = false;
                 softwareToolStripMenuItem.Enabled = false;
@@ -45,7 +48,7 @@ namespace Proyecto_Final_PrograIV
                 ticketsToolStripMenuItem.Enabled = true;
             }
 
-            if (rolUsuario == "TI")
+            if (rolUsuario == "ti")
             {
                 computadorasToolStripMenuItem.Enabled = true;
                 softwareToolStripMenuItem.Enabled = true;
@@ -61,7 +64,6 @@ namespace Proyecto_Final_PrograIV
 
             toolStripStatusLabelUsuario.Text = $"Usuario: {nombreUsuario}";
             toolStripStatusLabelRol.Text = $"Rol: {rolUsuario}";
-
             toolStripStatusLabelFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
         }
         protected override CreateParams CreateParams
@@ -77,22 +79,7 @@ namespace Proyecto_Final_PrograIV
 
 
        
-        // MÉTODO SEGURO PARA ABRIR FORMULARIOS
-        // ============================
-        private void AbrirFormulario(Form form)
-        {
-            try
-            {
-                form.StartPosition = FormStartPosition.CenterScreen;
-                form.BringToFront();
-                form.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo abrir el formulario.\n\nError: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+       
 
         // ========================
         //  MENÚ - USUARIOS
@@ -147,7 +134,31 @@ namespace Proyecto_Final_PrograIV
         // ========================
         private void ticketsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new Tickets());
+            if (rolUsuario == "empleado")
+            {
+                Tiquete_Empleado form = new Tiquete_Empleado(cedulaUsuario);
+                form.StartPosition = FormStartPosition.CenterScreen;
+                form.Show();
+                return;
+            }
+
+            if (rolUsuario == "tecnico")
+            {
+                Tiquete_Tecnico form = new Tiquete_Tecnico(cedulaUsuario);
+                form.StartPosition = FormStartPosition.CenterScreen;
+                form.Show();
+                return;
+            }
+
+            if (rolUsuario == "ti")   // encargado
+            {
+                Tiquete_Encargado form = new Tiquete_Encargado();
+                form.StartPosition = FormStartPosition.CenterScreen;
+                form.Show();
+                return;
+            }
+
+            MessageBox.Show("Rol no reconocido: " + rolUsuario);
         }
 
         // ========================
