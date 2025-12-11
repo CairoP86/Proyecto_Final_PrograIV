@@ -35,6 +35,7 @@
             this.softwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instalacionDeSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ticketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +44,6 @@
             this.toolStripStatusLabelUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRol = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFechaHora = new System.Windows.Forms.ToolStripStatusLabel();
-            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +78,7 @@
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip2.Size = new System.Drawing.Size(720, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(840, 24);
             this.menuStrip2.TabIndex = 4;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -101,6 +101,7 @@
             this.softwareToolStripMenuItem.Name = "softwareToolStripMenuItem";
             this.softwareToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.softwareToolStripMenuItem.Text = "Software";
+            this.softwareToolStripMenuItem.Click += new System.EventHandler(this.softwareToolStripMenuItem_Click);
             // 
             // instalacionDeSoftwareToolStripMenuItem
             // 
@@ -115,6 +116,13 @@
             this.ticketsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.ticketsToolStripMenuItem.Text = "Tiquetes";
             this.ticketsToolStripMenuItem.Click += new System.EventHandler(this.ticketsToolStripMenuItem_Click);
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            this.reportesToolStripMenuItem.Click += new System.EventHandler(this.reportesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -176,13 +184,6 @@
             this.toolStripStatusLabelFechaHora.Size = new System.Drawing.Size(67, 17);
             this.toolStripStatusLabelFechaHora.Text = "Fecha/hora";
             // 
-            // reportesToolStripMenuItem
-            // 
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.reportesToolStripMenuItem.Text = "Reportes";
-            this.reportesToolStripMenuItem.Click += new System.EventHandler(this.reportesToolStripMenuItem_Click);
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,7 +192,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Principal";
             this.Text = "Principal";
             this.Load += new System.EventHandler(this.Principal_Load);

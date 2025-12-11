@@ -35,9 +35,9 @@ namespace Proyecto_Final_PrograIV
                     dt.Load(dr);
 
                     cmbDepartamento.DataSource = dt;
-                    cmbDepartamento.DisplayMember = "Nombre";          // Lo que se muestra
-                    cmbDepartamento.ValueMember = "IdDepartamento";    // Lo que se guarda
-                    cmbDepartamento.SelectedIndex = -1;                // Nada seleccionado al inicio
+                    cmbDepartamento.DisplayMember = "Nombre";          
+                    cmbDepartamento.ValueMember = "IdDepartamento";    
+                    cmbDepartamento.SelectedIndex = -1;                
                 }
             }
             catch (Exception ex)

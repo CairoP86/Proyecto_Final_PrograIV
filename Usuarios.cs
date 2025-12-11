@@ -24,26 +24,102 @@ namespace Proyecto_Final_PrograIV
         public DataTable cargarDatos()
         {
             DataTable dt = new DataTable();
-            String consulta = "SELECT Cedula, Nombre, Apellido1, Apellido2, Clave, Rol, Fecha_Creacion FROM Usuarios";
-            SqlCommand cmd = new SqlCommand(consulta, Conexion.ObtenerConexion()); 
-            SqlDataAdapter da = new SqlDataAdapter(cmd); 
-            da.Fill(dt);
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                conn.Open();
+
+                string consulta = @"SELECT Cedula, Nombre, Apellido1, Apellido2, Clave, Rol, Fecha_Creacion 
+                            FROM Usuarios";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+
             return dt;
-       
+
+        }
+
+        public DataTable BuscarUsuariosAvanzado()
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                conn.Open();
+
+                // Empezamos con un WHERE flexible
+                string consulta = @"SELECT Cedula, Nombre, Apellido1, Apellido2, Clave, Rol, Fecha_Creacion
+                            FROM Usuarios
+                            WHERE 1 = 1 ";
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+
+                // Si el campo no está vacío, se agrega a la consulta
+                if (!string.IsNullOrWhiteSpace(txtCedula.Text))
+                {
+                    consulta += " AND Cedula LIKE @ced";
+                    cmd.Parameters.AddWithValue("@ced", "%" + txtCedula.Text + "%");
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtNombre.Text))
+                {
+                    consulta += " AND Nombre LIKE @nom";
+                    cmd.Parameters.AddWithValue("@nom", "%" + txtNombre.Text + "%");
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtApellido1.Text))
+                {
+                    consulta += " AND Apellido1 LIKE @ape1";
+                    cmd.Parameters.AddWithValue("@ape1", "%" + txtApellido1.Text + "%");
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtApellido2.Text))
+                {
+                    consulta += " AND Apellido2 LIKE @ape2";
+                    cmd.Parameters.AddWithValue("@ape2", "%" + txtApellido2.Text + "%");
+                }
+
+                if (!string.IsNullOrWhiteSpace(cmbRol.Text))
+                {
+                    consulta += " AND Rol LIKE @rol";
+                    cmd.Parameters.AddWithValue("@rol", "%" + cmbRol.Text + "%");
+                }
+
+                cmd.CommandText = consulta;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+
+            return dt;
         }
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
             dgvDatosUsuario.DataSource = cargarDatos();
+            CargarCampos();
 
         }
 
-        private void cbmCampo_SelectedIndexChanged(object sender, EventArgs e)
+        private void CargarCampos()
         {
+            cbmCampo.Items.Clear();
 
+            cbmCampo.Items.Add("Cedula");
+            cbmCampo.Items.Add("Nombre");
+            cbmCampo.Items.Add("Apellido1");
+            cbmCampo.Items.Add("Apellido2");
+            cbmCampo.Items.Add("Rol");
+
+           
         }
 
-    
+
 
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -51,12 +127,10 @@ namespace Proyecto_Final_PrograIV
             if (string.IsNullOrWhiteSpace(txtCedula.Text) ||
         string.IsNullOrWhiteSpace(txtNombre.Text) ||
         string.IsNullOrWhiteSpace(txtApellido1.Text) ||
-        string.IsNullOrWhiteSpace(txtApellido2.Text) ||
         string.IsNullOrWhiteSpace(txtClave.Text) ||
         string.IsNullOrWhiteSpace(cmbRol.Text))
             {
-                MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Campos incompletos",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Complete todos los campos obligatorios.");
                 return;
             }
 
@@ -66,34 +140,30 @@ namespace Proyecto_Final_PrograIV
                 {
                     conn.Open();
 
-                    string insertar = "INSERT INTO Usuarios (Cedula, Nombre, Apellido1, Apellido2, Clave, Rol) " +
-                                      "VALUES (@ced, @nom, @ape1, @ape2, @cla, @rol)";
+                    string insertar = @"INSERT INTO Usuarios 
+                               (Cedula, Nombre, Apellido1, Apellido2, Clave, Rol)
+                               VALUES (@ced, @nom, @ape1, @ape2, @cla, @rol)";
 
-                    using (SqlCommand cmd = new SqlCommand(insertar, conn)) // <-- usar 'conn' aquí
+                    using (SqlCommand cmd = new SqlCommand(insertar, conn))
                     {
-                        cmd.Parameters.AddWithValue("@ced", txtCedula.Text.Trim());
-                        cmd.Parameters.AddWithValue("@nom", txtNombre.Text.Trim());
-                        cmd.Parameters.AddWithValue("@ape1", txtApellido1.Text.Trim());
-                        cmd.Parameters.AddWithValue("@ape2", txtApellido2.Text.Trim());
-                        cmd.Parameters.AddWithValue("@cla", txtClave.Text.Trim());
-
-                        // Mejor usar cmbRol.Text en vez de SelectedItem.ToString() por seguridad
-                        cmd.Parameters.AddWithValue("@rol", cmbRol.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ced", txtCedula.Text);
+                        cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
+                        cmd.Parameters.AddWithValue("@ape1", txtApellido1.Text);
+                        cmd.Parameters.AddWithValue("@ape2", txtApellido2.Text);
+                        cmd.Parameters.AddWithValue("@cla", txtClave.Text);
+                        cmd.Parameters.AddWithValue("@rol", cmbRol.Text);
 
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                MessageBox.Show("Usuario agregado exitosamente.", "Registro exitoso",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                MessageBox.Show("Usuario agregado con éxito.");
                 dgvDatosUsuario.DataSource = cargarDatos();
                 limpiarCampos();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: " + ex.Message, "Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -125,30 +195,43 @@ namespace Proyecto_Final_PrograIV
         private void btnActualizar_Click(object sender, EventArgs e)
         {
 
-            if ((txtCedula.Text == "") || (txtNombre.Text == "") || (txtApellido1.Text == "") || (txtApellido2.Text == "") || (txtClave.Text == "") || (cmbRol.Text == ""))
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
             {
-                MessageBox.Show("Faltan datos para ACTUALIZAR en la base de datos.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar un usuario para actualizar.");
                 return;
             }
-            else
+
+            try
             {
+                using (SqlConnection conn = Conexion.ObtenerConexion())
+                {
+                    conn.Open();
 
-                String actualizar = "UPDATE Usuarios SET Cedula=@ced, Nombre=@nom, Apellido1=@ape1, Apellido2=@ape2, Clave=@cla, Rol=@rol WHERE Cedula=@ced";
-                SqlCommand cmd = new SqlCommand(actualizar, Conexion.ObtenerConexion());
+                    string actualizar = @"UPDATE Usuarios 
+                                 SET Nombre=@nom, Apellido1=@ape1, Apellido2=@ape2, 
+                                     Clave=@cla, Rol=@rol
+                                 WHERE Cedula=@ced";
 
-                cmd.Parameters.AddWithValue("@ced", txtCedula.Text);
-                cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
-                cmd.Parameters.AddWithValue("@ape1", txtApellido1.Text);
-                cmd.Parameters.AddWithValue("@ape2", txtApellido2.Text);
-                cmd.Parameters.AddWithValue("@cla", txtClave.Text);
-                cmd.Parameters.AddWithValue("@rol", cmbRol.SelectedItem.ToString());
-                cmd.ExecuteNonQuery();
+                    using (SqlCommand cmd = new SqlCommand(actualizar, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ced", txtCedula.Text);
+                        cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
+                        cmd.Parameters.AddWithValue("@ape1", txtApellido1.Text);
+                        cmd.Parameters.AddWithValue("@ape2", txtApellido2.Text);
+                        cmd.Parameters.AddWithValue("@cla", txtClave.Text);
+                        cmd.Parameters.AddWithValue("@rol", cmbRol.Text);
 
-                MessageBox.Show("Datos actualizados a la base de datos", "Actualiozacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
 
+                MessageBox.Show("Usuario actualizado.");
                 dgvDatosUsuario.DataSource = cargarDatos();
-
                 limpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar: " + ex.Message);
             }
 
 
@@ -156,26 +239,34 @@ namespace Proyecto_Final_PrograIV
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if ((txtCedula.Text == "")) 
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
             {
-                MessageBox.Show("Por favor, complete el campo de la cedula para eliminar resgitro", "Campo incompleto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ingrese una cédula para eliminar.");
                 return;
             }
-            else
+
+            try
             {
+                using (SqlConnection conn = Conexion.ObtenerConexion())
+                {
+                    conn.Open();
 
-                String eliminar = "DELETE FROM Usuarios WHERE Cedula=@ced";
-                SqlCommand cmd = new SqlCommand(eliminar, Conexion.ObtenerConexion());
+                    string eliminar = "DELETE FROM Usuarios WHERE Cedula=@ced";
 
-                cmd.Parameters.AddWithValue("@ced", txtCedula.Text);
-             
-                cmd.ExecuteNonQuery();
+                    using (SqlCommand cmd = new SqlCommand(eliminar, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ced", txtCedula.Text);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
 
-                MessageBox.Show("Usuario eliminado exitosamente.", "Eliminación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                MessageBox.Show("Usuario eliminado.");
                 dgvDatosUsuario.DataSource = cargarDatos();
-
                 limpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar: " + ex.Message);
             }
         }
 
@@ -229,6 +320,76 @@ namespace Proyecto_Final_PrograIV
                 !char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true; // Bloquea la tecla
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            // Si TODO está vacío → mostrar todos los usuarios
+            if (string.IsNullOrWhiteSpace(txtCedula.Text) &&
+                string.IsNullOrWhiteSpace(txtNombre.Text) &&
+                string.IsNullOrWhiteSpace(txtApellido1.Text) &&
+                string.IsNullOrWhiteSpace(txtApellido2.Text) &&
+                string.IsNullOrWhiteSpace(cmbRol.Text))
+            {
+                dgvDatosUsuario.DataSource = cargarDatos();
+                return;
+            }
+
+            // Si hay al menos un campo → buscar
+            dgvDatosUsuario.DataSource = BuscarUsuariosAvanzado();
+        }
+
+        private void cbmCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbmCampo.SelectedIndex == -1)
+                return;
+
+            cbmDato.Items.Clear();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                conn.Open();
+
+                string columna = cbmCampo.SelectedItem.ToString();
+                string consulta = $"SELECT DISTINCT {columna} FROM Usuarios ORDER BY {columna}";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        cbmDato.Items.Add(dr[columna].ToString());
+                    }
+                }
+            }
+        }
+
+        private void cbmDato_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbmCampo.SelectedIndex == -1 || cbmDato.SelectedIndex == -1)
+                return;
+
+            string campo = cbmCampo.SelectedItem.ToString();
+            string valor = cbmDato.SelectedItem.ToString();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                conn.Open();
+
+                string consulta = $"SELECT * FROM Usuarios WHERE {campo} = @val";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                {
+                    cmd.Parameters.AddWithValue("@val", valor);
+
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+
+                    dgvDatosUsuario.DataSource = dt;
+                }
             }
         }
     }
