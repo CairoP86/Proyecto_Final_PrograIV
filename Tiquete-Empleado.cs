@@ -78,28 +78,41 @@ namespace Proyecto_Final_PrograIV
                 conn.Open();
 
                 string insertar = @"
-                    INSERT INTO Tiquetes (CedulaEmpleado, Descripcion, IdEstado)
-                    VALUES (@ced, @desc, 1)";   
+                            INSERT INTO Tiquetes (CedulaEmpleado, Descripcion, IdEstado)
+                             VALUES (@ced, @desc, 1);
+                             SELECT SCOPE_IDENTITY();";
 
                 using (SqlCommand cmd = new SqlCommand(insertar, conn))
                 {
                     cmd.Parameters.AddWithValue("@ced", cedulaUsuarioActual);
                     cmd.Parameters.AddWithValue("@desc", txtDescripcion.Text.Trim());
 
-                    cmd.ExecuteNonQuery();
+                    // Obtener ID del ticket recién creado
+                    int idTiquete = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    // Crear notificación automática para el encargado TI
+                    NotificacionesDAO.Crear("0303030003", idTiquete,
+                        "Se ha generado un nuevo ticket en el sistema.");
                 }
             }
 
-            MessageBox.Show("Tiquete creado correctamente.",
-                            "Éxito",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+            //actualizar notificaciones en el menú principal
+            ((Principal)Application.OpenForms["Principal"])?.ActualizarNotificacionesMenu();
 
-            
+
+            MessageBox.Show("Tiquete creado correctamente.",
+                "Éxito",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+            // Recargar tabla
             dgvTiquetes.DataSource = CargarMisTiquetes();
 
             // Limpiar campo
             txtDescripcion.Clear();
+
+
+            
         }
     }
 }

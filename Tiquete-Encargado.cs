@@ -38,7 +38,7 @@ namespace Proyecto_Final_PrograIV
                 da.Fill(dt);
 
                 cbmEmpleado.DataSource = dt;
-                cbmEmpleado.DisplayMember = "NombreCompleto";
+                cbmEmpleado.DisplayMember = "Nombre";
                 cbmEmpleado.ValueMember = "Cedula";
 
                 cbmEmpleado.SelectedIndex = -1; 
@@ -97,17 +97,21 @@ namespace Proyecto_Final_PrograIV
                 conn.Open();
 
                 string query = @"
-                SELECT t.IdTiquete, 
-                       u.Nombre + ' ' + u.Apellido1 AS Empleado,
-                       t.Descripcion,
-                       e.Nombre AS Estado,
-                       tec.Nombre + ' ' + tec.Apellido1 AS Tecnico,
-                       t.FechaCreacion,
-                       t.FechaAtencion
-                FROM Tiquetes t
-                INNER JOIN Usuarios u ON u.Cedula = t.CedulaEmpleado
-                INNER JOIN EstadoTiquete e ON e.IdEstado = t.IdEstado
-                LEFT JOIN Usuarios tec ON tec.Cedula = t.TecnicoAsignado";
+            SELECT 
+                t.IdTiquete,
+                t.CedulaEmpleado,
+                u.Nombre + ' ' + u.Apellido1 AS Empleado,
+                t.Descripcion,
+                t.IdEstado,
+                e.Nombre AS Estado,
+                t.TecnicoAsignado,
+                tec.Nombre + ' ' + tec.Apellido1 AS Tecnico,
+                t.FechaCreacion,
+                t.FechaAtencion
+            FROM Tiquetes t
+            INNER JOIN Usuarios u ON u.Cedula = t.CedulaEmpleado
+            INNER JOIN EstadoTiquete e ON e.IdEstado = t.IdEstado
+            LEFT JOIN Usuarios tec ON tec.Cedula = t.TecnicoAsignado";
 
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
@@ -116,6 +120,7 @@ namespace Proyecto_Final_PrograIV
                 dgvListaTiquetes.DataSource = dt;
             }
         }
+
 
         private void Limpiar()
         {
@@ -132,6 +137,7 @@ namespace Proyecto_Final_PrograIV
             CargarTecnicos();
             CargarEstados();
             CargarTiquetes();
+            
 
         }
 
@@ -250,6 +256,22 @@ namespace Proyecto_Final_PrograIV
                 cmd.Parameters.AddWithValue("@id", idSeleccionado);
 
                 cmd.ExecuteNonQuery();
+
+                // ============================
+                // 🔔 NOTIFICACIONES AUTOMÁTICAS
+                // ============================
+
+                // 1. Notificación al técnico cuando el TI asigna uno
+                if (!string.IsNullOrEmpty(tecnico))
+                {
+                    NotificacionesDAO.Crear(
+                        tecnico,
+                        idSeleccionado,
+                        $"Se te ha asignado el ticket #{idSeleccionado}."
+                    );
+                }
+
+                
             }
 
             MessageBox.Show("Tiquete actualizado correctamente.");
@@ -320,6 +342,31 @@ namespace Proyecto_Final_PrograIV
 
                 dgvListaTiquetes.DataSource = dt;
             }
+        }
+
+        private void dgvListaTiquetes_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvListaTiquetes.SelectedRows.Count == 0)
+                return;
+
+            DataGridViewRow row = dgvListaTiquetes.SelectedRows[0];
+
+            idSeleccionado = Convert.ToInt32(row.Cells["IdTiquete"].Value);
+
+            // Descripción
+            txtDescripcion.Text = row.Cells["Descripcion"].Value.ToString();
+
+            // Empleado
+            cbmEmpleado.SelectedValue = row.Cells["CedulaEmpleado"].Value.ToString();
+
+            // Técnico
+            if (row.Cells["TecnicoAsignado"].Value == DBNull.Value)
+                cbmTecnico.SelectedIndex = -1;
+            else
+                cbmTecnico.SelectedValue = row.Cells["TecnicoAsignado"].Value.ToString();
+
+            // Estado
+            cbmEstado.SelectedValue = Convert.ToInt32(row.Cells["IdEstado"].Value);
         }
     }
 }

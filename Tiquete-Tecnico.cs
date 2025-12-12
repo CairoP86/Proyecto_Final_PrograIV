@@ -98,6 +98,19 @@ namespace Proyecto_Final_PrograIV
             txtDescripcion.Text =
                 dgvTiquetesTecnico.CurrentRow.Cells["Descripcion"].Value.ToString();
         }
+        private string ObtenerCedulaEmpleado(int idTiquete)
+        {
+            using (SqlConnection cn = Conexion.ObtenerConexion())
+            {
+                string q = "SELECT CedulaEmpleado FROM Tiquetes WHERE IdTiquete = @id";
+                SqlCommand cmd = new SqlCommand(q, cn);
+                cmd.Parameters.AddWithValue("@id", idTiquete);
+
+                cn.Open();
+                return cmd.ExecuteScalar()?.ToString();
+            }
+        }
+
 
         private void btnEstado_Click(object sender, EventArgs e)
         {
@@ -140,6 +153,24 @@ namespace Proyecto_Final_PrograIV
                 cmd.Parameters.AddWithValue("@id", idTiqueteSeleccionado);
 
                 cmd.ExecuteNonQuery();
+
+                // ============================
+                // 🔔 NOTIFICACIÓN AL EMPLEADO
+                // ============================
+
+                // Obtener cédula del empleado dueño del ticket
+                string cedulaEmpleado = ObtenerCedulaEmpleado(idTiqueteSeleccionado);
+
+                // Crear la notificación si existe empleado válido
+                if (!string.IsNullOrEmpty(cedulaEmpleado))
+                {
+                    NotificacionesDAO.Crear(
+                        cedulaEmpleado,
+                        idTiqueteSeleccionado,
+                        $"El técnico actualizó el ticket #{idTiqueteSeleccionado}."
+                    );
+                }
+
             }
 
             MessageBox.Show("Estado actualizado correctamente.");

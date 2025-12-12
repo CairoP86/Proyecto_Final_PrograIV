@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Proyecto_Final_PrograIV;
+
 
 namespace Proyecto_Final_PrograIV
 {
@@ -59,6 +61,8 @@ namespace Proyecto_Final_PrograIV
 
         private void Principal_Load(object sender, EventArgs e)
         {
+            ActualizarNotificacionesMenu();
+
             UsuarioDAO dao = new UsuarioDAO();
             string nombreUsuario = dao.ObtenerNombreUsuario(cedulaUsuario);
 
@@ -199,10 +203,39 @@ namespace Proyecto_Final_PrograIV
             form.BringToFront();
             form.Show();
         }
+        public void ActualizarNotificacionesMenu()
+        {
+            int nuevas = NotificacionesDAO.ContarNoVistas(cedulaUsuario);
+
+            if (nuevas > 0)
+            {
+                notificacionesToolStripMenuItem.Text = $"Notificaciones ({nuevas})";
+                notificacionesToolStripMenuItem.ForeColor = Color.Red; // opcional
+            }
+            else
+            {
+                notificacionesToolStripMenuItem.Text = "Notificaciones";
+                notificacionesToolStripMenuItem.ForeColor = Color.Black; // color original
+            }
+        }
+
+
 
         private void toolStripStatusLabelUsuario_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            
+
+            ActualizarNotificacionesMenu();
+            Notificaciones form = new Notificaciones(cedulaUsuario);
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.BringToFront();
+            form.Show();
         }
     }
 }
