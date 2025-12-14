@@ -170,8 +170,17 @@ namespace Proyecto_Final_PrograIV
         // ========================
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Sistema de Soporte TI\nProyecto Final - Programación IV",
-                "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+            "Sistema de Soporte TI\n" +
+            "Proyecto Final - Programación IV\n\n" +
+            "Desarrollado por:\n" +
+            "• Cairo López\n" +
+            "• Kevin Quirós\n" +
+            "• Kevin Morera",
+            "Acerca de",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information
+            );
         }
 
         // ========================

@@ -55,11 +55,11 @@ namespace Proyecto_Final_PrograIV
                     con.Open();
 
                     string consulta = @"
-                SELECT Usuarios.Cedula, 
-                       Usuarios.Nombre + ' ' + Usuarios.Apellido1 AS NombreCompleto
-                FROM Usuarios
-                INNER JOIN Empleados ON Usuarios.Cedula = Empleados.Cedula
-                WHERE Empleados.IdDepartamento = @dep";  
+                    SELECT Empleados.IdEmpleado,
+                    Usuarios.Nombre + ' ' + Usuarios.Apellido1 AS NombreCompleto
+                    FROM Usuarios
+                    INNER JOIN Empleados ON Usuarios.Cedula = Empleados.Cedula
+                    WHERE Empleados.IdDepartamento = @dep";
 
                     SqlCommand cmd = new SqlCommand(consulta, con);
                     cmd.Parameters.AddWithValue("@dep", idDepartamento);
@@ -70,7 +70,7 @@ namespace Proyecto_Final_PrograIV
 
                     cbmAsignado.DataSource = dt;
                     cbmAsignado.DisplayMember = "NombreCompleto";
-                    cbmAsignado.ValueMember = "Cedula";
+                    cbmAsignado.ValueMember = "IdEmpleado";
                     cbmAsignado.SelectedIndex = -1;
                 }
             }
@@ -253,19 +253,23 @@ namespace Proyecto_Final_PrograIV
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            
+
             if (string.IsNullOrWhiteSpace(txtMarca.Text) ||
                 string.IsNullOrWhiteSpace(txtSerie.Text) ||
-                string.IsNullOrWhiteSpace(cbmTipo.Text) ||
-                string.IsNullOrWhiteSpace(cmbDepartamento.Text) ||
-                string.IsNullOrWhiteSpace(cbmAsignado.Text))
+                cbmTipo.SelectedIndex == -1 ||
+                cmbDepartamento.SelectedIndex == -1 ||
+                cbmAsignado.SelectedIndex == -1)
             {
-                MessageBox.Show("Debe completar todos los campos para registrar la computadora.",
-                                "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Debe completar todos los campos para registrar la computadora.",
+                    "Campos incompletos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
 
-            string consulta = @"INSERT INTO Computadoras 
+            string consulta = @"INSERT INTO Computadoras
                         (Marca, TipoEquipo, Serie, IdDepartamento, IdEmpleado)
                         VALUES (@marca, @tipo, @serie, @dep, @emp)";
 
@@ -275,17 +279,23 @@ namespace Proyecto_Final_PrograIV
                 cmd.Parameters.AddWithValue("@marca", txtMarca.Text);
                 cmd.Parameters.AddWithValue("@tipo", cbmTipo.Text);
                 cmd.Parameters.AddWithValue("@serie", txtSerie.Text);
-                cmd.Parameters.AddWithValue("@dep", cmbDepartamento.Text);
-                cmd.Parameters.AddWithValue("@emp", cbmAsignado.SelectedValue);
+
+               
+                cmd.Parameters.AddWithValue("@dep", Convert.ToInt32(cmbDepartamento.SelectedValue));
+                cmd.Parameters.AddWithValue("@emp", Convert.ToInt32(cbmAsignado.SelectedValue));
 
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
 
-            MessageBox.Show("Computadora agregada correctamente.", "Éxito",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                "Computadora agregada correctamente.",
+                "Éxito",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
 
-            cargarComputadoras(); 
+            cargarComputadoras();
             limpiarCampos();
         }
 
@@ -326,8 +336,10 @@ namespace Proyecto_Final_PrograIV
                 cmd.Parameters.AddWithValue("@marca", txtMarca.Text);
                 cmd.Parameters.AddWithValue("@tipo", cbmTipo.Text);
                 cmd.Parameters.AddWithValue("@serie", txtSerie.Text);
-                cmd.Parameters.AddWithValue("@dep", cmbDepartamento.Text);
-                cmd.Parameters.AddWithValue("@emp", cbmAsignado.SelectedValue);
+                cmd.Parameters.AddWithValue("@dep",
+                Convert.ToInt32(cmbDepartamento.SelectedValue));
+                cmd.Parameters.AddWithValue("@emp",
+                    Convert.ToInt32(cbmAsignado.SelectedValue));
                 cmd.Parameters.AddWithValue("@id", id);
 
                 con.Open();

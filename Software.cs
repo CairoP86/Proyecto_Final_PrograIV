@@ -13,6 +13,7 @@ namespace Proyecto_Final_PrograIV
 {
     public partial class Software : Form
     {
+        private int idSoftwareSeleccionado = 0;
         public Software()
         {
             InitializeComponent();
@@ -203,12 +204,18 @@ namespace Proyecto_Final_PrograIV
         private void dgvDatosUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            txtNombre.Text = dgvSoftware.CurrentRow.Cells["Nombre"].Value.ToString();
-            txtVersion.Text = dgvSoftware.CurrentRow.Cells["Version"].Value.ToString();
-            cbmTipoLic.Text = dgvSoftware.CurrentRow.Cells["TipoLicencia"].Value.ToString();
-            txtStockLic.Text = dgvSoftware.CurrentRow.Cells["StockLicencias"].Value.ToString();
-            txtLicenDisponibles.Text = dgvSoftware.CurrentRow.Cells["LicenciasDisponibles"].Value.ToString();
-            txtTipoLicInstalada.Text = dgvSoftware.CurrentRow.Cells["LicenciasInstaladas"].Value.ToString();
+            if (e.RowIndex < 0) return;
+
+            DataGridViewRow fila = dgvSoftware.Rows[e.RowIndex];
+
+            idSoftwareSeleccionado = Convert.ToInt32(fila.Cells["IdSoftware"].Value);
+
+            txtNombre.Text = fila.Cells["Nombre"].Value.ToString();
+            txtVersion.Text = fila.Cells["Version"].Value.ToString();
+            cbmTipoLic.Text = fila.Cells["TipoLicencia"].Value.ToString();
+            txtStockLic.Text = fila.Cells["StockLicencias"].Value.ToString();
+            txtLicenDisponibles.Text = fila.Cells["LicenciasDisponibles"].Value.ToString();
+            txtTipoLicInstalada.Text = fila.Cells["LicenciasInstaladas"].Value.ToString();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -255,13 +262,12 @@ namespace Proyecto_Final_PrograIV
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            if (idSoftwareSeleccionado == 0)
             {
                 MessageBox.Show("Seleccione un software para actualizar.");
                 return;
             }
 
-            // Validar que el stock sea numérico
             if (!int.TryParse(txtStockLic.Text, out int stock))
             {
                 MessageBox.Show("El stock debe ser un número válido.");
@@ -273,11 +279,12 @@ namespace Proyecto_Final_PrograIV
                 conn.Open();
 
                 string actualizar = @"UPDATE Software SET
-                        Version=@ver,
-                        TipoLicencia=@tipo,
-                        StockLicencias=@stock,
-                        LicenciasDisponibles=@stock
-                        WHERE Nombre=@nom";
+                Nombre = @nom,
+                Version = @ver,
+                TipoLicencia = @tipo,
+                StockLicencias = @stock,
+                LicenciasDisponibles = @stock
+            WHERE IdSoftware = @id";
 
                 using (SqlCommand cmd = new SqlCommand(actualizar, conn))
                 {
@@ -285,6 +292,7 @@ namespace Proyecto_Final_PrograIV
                     cmd.Parameters.AddWithValue("@ver", txtVersion.Text);
                     cmd.Parameters.AddWithValue("@tipo", cbmTipoLic.Text);
                     cmd.Parameters.AddWithValue("@stock", stock);
+                    cmd.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -311,9 +319,14 @@ namespace Proyecto_Final_PrograIV
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            if (idSoftwareSeleccionado == 0)
             {
-                MessageBox.Show("Seleccione un software para eliminar.");
+                MessageBox.Show(
+                    "Seleccione un software para eliminar.",
+                    "Advertencia",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
 
@@ -321,18 +334,72 @@ namespace Proyecto_Final_PrograIV
             {
                 conn.Open();
 
-                string eliminar = "DELETE FROM Software WHERE Nombre=@nom";
+                // 1️⃣ Obtener licencias instaladas reales
+                string obtenerLicencias = @"SELECT LicenciasInstaladas
+                                    FROM Software
+                                    WHERE IdSoftware = @id";
 
-                using (SqlCommand cmd = new SqlCommand(eliminar, conn))
+                int licenciasInstaladas;
+
+                using (SqlCommand cmdLic = new SqlCommand(obtenerLicencias, conn))
                 {
-                    cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
-                    cmd.ExecuteNonQuery();
+                    cmdLic.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
+                    licenciasInstaladas = Convert.ToInt32(cmdLic.ExecuteScalar());
+                }
+
+                // 2️⃣ Bloquear eliminación si hay licencias
+                if (licenciasInstaladas > 0)
+                {
+                    MessageBox.Show(
+                        $"No se puede eliminar el software porque tiene {licenciasInstaladas} licencia(s) instalada(s).",
+                        "Eliminación bloqueada",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
+
+                // 3️⃣ Eliminar instalaciones (solo porque no hay licencias)
+                string eliminarInstalaciones = @"DELETE FROM InstalacionesSoftware
+                                         WHERE IdSoftware = @id";
+
+                using (SqlCommand cmdInst = new SqlCommand(eliminarInstalaciones, conn))
+                {
+                    cmdInst.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
+                    cmdInst.ExecuteNonQuery();
+                }
+
+                // 4️⃣ Confirmar eliminación
+                DialogResult confirmacion = MessageBox.Show(
+                    "¿Está seguro de que desea eliminar este software?",
+                    "Confirmar eliminación",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (confirmacion != DialogResult.Yes)
+                    return;
+
+                // 5️⃣ Eliminar software
+                string eliminarSoftware = "DELETE FROM Software WHERE IdSoftware = @id";
+
+                using (SqlCommand cmdEliminar = new SqlCommand(eliminarSoftware, conn))
+                {
+                    cmdEliminar.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
+                    cmdEliminar.ExecuteNonQuery();
                 }
             }
 
-            MessageBox.Show("Software eliminado.");
+            MessageBox.Show(
+                "Software eliminado correctamente.",
+                "Éxito",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+
             dgvSoftware.DataSource = CargarSoftware();
             Limpiar();
+            idSoftwareSeleccionado = 0;
         }
 
         private void Software_Load(object sender, EventArgs e)
