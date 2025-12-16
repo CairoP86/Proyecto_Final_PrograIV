@@ -41,7 +41,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(330, 37);
+            this.label1.Location = new System.Drawing.Point(328, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 13);
             this.label1.TabIndex = 0;
@@ -49,9 +49,12 @@
             // 
             // dgvTiquetesTecnico
             // 
+            this.dgvTiquetesTecnico.BackgroundColor = System.Drawing.Color.White;
             this.dgvTiquetesTecnico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTiquetesTecnico.Location = new System.Drawing.Point(60, 64);
+            this.dgvTiquetesTecnico.GridColor = System.Drawing.Color.White;
+            this.dgvTiquetesTecnico.Location = new System.Drawing.Point(58, 68);
             this.dgvTiquetesTecnico.Name = "dgvTiquetesTecnico";
+            this.dgvTiquetesTecnico.ReadOnly = true;
             this.dgvTiquetesTecnico.Size = new System.Drawing.Size(676, 150);
             this.dgvTiquetesTecnico.TabIndex = 1;
             this.dgvTiquetesTecnico.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTiquetesTecnico_CellContentClick);
@@ -59,7 +62,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(57, 261);
+            this.label2.Location = new System.Drawing.Point(155, 238);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(184, 13);
             this.label2.TabIndex = 2;
@@ -67,7 +70,8 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(261, 230);
+            this.txtDescripcion.BackColor = System.Drawing.Color.White;
+            this.txtDescripcion.Location = new System.Drawing.Point(158, 267);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.ReadOnly = true;
@@ -77,7 +81,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(154, 323);
+            this.label3.Location = new System.Drawing.Point(221, 373);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 4;
@@ -89,26 +93,30 @@
             this.cbmEstado.Items.AddRange(new object[] {
             "Generado",
             "Completado "});
-            this.cbmEstado.Location = new System.Drawing.Point(261, 320);
+            this.cbmEstado.Location = new System.Drawing.Point(328, 370);
             this.cbmEstado.Name = "cbmEstado";
             this.cbmEstado.Size = new System.Drawing.Size(151, 21);
             this.cbmEstado.TabIndex = 5;
             // 
             // btnEstado
             // 
-            this.btnEstado.Location = new System.Drawing.Point(261, 366);
+            this.btnEstado.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEstado.ForeColor = System.Drawing.Color.White;
+            this.btnEstado.Location = new System.Drawing.Point(328, 416);
             this.btnEstado.Name = "btnEstado";
-            this.btnEstado.Size = new System.Drawing.Size(151, 23);
+            this.btnEstado.Size = new System.Drawing.Size(151, 34);
             this.btnEstado.TabIndex = 6;
             this.btnEstado.Text = "Actualizar Estado";
-            this.btnEstado.UseVisualStyleBackColor = true;
+            this.btnEstado.UseVisualStyleBackColor = false;
             this.btnEstado.Click += new System.EventHandler(this.btnEstado_Click);
             // 
             // Tiquete_Tecnico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(800, 527);
             this.Controls.Add(this.btnEstado);
             this.Controls.Add(this.cbmEstado);
             this.Controls.Add(this.label3);

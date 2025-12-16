@@ -35,6 +35,7 @@ namespace Proyecto_Final_PrograIV
         {
             if (rolUsuario == "empleado")
             {
+                usuariosToolStripMenuItem.Enabled = false;
                 computadorasToolStripMenuItem.Enabled = false;
                 softwareToolStripMenuItem.Enabled = false;
                 instalacionDeSoftwareToolStripMenuItem.Enabled = false;
@@ -44,6 +45,7 @@ namespace Proyecto_Final_PrograIV
 
             if (rolUsuario == "tecnico")
             {
+                usuariosToolStripMenuItem.Enabled = false;
                 computadorasToolStripMenuItem.Enabled = false;
                 softwareToolStripMenuItem.Enabled = false;
                 instalacionDeSoftwareToolStripMenuItem.Enabled = true;

@@ -22,12 +22,11 @@ namespace Proyecto_Final_PrograIV
         
         private void Login_Load(object sender, EventArgs e)
         {
-            SetPlaceholder(txtCedula, "Ejemplo: 050112233");
+            
 
             // 🔥 Clave inicia sin ocultar SOLO si tiene placeholder
             txtClave.UseSystemPasswordChar = false;
-            txtClave.Text = "Ingrese su contraseña";
-            txtClave.ForeColor = Color.Gray;
+            
         }
 
 

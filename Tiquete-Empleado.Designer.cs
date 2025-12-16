@@ -57,12 +57,15 @@
             // 
             // btnGenerar
             // 
+            this.btnGenerar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnGenerar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerar.ForeColor = System.Drawing.Color.White;
             this.btnGenerar.Location = new System.Drawing.Point(272, 187);
             this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(259, 23);
+            this.btnGenerar.Size = new System.Drawing.Size(259, 42);
             this.btnGenerar.TabIndex = 2;
             this.btnGenerar.Text = "Generar Tiquete";
-            this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.UseVisualStyleBackColor = false;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // label2
@@ -76,9 +79,12 @@
             // 
             // dgvTiquetes
             // 
+            this.dgvTiquetes.BackgroundColor = System.Drawing.Color.White;
             this.dgvTiquetes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTiquetes.GridColor = System.Drawing.Color.White;
             this.dgvTiquetes.Location = new System.Drawing.Point(55, 288);
             this.dgvTiquetes.Name = "dgvTiquetes";
+            this.dgvTiquetes.ReadOnly = true;
             this.dgvTiquetes.Size = new System.Drawing.Size(687, 150);
             this.dgvTiquetes.TabIndex = 4;
             // 
@@ -102,6 +108,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.txtCedula);
             this.Controls.Add(this.label3);

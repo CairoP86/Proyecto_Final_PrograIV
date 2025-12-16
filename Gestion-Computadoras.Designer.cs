@@ -58,22 +58,22 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(32, 28);
+            this.groupBox1.Location = new System.Drawing.Point(32, 11);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(265, 37);
+            this.groupBox1.Size = new System.Drawing.Size(265, 54);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(63, 15);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(54, 18);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.Size = new System.Drawing.Size(168, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Datos del Equipo ";
             // 
@@ -141,7 +141,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(265, 333);
+            this.groupBox2.Size = new System.Drawing.Size(265, 384);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
@@ -214,11 +214,13 @@
             // btnBuscar
             // 
             this.btnBuscar.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
-            this.btnBuscar.BackColor = System.Drawing.SystemColors.Window;
-            this.btnBuscar.Location = new System.Drawing.Point(176, 254);
+            this.btnBuscar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.ForeColor = System.Drawing.Color.White;
+            this.btnBuscar.Location = new System.Drawing.Point(134, 289);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(74, 23);
+            this.btnBuscar.Size = new System.Drawing.Size(94, 39);
             this.btnBuscar.TabIndex = 12;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
@@ -267,11 +269,13 @@
             // btnEliminar
             // 
             this.btnEliminar.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
-            this.btnEliminar.BackColor = System.Drawing.SystemColors.Window;
-            this.btnEliminar.Location = new System.Drawing.Point(176, 296);
+            this.btnEliminar.BackColor = System.Drawing.Color.Red;
+            this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.Color.White;
+            this.btnEliminar.Location = new System.Drawing.Point(134, 332);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(72, 23);
+            this.btnEliminar.Size = new System.Drawing.Size(94, 38);
             this.btnEliminar.TabIndex = 7;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
@@ -280,11 +284,13 @@
             // btnActualizar
             // 
             this.btnActualizar.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
-            this.btnActualizar.BackColor = System.Drawing.SystemColors.Window;
-            this.btnActualizar.Location = new System.Drawing.Point(103, 296);
+            this.btnActualizar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnActualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualizar.ForeColor = System.Drawing.Color.White;
+            this.btnActualizar.Location = new System.Drawing.Point(28, 332);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(2);
             this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(69, 23);
+            this.btnActualizar.Size = new System.Drawing.Size(89, 38);
             this.btnActualizar.TabIndex = 6;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
@@ -293,11 +299,13 @@
             // btnAgregar
             // 
             this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
-            this.btnAgregar.BackColor = System.Drawing.SystemColors.Window;
-            this.btnAgregar.Location = new System.Drawing.Point(103, 254);
+            this.btnAgregar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Location = new System.Drawing.Point(28, 289);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(69, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(88, 39);
             this.btnAgregar.TabIndex = 5;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = false;
@@ -307,12 +315,14 @@
             // 
             this.dtvComputadoras.BackgroundColor = System.Drawing.Color.White;
             this.dtvComputadoras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtvComputadoras.GridColor = System.Drawing.Color.White;
             this.dtvComputadoras.Location = new System.Drawing.Point(301, 29);
             this.dtvComputadoras.Margin = new System.Windows.Forms.Padding(2);
             this.dtvComputadoras.Name = "dtvComputadoras";
+            this.dtvComputadoras.ReadOnly = true;
             this.dtvComputadoras.RowHeadersWidth = 51;
             this.dtvComputadoras.RowTemplate.Height = 24;
-            this.dtvComputadoras.Size = new System.Drawing.Size(315, 344);
+            this.dtvComputadoras.Size = new System.Drawing.Size(315, 373);
             this.dtvComputadoras.TabIndex = 6;
             this.dtvComputadoras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvComputadoras_CellClick);
             // 
@@ -321,7 +331,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(632, 426);
+            this.ClientSize = new System.Drawing.Size(632, 531);
             this.Controls.Add(this.dtvComputadoras);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

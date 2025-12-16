@@ -57,18 +57,18 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(28, 71);
+            this.groupBox2.Location = new System.Drawing.Point(71, 109);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(300, 221);
+            this.groupBox2.Size = new System.Drawing.Size(375, 221);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             // 
             // txtTecnico
             // 
             this.txtTecnico.Enabled = false;
-            this.txtTecnico.Location = new System.Drawing.Point(151, 123);
+            this.txtTecnico.Location = new System.Drawing.Point(194, 113);
             this.txtTecnico.Name = "txtTecnico";
             this.txtTecnico.Size = new System.Drawing.Size(126, 20);
             this.txtTecnico.TabIndex = 17;
@@ -77,7 +77,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(27, 29);
+            this.label8.Location = new System.Drawing.Point(70, 19);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(119, 13);
@@ -87,7 +87,7 @@
             // cbmSoftware
             // 
             this.cbmSoftware.FormattingEnabled = true;
-            this.cbmSoftware.Location = new System.Drawing.Point(151, 26);
+            this.cbmSoftware.Location = new System.Drawing.Point(194, 16);
             this.cbmSoftware.Margin = new System.Windows.Forms.Padding(2);
             this.cbmSoftware.Name = "cbmSoftware";
             this.cbmSoftware.Size = new System.Drawing.Size(126, 21);
@@ -96,7 +96,7 @@
             // cbmComputadora
             // 
             this.cbmComputadora.FormattingEnabled = true;
-            this.cbmComputadora.Location = new System.Drawing.Point(151, 58);
+            this.cbmComputadora.Location = new System.Drawing.Point(194, 48);
             this.cbmComputadora.Margin = new System.Windows.Forms.Padding(2);
             this.cbmComputadora.Name = "cbmComputadora";
             this.cbmComputadora.Size = new System.Drawing.Size(126, 21);
@@ -106,7 +106,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 61);
+            this.label6.Location = new System.Drawing.Point(50, 51);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(140, 13);
@@ -116,7 +116,7 @@
             // txtFecha
             // 
             this.txtFecha.Enabled = false;
-            this.txtFecha.Location = new System.Drawing.Point(151, 87);
+            this.txtFecha.Location = new System.Drawing.Point(194, 77);
             this.txtFecha.Margin = new System.Windows.Forms.Padding(2);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(127, 20);
@@ -124,19 +124,22 @@
             // 
             // btnInstalar
             // 
-            this.btnInstalar.Location = new System.Drawing.Point(54, 161);
+            this.btnInstalar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnInstalar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInstalar.ForeColor = System.Drawing.Color.White;
+            this.btnInstalar.Location = new System.Drawing.Point(97, 151);
             this.btnInstalar.Margin = new System.Windows.Forms.Padding(2);
             this.btnInstalar.Name = "btnInstalar";
             this.btnInstalar.Size = new System.Drawing.Size(196, 41);
             this.btnInstalar.TabIndex = 6;
             this.btnInstalar.Text = "Instalar";
-            this.btnInstalar.UseVisualStyleBackColor = true;
+            this.btnInstalar.UseVisualStyleBackColor = false;
             this.btnInstalar.Click += new System.EventHandler(this.btnInstalar_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(51, 87);
+            this.label5.Location = new System.Drawing.Point(94, 77);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 13);
@@ -146,7 +149,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 123);
+            this.label4.Location = new System.Drawing.Point(80, 113);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(109, 13);
@@ -165,22 +168,22 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(28, 29);
+            this.groupBox1.Location = new System.Drawing.Point(71, 26);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(300, 37);
+            this.groupBox1.Size = new System.Drawing.Size(375, 63);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(59, 15);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(39, 25);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(178, 13);
+            this.label1.Size = new System.Drawing.Size(296, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Proceso de Instalacion Software";
             // 
@@ -189,7 +192,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(368, 309);
+            this.ClientSize = new System.Drawing.Size(507, 355);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
