@@ -41,9 +41,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(114, 119);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(72, 125);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 13);
+            this.label1.Size = new System.Drawing.Size(194, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Descripción del problema: ";
             // 
@@ -71,9 +73,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(343, 254);
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(297, 252);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 13);
+            this.label2.Size = new System.Drawing.Size(196, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Mis tiquetes generados";
             // 
@@ -82,7 +86,7 @@
             this.dgvTiquetes.BackgroundColor = System.Drawing.Color.White;
             this.dgvTiquetes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTiquetes.GridColor = System.Drawing.Color.White;
-            this.dgvTiquetes.Location = new System.Drawing.Point(55, 288);
+            this.dgvTiquetes.Location = new System.Drawing.Point(57, 275);
             this.dgvTiquetes.Name = "dgvTiquetes";
             this.dgvTiquetes.ReadOnly = true;
             this.dgvTiquetes.Size = new System.Drawing.Size(687, 150);
@@ -91,9 +95,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(203, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.Size = new System.Drawing.Size(60, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "Cédula:";
             // 
@@ -109,7 +115,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackgroundImage = global::Proyecto_Final_PrograIV.Properties.Resources.imagen__2_;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(800, 483);
             this.Controls.Add(this.txtCedula);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgvTiquetes);

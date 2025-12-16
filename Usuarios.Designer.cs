@@ -59,6 +59,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(22, 28);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -81,6 +82,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.cbmCampo);
             this.groupBox2.Controls.Add(this.cbmDato);
@@ -350,6 +352,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::Proyecto_Final_PrograIV.Properties.Resources.imagen__1_;
             this.ClientSize = new System.Drawing.Size(760, 458);
             this.Controls.Add(this.dgvDatosUsuario);
             this.Controls.Add(this.groupBox2);

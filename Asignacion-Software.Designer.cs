@@ -47,6 +47,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.txtTecnico);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.cbmSoftware);
@@ -57,18 +58,18 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(71, 109);
+            this.groupBox2.Location = new System.Drawing.Point(101, 78);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(375, 221);
+            this.groupBox2.Size = new System.Drawing.Size(375, 210);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             // 
             // txtTecnico
             // 
             this.txtTecnico.Enabled = false;
-            this.txtTecnico.Location = new System.Drawing.Point(194, 113);
+            this.txtTecnico.Location = new System.Drawing.Point(194, 111);
             this.txtTecnico.Name = "txtTecnico";
             this.txtTecnico.Size = new System.Drawing.Size(126, 20);
             this.txtTecnico.TabIndex = 17;
@@ -77,6 +78,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(70, 19);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
@@ -106,6 +108,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(50, 51);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
@@ -127,10 +130,10 @@
             this.btnInstalar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnInstalar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInstalar.ForeColor = System.Drawing.Color.White;
-            this.btnInstalar.Location = new System.Drawing.Point(97, 151);
+            this.btnInstalar.Location = new System.Drawing.Point(83, 147);
             this.btnInstalar.Margin = new System.Windows.Forms.Padding(2);
             this.btnInstalar.Name = "btnInstalar";
-            this.btnInstalar.Size = new System.Drawing.Size(196, 41);
+            this.btnInstalar.Size = new System.Drawing.Size(238, 41);
             this.btnInstalar.TabIndex = 6;
             this.btnInstalar.Text = "Instalar";
             this.btnInstalar.UseVisualStyleBackColor = false;
@@ -139,6 +142,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(94, 77);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
@@ -149,7 +153,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(80, 113);
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(80, 111);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(109, 13);
@@ -167,8 +172,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(71, 26);
+            this.groupBox1.Location = new System.Drawing.Point(101, 11);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -180,6 +186,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(39, 25);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
@@ -191,8 +198,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(507, 355);
+            this.BackColor = System.Drawing.Color.Black;
+            this.BackgroundImage = global::Proyecto_Final_PrograIV.Properties.Resources.Imagen_generada;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(637, 427);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);

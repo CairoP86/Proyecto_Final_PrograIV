@@ -204,7 +204,46 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\fondo-login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gestion-pc.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imagen1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imagen %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4,532 vectores de stock y arte vectorial de Creation site web _ Shutterstock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Imagen generada.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imagen %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imagen %282%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imagen %282%292.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Imágenes de Reporting - Descarga gratuita en Freepik.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Imagen generada %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Imagen generada %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ilustración de Dibujos Animados De Informe Médico y más Vectores Libres de Derechos de Archivo - Archivo, Asistencia sanitaria y medicina, Atención primaria - iStock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Imágenes de Tecnologia fondo blanco - Descarga gratuita en Freepik.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

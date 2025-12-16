@@ -59,5 +59,147 @@ namespace Proyecto_Final_PrograIV.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _4_532_vectores_de_stock_y_arte_vectorial_de_Creation_site_web___Shutterstock {
+            get {
+                object obj = ResourceManager.GetObject("4,532 vectores de stock y arte vectorial de Creation site web _ Shutterstock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fondo_login {
+            get {
+                object obj = ResourceManager.GetObject("fondo-login", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gestion_pc {
+            get {
+                object obj = ResourceManager.GetObject("gestion-pc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ilustración_de_Dibujos_Animados_De_Informe_Médico_y_más_Vectores_Libres_de_Derechos_de_Archivo___Archivo__Asistencia_sanitaria_y_medicina__Atención_primaria___iStock {
+            get {
+                object obj = ResourceManager.GetObject("Ilustración de Dibujos Animados De Informe Médico y más Vectores Libres de Derech" +
+                        "os de Archivo - Archivo, Asistencia sanitaria y medicina, Atención primaria - iS" +
+                        "tock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagen__1_ {
+            get {
+                object obj = ResourceManager.GetObject("imagen (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagen__2_ {
+            get {
+                object obj = ResourceManager.GetObject("imagen (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagen__2_1 {
+            get {
+                object obj = ResourceManager.GetObject("imagen (2)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagen__2_2 {
+            get {
+                object obj = ResourceManager.GetObject("imagen (2)2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Imagen_generada {
+            get {
+                object obj = ResourceManager.GetObject("Imagen generada", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Imagen_generada__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Imagen generada (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Imagen_generada__1_1 {
+            get {
+                object obj = ResourceManager.GetObject("Imagen generada (1)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagen1 {
+            get {
+                object obj = ResourceManager.GetObject("imagen1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Imágenes_de_Reporting___Descarga_gratuita_en_Freepik {
+            get {
+                object obj = ResourceManager.GetObject("Imágenes de Reporting - Descarga gratuita en Freepik", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Imágenes_de_Tecnologia_fondo_blanco___Descarga_gratuita_en_Freepik {
+            get {
+                object obj = ResourceManager.GetObject("Imágenes de Tecnologia fondo blanco - Descarga gratuita en Freepik", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
