@@ -43,18 +43,20 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(72, 125);
+            this.label1.Location = new System.Drawing.Point(96, 154);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 16);
+            this.label1.Size = new System.Drawing.Size(236, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Descripción del problema: ";
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(272, 103);
+            this.txtDescripcion.Location = new System.Drawing.Point(363, 127);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(259, 56);
+            this.txtDescripcion.Size = new System.Drawing.Size(344, 68);
             this.txtDescripcion.TabIndex = 1;
             // 
             // btnGenerar
@@ -62,9 +64,10 @@
             this.btnGenerar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnGenerar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerar.ForeColor = System.Drawing.Color.White;
-            this.btnGenerar.Location = new System.Drawing.Point(272, 187);
+            this.btnGenerar.Location = new System.Drawing.Point(363, 230);
+            this.btnGenerar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(259, 42);
+            this.btnGenerar.Size = new System.Drawing.Size(345, 52);
             this.btnGenerar.TabIndex = 2;
             this.btnGenerar.Text = "Generar Tiquete";
             this.btnGenerar.UseVisualStyleBackColor = false;
@@ -75,9 +78,10 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(297, 252);
+            this.label2.Location = new System.Drawing.Point(396, 310);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(196, 20);
+            this.label2.Size = new System.Drawing.Size(236, 25);
             this.label2.TabIndex = 3;
             this.label2.Text = "Mis tiquetes generados";
             // 
@@ -86,10 +90,12 @@
             this.dgvTiquetes.BackgroundColor = System.Drawing.Color.White;
             this.dgvTiquetes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTiquetes.GridColor = System.Drawing.Color.White;
-            this.dgvTiquetes.Location = new System.Drawing.Point(57, 275);
+            this.dgvTiquetes.Location = new System.Drawing.Point(76, 338);
+            this.dgvTiquetes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvTiquetes.Name = "dgvTiquetes";
             this.dgvTiquetes.ReadOnly = true;
-            this.dgvTiquetes.Size = new System.Drawing.Size(687, 150);
+            this.dgvTiquetes.RowHeadersWidth = 51;
+            this.dgvTiquetes.Size = new System.Drawing.Size(916, 185);
             this.dgvTiquetes.TabIndex = 4;
             // 
             // label3
@@ -97,27 +103,28 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(203, 52);
+            this.label3.Location = new System.Drawing.Point(271, 64);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 16);
+            this.label3.Size = new System.Drawing.Size(73, 20);
             this.label3.TabIndex = 5;
             this.label3.Text = "Cédula:";
             // 
             // txtCedula
             // 
-            this.txtCedula.Location = new System.Drawing.Point(272, 49);
+            this.txtCedula.Location = new System.Drawing.Point(363, 60);
+            this.txtCedula.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCedula.Name = "txtCedula";
-            this.txtCedula.Size = new System.Drawing.Size(259, 20);
+            this.txtCedula.Size = new System.Drawing.Size(344, 22);
             this.txtCedula.TabIndex = 6;
             // 
             // Tiquete_Empleado
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::Proyecto_Final_PrograIV.Properties.Resources.imagen__2_;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 483);
+            this.ClientSize = new System.Drawing.Size(1067, 594);
             this.Controls.Add(this.txtCedula);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgvTiquetes);
@@ -125,6 +132,7 @@
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Tiquete_Empleado";
             this.Text = "Tiquete_Empleado";
             this.Load += new System.EventHandler(this.Tiquete_Empleado_Load);

@@ -103,8 +103,8 @@ namespace Proyecto_Final_PrograIV
 
 
             cbmCampo.SelectedIndex = -1;
-            cbmDato.Items.Clear();
-            cbmDato.SelectedIndex = -1;
+            
+            
 
             txtNombre.Focus(); 
         }
@@ -123,7 +123,7 @@ namespace Proyecto_Final_PrograIV
             if (cbmCampo.SelectedIndex == -1)
                 return;
 
-            cbmDato.Items.Clear();
+           
 
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
@@ -138,7 +138,7 @@ namespace Proyecto_Final_PrograIV
 
                     while (dr.Read())
                     {
-                        cbmDato.Items.Add(dr[columna].ToString());
+                        
                     }
                 }
             }
@@ -146,11 +146,11 @@ namespace Proyecto_Final_PrograIV
 
         private void cbmDato_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbmCampo.SelectedIndex == -1 || cbmDato.SelectedIndex == -1)
+            if (cbmCampo.SelectedIndex == -1 )
                 return;
 
             string campo = cbmCampo.SelectedItem.ToString();
-            string valor = cbmDato.SelectedItem.ToString();
+           
 
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
@@ -160,7 +160,7 @@ namespace Proyecto_Final_PrograIV
 
                 using (SqlCommand cmd = new SqlCommand(consulta, conn))
                 {
-                    cmd.Parameters.AddWithValue("@val", valor);
+                    
 
                     DataTable dt = new DataTable();
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
