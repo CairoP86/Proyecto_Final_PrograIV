@@ -41,10 +41,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(63, 80);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(151, 102);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(50, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Cédula";
             // 
@@ -52,29 +53,33 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(63, 152);
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(151, 191);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.Size = new System.Drawing.Size(76, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "Contraseña";
             // 
             // txtCedula
             // 
-            this.txtCedula.Location = new System.Drawing.Point(66, 96);
+            this.txtCedula.Location = new System.Drawing.Point(155, 122);
+            this.txtCedula.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCedula.Multiline = true;
             this.txtCedula.Name = "txtCedula";
-            this.txtCedula.Size = new System.Drawing.Size(242, 35);
+            this.txtCedula.Size = new System.Drawing.Size(384, 41);
             this.txtCedula.TabIndex = 2;
             this.txtCedula.Enter += new System.EventHandler(this.Login_Load);
             this.txtCedula.Leave += new System.EventHandler(this.txtCedula_Enter);
             // 
             // txtClave
             // 
-            this.txtClave.Location = new System.Drawing.Point(66, 168);
+            this.txtClave.Location = new System.Drawing.Point(155, 211);
+            this.txtClave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtClave.Multiline = true;
             this.txtClave.Name = "txtClave";
-            this.txtClave.Size = new System.Drawing.Size(242, 32);
+            this.txtClave.PasswordChar = '*';
+            this.txtClave.Size = new System.Drawing.Size(384, 37);
             this.txtClave.TabIndex = 3;
             this.txtClave.Enter += new System.EventHandler(this.txtCedula_Enter);
             this.txtClave.Leave += new System.EventHandler(this.txtClave_Leave);
@@ -85,9 +90,10 @@
             this.btnIniciar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnIniciar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnIniciar.Location = new System.Drawing.Point(66, 217);
+            this.btnIniciar.Location = new System.Drawing.Point(155, 271);
+            this.btnIniciar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(104, 38);
+            this.btnIniciar.Size = new System.Drawing.Size(202, 46);
             this.btnIniciar.TabIndex = 4;
             this.btnIniciar.Text = "Iniciar Sesión";
             this.btnIniciar.UseVisualStyleBackColor = false;
@@ -99,9 +105,10 @@
             this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSalir.Location = new System.Drawing.Point(211, 217);
+            this.btnSalir.Location = new System.Drawing.Point(348, 271);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(97, 38);
+            this.btnSalir.Size = new System.Drawing.Size(192, 46);
             this.btnSalir.TabIndex = 5;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
@@ -112,20 +119,20 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(151, 49);
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(268, 64);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 24);
+            this.label3.Size = new System.Drawing.Size(78, 29);
             this.label3.TabIndex = 6;
             this.label3.Text = "Login";
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Proyecto_Final_PrograIV.Properties.Resources.fondo_login;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(367, 278);
+            this.ClientSize = new System.Drawing.Size(674, 427);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnIniciar);
@@ -134,6 +141,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Login";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
