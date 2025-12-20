@@ -10,19 +10,21 @@ namespace Proyecto_Final_PrograIV
 {
     public class UsuarioDAO
     {
-        public string ValidarLogin(string cedula, string clave)
+        public string ValidarLogin(string cedula, string claveHash)
         {
             string rol = null;
 
             using (SqlConnection con = Conexion.ObtenerConexion())
             {
                 con.Open();
+
                 SqlCommand cmd = new SqlCommand(
-                    "SELECT Rol FROM Usuarios WHERE Cedula=@ced AND Clave=@cla", con);
+                    "SELECT Rol FROM Usuarios WHERE Cedula = @ced AND ClaveHash = @hash",
+                    con
+                );
 
                 cmd.Parameters.AddWithValue("@ced", cedula);
-                cmd.Parameters.AddWithValue("@cla", clave);
-
+                cmd.Parameters.AddWithValue("@hash", claveHash);
 
                 var result = cmd.ExecuteScalar();
 
@@ -30,8 +32,28 @@ namespace Proyecto_Final_PrograIV
                     rol = result.ToString();
             }
 
-            return rol;  
+            return rol;
         }
+        public bool ClaveExpirada(string cedula)
+        {
+            using (SqlConnection con = Conexion.ObtenerConexion())
+            {
+                con.Open();
+
+                string sql = @"SELECT DATEDIFF(HOUR, FechaCambioClave, GETDATE())
+                       FROM Usuarios
+                       WHERE Cedula = @ced";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@ced", cedula);
+
+                int dias = Convert.ToInt32(cmd.ExecuteScalar());
+
+                return dias >= 12;
+            }
+        }
+
+
 
 
 

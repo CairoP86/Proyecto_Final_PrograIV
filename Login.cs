@@ -30,16 +30,29 @@ namespace Proyecto_Final_PrograIV
         }
 
 
-        
+
         // BOTÓN INICIAR SESIÓN
-       
+
         private void btnIniciar_Click(object sender, EventArgs e)
         {
+            // 1️⃣ Validación básica de campos
+            if (string.IsNullOrWhiteSpace(txtCedula.Text) ||
+                string.IsNullOrWhiteSpace(txtClave.Text))
+            {
+                MessageBox.Show("Debe ingresar cédula y contraseña.");
+                return;
+            }
+
             string cedula = txtCedula.Text.Trim();
-            string clave = txtClave.Text.Trim();
+            string clavePlano = txtClave.Text.Trim();
+
+            // 2️⃣ Generar hash de la contraseña ingresada
+            string claveHash = Seguridad.GenerarHash(clavePlano);
 
             UsuarioDAO user = new UsuarioDAO();
-            string rol = user.ValidarLogin(cedula, clave);
+
+            // 3️⃣ Validar credenciales
+            string rol = user.ValidarLogin(cedula, claveHash);
 
             if (rol == null)
             {
@@ -47,15 +60,31 @@ namespace Proyecto_Final_PrograIV
                 return;
             }
 
+            // 4️⃣ Validar expiración (12 horas en prueba)
+            if (user.ClaveExpirada(cedula))
+            {
+                MessageBox.Show(
+                    "Su contraseña ha expirado.\n\nContacte al departamento de TI para que se la renueven.",
+                    "Acceso bloqueado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            // 5️⃣ Acceso correcto
+            MessageBox.Show("Bienvenido al sistema.");
+
             Principal menu = new Principal(rol, cedula);
             menu.Show();
             this.Hide();
         }
 
-           
-       
+
+
+
         // BOTÓN SALIR
-      
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();

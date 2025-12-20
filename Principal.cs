@@ -16,6 +16,8 @@ namespace Proyecto_Final_PrograIV
 
     public partial class Principal : Form
     {
+        private string rolUsuarioLogueado;
+
 
         string rolUsuario;
         string cedulaUsuario;
@@ -29,6 +31,8 @@ namespace Proyecto_Final_PrograIV
             cedulaUsuario = cedula;
 
             AplicarPermisosSegunRol();
+
+            rolUsuarioLogueado = rol;
         }
 
         private void AplicarPermisosSegunRol()
@@ -63,6 +67,9 @@ namespace Proyecto_Final_PrograIV
 
         private void Principal_Load(object sender, EventArgs e)
         {
+            
+
+
             ActualizarNotificacionesMenu();
 
             UsuarioDAO dao = new UsuarioDAO();
@@ -92,7 +99,7 @@ namespace Proyecto_Final_PrograIV
         // ========================
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Usuarios form = new Usuarios();
+            Usuarios form = new Usuarios(rolUsuarioLogueado);
             form.StartPosition = FormStartPosition.CenterScreen;
             form.BringToFront();
             form.Show();

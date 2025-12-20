@@ -52,6 +52,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvDatosUsuario = new System.Windows.Forms.DataGridView();
+            this.btnResetClave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosUsuario)).BeginInit();
@@ -338,12 +339,23 @@
             this.dgvDatosUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatosUsuario_CellClick);
             this.dgvDatosUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatosUsuario_CellContentClick);
             // 
+            // btnResetClave
+            // 
+            this.btnResetClave.Location = new System.Drawing.Point(294, 533);
+            this.btnResetClave.Name = "btnResetClave";
+            this.btnResetClave.Size = new System.Drawing.Size(107, 33);
+            this.btnResetClave.TabIndex = 3;
+            this.btnResetClave.Text = "Resetear contraseña";
+            this.btnResetClave.UseVisualStyleBackColor = true;
+            this.btnResetClave.Click += new System.EventHandler(this.btnResetClave_Click);
+            // 
             // Usuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1013, 564);
+            this.ClientSize = new System.Drawing.Size(1013, 593);
+            this.Controls.Add(this.btnResetClave);
             this.Controls.Add(this.dgvDatosUsuario);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -386,5 +398,6 @@
         private System.Windows.Forms.ComboBox cbmCampo;
         private System.Windows.Forms.ComboBox cbmDato;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnResetClave;
     }
 }

@@ -12,12 +12,18 @@ using System.Data.SqlClient;
 
 namespace Proyecto_Final_PrograIV
 {
+
     public partial class Usuarios : Form
     {
-        public Usuarios()
+
+        private string rolUsuarioLogueado;
+
+        public Usuarios(string rol)
         {
+
             InitializeComponent();
             Conexion.ObtenerConexion();
+            rolUsuarioLogueado = rol;
 
         }
 
@@ -29,7 +35,7 @@ namespace Proyecto_Final_PrograIV
             {
                 conn.Open();
 
-                string consulta = @"SELECT Cedula, Nombre, Apellido1, Apellido2, Clave, Rol, Fecha_Creacion 
+                string consulta = @"SELECT Cedula, Nombre, Apellido1, Apellido2, Rol, Fecha_Creacion 
                             FROM Usuarios";
 
                 using (SqlCommand cmd = new SqlCommand(consulta, conn))
@@ -52,7 +58,7 @@ namespace Proyecto_Final_PrograIV
                 conn.Open();
 
                 // Empezamos con un WHERE flexible
-                string consulta = @"SELECT Cedula, Nombre, Apellido1, Apellido2, Clave, Rol, Fecha_Creacion
+                string consulta = @"SELECT Cedula, Nombre, Apellido1, Apellido2,  Rol, Fecha_Creacion
                             FROM Usuarios
                             WHERE 1 = 1 ";
 
@@ -99,12 +105,22 @@ namespace Proyecto_Final_PrograIV
             return dt;
         }
 
+
         private void Usuarios_Load(object sender, EventArgs e)
         {
+
+
+
             dgvDatosUsuario.DataSource = cargarDatos();
             CargarCampos();
 
+            // 🔐 Solo TI puede resetear contraseñas
+            if (rolUsuarioLogueado != "TI")
+            {
+                btnResetClave.Visible = false;
+            }
         }
+
 
         private void CargarCampos()
         {
@@ -125,10 +141,9 @@ namespace Proyecto_Final_PrograIV
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtCedula.Text) ||
-        string.IsNullOrWhiteSpace(txtNombre.Text) ||
-        string.IsNullOrWhiteSpace(txtApellido1.Text) ||
-        string.IsNullOrWhiteSpace(txtClave.Text) ||
-        string.IsNullOrWhiteSpace(cmbRol.Text))
+                string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtApellido1.Text) ||
+                string.IsNullOrWhiteSpace(cmbRol.Text))
             {
                 MessageBox.Show("Complete todos los campos obligatorios.");
                 return;
@@ -140,9 +155,12 @@ namespace Proyecto_Final_PrograIV
                 {
                     conn.Open();
 
+                    // 🔐 Contraseña inicial por defecto (solo para pruebas)
+                    string hash = Seguridad.GenerarHash("1234");
+
                     string insertar = @"INSERT INTO Usuarios 
-                               (Cedula, Nombre, Apellido1, Apellido2, Clave, Rol)
-                               VALUES (@ced, @nom, @ape1, @ape2, @cla, @rol)";
+                                (Cedula, Nombre, Apellido1, Apellido2, ClaveHash, Rol, FechaCambioClave)
+                                VALUES (@ced, @nom, @ape1, @ape2, @hash, @rol, GETDATE())";
 
                     using (SqlCommand cmd = new SqlCommand(insertar, conn))
                     {
@@ -150,7 +168,7 @@ namespace Proyecto_Final_PrograIV
                         cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
                         cmd.Parameters.AddWithValue("@ape1", txtApellido1.Text);
                         cmd.Parameters.AddWithValue("@ape2", txtApellido2.Text);
-                        cmd.Parameters.AddWithValue("@cla", txtClave.Text);
+                        cmd.Parameters.AddWithValue("@hash", hash);
                         cmd.Parameters.AddWithValue("@rol", cmbRol.Text);
 
                         cmd.ExecuteNonQuery();
@@ -167,13 +185,15 @@ namespace Proyecto_Final_PrograIV
             }
         }
 
+
+
         private void limpiarCampos()
         {
             txtCedula.Clear();
             txtNombre.Clear();
             txtApellido1.Clear();
             txtApellido2.Clear();
-            txtClave.Clear();
+           
             cmbRol.SelectedIndex = -1;
         }
 
@@ -194,7 +214,6 @@ namespace Proyecto_Final_PrograIV
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(txtCedula.Text))
             {
                 MessageBox.Show("Debe seleccionar un usuario para actualizar.");
@@ -208,9 +227,11 @@ namespace Proyecto_Final_PrograIV
                     conn.Open();
 
                     string actualizar = @"UPDATE Usuarios 
-                                 SET Nombre=@nom, Apellido1=@ape1, Apellido2=@ape2, 
-                                     Clave=@cla, Rol=@rol
-                                 WHERE Cedula=@ced";
+                                  SET Nombre=@nom, 
+                                      Apellido1=@ape1, 
+                                      Apellido2=@ape2, 
+                                      Rol=@rol
+                                  WHERE Cedula=@ced";
 
                     using (SqlCommand cmd = new SqlCommand(actualizar, conn))
                     {
@@ -218,7 +239,6 @@ namespace Proyecto_Final_PrograIV
                         cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
                         cmd.Parameters.AddWithValue("@ape1", txtApellido1.Text);
                         cmd.Parameters.AddWithValue("@ape2", txtApellido2.Text);
-                        cmd.Parameters.AddWithValue("@cla", txtClave.Text);
                         cmd.Parameters.AddWithValue("@rol", cmbRol.Text);
 
                         cmd.ExecuteNonQuery();
@@ -233,9 +253,8 @@ namespace Proyecto_Final_PrograIV
             {
                 MessageBox.Show("Error al actualizar: " + ex.Message);
             }
-
-
         }
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -276,8 +295,8 @@ namespace Proyecto_Final_PrograIV
             txtNombre.Text = dgvDatosUsuario.CurrentRow.Cells[1].Value.ToString();
             txtApellido1.Text = dgvDatosUsuario.CurrentRow.Cells[2].Value.ToString();
             txtApellido2.Text = dgvDatosUsuario.CurrentRow.Cells[3].Value.ToString();
-            txtClave.Text = dgvDatosUsuario.CurrentRow.Cells[4].Value.ToString();
-            cmbRol.Text = dgvDatosUsuario.CurrentRow.Cells[5].Value.ToString();
+           
+            cmbRol.Text = dgvDatosUsuario.CurrentRow.Cells[4].Value.ToString();
         }
 
         private void txtCedula_KeyPress(object sender, KeyPressEventArgs e)
@@ -378,7 +397,10 @@ namespace Proyecto_Final_PrograIV
             {
                 conn.Open();
 
-                string consulta = $"SELECT * FROM Usuarios WHERE {campo} = @val";
+                // ⚠️ El nombre del campo NO puede ser parámetro, se interpola
+                string consulta = $@"SELECT Cedula, Nombre, Apellido1, Apellido2, Rol, Fecha_Creacion
+                              FROM Usuarios
+                              WHERE {campo} = @val";
 
                 using (SqlCommand cmd = new SqlCommand(consulta, conn))
                 {
@@ -392,5 +414,54 @@ namespace Proyecto_Final_PrograIV
                 }
             }
         }
+
+
+        private void btnResetClave_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
+            {
+                MessageBox.Show("Seleccione un usuario.");
+                return;
+            }
+
+            // 1️⃣ Clave temporal
+            string claveTemporal = "Temp" + new Random().Next(1000, 9999);
+
+            // 2️⃣ Hash
+            string hash = Seguridad.GenerarHash(claveTemporal);
+
+            try
+            {
+                using (SqlConnection conn = Conexion.ObtenerConexion())
+                {
+                    conn.Open();
+
+                    string sql = @"UPDATE Usuarios
+                                    SET ClaveHash = @hash,
+                                     FechaCambioClave = GETDATE()
+                                      WHERE Cedula = @ced";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@hash", hash);
+                        cmd.Parameters.AddWithValue("@ced", txtCedula.Text);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // 3️⃣ Mostrar la clave SOLO AL TI
+                MessageBox.Show(
+                    $"Contraseña temporal:\n\n{claveTemporal}\n\nEl usuario debe usar esta contraseña hasta que TI se la renueve nuevamente.",
+                     "Reset de contraseña",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Information
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al resetear contraseña: " + ex.Message);
+            }
+        }
+
     }
 }
