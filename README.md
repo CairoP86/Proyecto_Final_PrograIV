@@ -28,6 +28,7 @@ Este proyecto fue desarrollado inicialmente como trabajo académico y posteriorm
   - Tickets por estado
   - Tickets por técnico
   - Historial de atención
+  - El sistema registra auditoría de acciones críticas como el reseteo de contraseñas, permitidas únicamente a usuarios con rol TI.
 
 - 🖥 **Interfaz gráfica amigable**
   - Aplicación Windows Forms
