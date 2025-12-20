@@ -40,7 +40,7 @@ namespace Proyecto_Final_PrograIV
             {
                 con.Open();
 
-                string sql = @"SELECT DATEDIFF(HOUR, FechaCambioClave, GETDATE())
+                string sql = @"SELECT DATEDIFF(DAY, FechaCambioClave, GETDATE())
                        FROM Usuarios
                        WHERE Cedula = @ced";
 
@@ -49,7 +49,7 @@ namespace Proyecto_Final_PrograIV
 
                 int dias = Convert.ToInt32(cmd.ExecuteScalar());
 
-                return dias >= 12;
+                return dias >= 90;
             }
         }
 

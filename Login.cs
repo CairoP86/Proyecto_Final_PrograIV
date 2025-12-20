@@ -17,6 +17,8 @@ namespace Proyecto_Final_PrograIV
             InitializeComponent();
         }
 
+
+
         
         // LOAD
         

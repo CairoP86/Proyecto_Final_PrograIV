@@ -19,12 +19,15 @@ namespace Proyecto_Final_PrograIV
         private string rolUsuarioLogueado;
 
 
+
+
         string rolUsuario;
         string cedulaUsuario;
 
 
         public Principal(string rol, string cedula)
         {
+
             InitializeComponent();
             rolUsuario = rol.Trim().ToLower();
             
@@ -99,10 +102,11 @@ namespace Proyecto_Final_PrograIV
         // ========================
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Usuarios form = new Usuarios(rolUsuarioLogueado);
+            Usuarios form = new Usuarios(rolUsuario, cedulaUsuario);
             form.StartPosition = FormStartPosition.CenterScreen;
             form.BringToFront();
             form.Show();
+
         }
 
 

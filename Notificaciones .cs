@@ -12,10 +12,7 @@ namespace Proyecto_Final_PrograIV
 {
     public partial class Notificaciones : Form
     {
-        public Notificaciones()
-        {
-            InitializeComponent();
-        }
+       
 
 
         private void Notificaciones_Load(object sender, EventArgs e)

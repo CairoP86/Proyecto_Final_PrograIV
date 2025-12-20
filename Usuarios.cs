@@ -15,17 +15,19 @@ namespace Proyecto_Final_PrograIV
 
     public partial class Usuarios : Form
     {
-
         private string rolUsuarioLogueado;
+        private string cedulaUsuarioLogueado;
 
-        public Usuarios(string rol)
+
+
+
+        public Usuarios(string rol, string cedula)
         {
-
             InitializeComponent();
-            Conexion.ObtenerConexion();
             rolUsuarioLogueado = rol;
-
+            cedulaUsuarioLogueado = cedula;
         }
+
 
         public DataTable cargarDatos()
         {
@@ -115,7 +117,7 @@ namespace Proyecto_Final_PrograIV
             CargarCampos();
 
             // 🔐 Solo TI puede resetear contraseñas
-            if (rolUsuarioLogueado != "TI")
+            if (!rolUsuarioLogueado.Equals("TI", StringComparison.OrdinalIgnoreCase))
             {
                 btnResetClave.Visible = false;
             }
@@ -446,7 +448,16 @@ namespace Proyecto_Final_PrograIV
                         cmd.Parameters.AddWithValue("@hash", hash);
                         cmd.Parameters.AddWithValue("@ced", txtCedula.Text);
                         cmd.ExecuteNonQuery();
+                        AuditoriaDAO.Registrar(
+                        rolUsuarioLogueado,   // o cedula del TI si la tenés
+                      "RESET_CLAVE",
+                          "Usuarios",
+                          null,
+                        $"Reset de contraseña al usuario {txtCedula.Text}"
+                   );
                     }
+                  
+
                 }
 
                 // 3️⃣ Mostrar la clave SOLO AL TI

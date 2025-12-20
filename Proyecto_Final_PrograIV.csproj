@@ -70,6 +70,7 @@
     <Compile Include="Asignacion-Software.Designer.cs">
       <DependentUpon>Asignacion-Software.cs</DependentUpon>
     </Compile>
+    <Compile Include="AuditoriaDAO.cs" />
     <Compile Include="Notificaciones .cs">
       <SubType>Form</SubType>
     </Compile>
