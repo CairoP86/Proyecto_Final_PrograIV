@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -24,6 +25,45 @@ namespace Proyecto_Final_PrograIV
                 cmd.ExecuteNonQuery();
             }
         }
+        public static void CrearParaTodosTI(int idTiquete, string mensaje)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                conn.Open();
+
+                // 1. Obtener todas las cédulas de usuarios TI
+                List<string> cedulasTI = new List<string>();
+
+                string sqlTI = "SELECT Cedula FROM Usuarios WHERE Rol = 'TI'";
+                using (SqlCommand cmd = new SqlCommand(sqlTI, conn))
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        cedulasTI.Add(dr["Cedula"].ToString());
+                    }
+                }
+
+                // 2. Crear una notificación para cada TI
+                foreach (string cedula in cedulasTI)
+                {
+                    string insertar = @"
+                INSERT INTO Notificaciones
+                (CedulaDestino, IdTiquete, Mensaje, Fecha, Visto)
+                VALUES (@ced, @id, @msg, GETDATE(), 0)";
+
+                    using (SqlCommand cmd = new SqlCommand(insertar, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ced", cedula);
+                        cmd.Parameters.AddWithValue("@id", idTiquete);
+                        cmd.Parameters.AddWithValue("@msg", mensaje);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+
 
         public static int ContarNoVistas(string cedulaDestino)
         {

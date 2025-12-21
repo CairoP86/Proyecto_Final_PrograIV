@@ -35,6 +35,7 @@
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.chkMostrarClave = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -64,7 +65,7 @@
             // txtCedula
             // 
             this.txtCedula.Location = new System.Drawing.Point(155, 122);
-            this.txtCedula.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCedula.Margin = new System.Windows.Forms.Padding(4);
             this.txtCedula.Multiline = true;
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(384, 41);
@@ -75,12 +76,13 @@
             // txtClave
             // 
             this.txtClave.Location = new System.Drawing.Point(155, 211);
-            this.txtClave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtClave.Margin = new System.Windows.Forms.Padding(4);
             this.txtClave.Multiline = true;
             this.txtClave.Name = "txtClave";
             this.txtClave.PasswordChar = '*';
             this.txtClave.Size = new System.Drawing.Size(384, 37);
             this.txtClave.TabIndex = 3;
+            this.txtClave.TextChanged += new System.EventHandler(this.txtClave_TextChanged);
             this.txtClave.Enter += new System.EventHandler(this.txtCedula_Enter);
             this.txtClave.Leave += new System.EventHandler(this.txtClave_Leave);
             // 
@@ -91,7 +93,7 @@
             this.btnIniciar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnIniciar.Location = new System.Drawing.Point(155, 271);
-            this.btnIniciar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnIniciar.Margin = new System.Windows.Forms.Padding(4);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(202, 46);
             this.btnIniciar.TabIndex = 4;
@@ -106,7 +108,7 @@
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSalir.Location = new System.Drawing.Point(348, 271);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(192, 46);
             this.btnSalir.TabIndex = 5;
@@ -127,12 +129,24 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Login";
             // 
+            // chkMostrarClave
+            // 
+            this.chkMostrarClave.AutoSize = true;
+            this.chkMostrarClave.Location = new System.Drawing.Point(488, 223);
+            this.chkMostrarClave.Name = "chkMostrarClave";
+            this.chkMostrarClave.Size = new System.Drawing.Size(41, 20);
+            this.chkMostrarClave.TabIndex = 7;
+            this.chkMostrarClave.Text = "👁️";
+            this.chkMostrarClave.UseVisualStyleBackColor = true;
+            this.chkMostrarClave.CheckedChanged += new System.EventHandler(this.chkMostrarClave_CheckedChanged);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(674, 427);
+            this.Controls.Add(this.chkMostrarClave);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnIniciar);
@@ -141,7 +155,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
@@ -159,5 +173,6 @@
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox chkMostrarClave;
     }
 }

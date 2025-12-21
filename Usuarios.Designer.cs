@@ -334,7 +334,7 @@
             this.dgvDatosUsuario.ReadOnly = true;
             this.dgvDatosUsuario.RowHeadersWidth = 51;
             this.dgvDatosUsuario.RowTemplate.Height = 24;
-            this.dgvDatosUsuario.Size = new System.Drawing.Size(505, 485);
+            this.dgvDatosUsuario.Size = new System.Drawing.Size(867, 485);
             this.dgvDatosUsuario.TabIndex = 2;
             this.dgvDatosUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatosUsuario_CellClick);
             this.dgvDatosUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatosUsuario_CellContentClick);
@@ -354,7 +354,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1013, 593);
+            this.ClientSize = new System.Drawing.Size(1375, 610);
             this.Controls.Add(this.btnResetClave);
             this.Controls.Add(this.dgvDatosUsuario);
             this.Controls.Add(this.groupBox2);

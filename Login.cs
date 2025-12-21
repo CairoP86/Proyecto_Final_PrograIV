@@ -24,7 +24,9 @@ namespace Proyecto_Final_PrograIV
         
         private void Login_Load(object sender, EventArgs e)
         {
-            
+
+            txtClave.UseSystemPasswordChar = true; // OCULTA por defecto
+
 
             // 🔥 Clave inicia sin ocultar SOLO si tiene placeholder
             txtClave.UseSystemPasswordChar = false;
@@ -126,6 +128,7 @@ namespace Proyecto_Final_PrograIV
         private void txtClave_Enter(object sender, EventArgs e)
         {
 
+
         }
 
 
@@ -133,10 +136,22 @@ namespace Proyecto_Final_PrograIV
         {
 
         }
+        private void chkMostrarClave_CheckedChanged(object sender, EventArgs e)
+        {
+            txtClave.UseSystemPasswordChar = !chkMostrarClave.Checked;
+        }
+
 
         private void btnSalir_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }

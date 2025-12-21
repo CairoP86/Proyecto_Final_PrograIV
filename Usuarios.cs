@@ -426,11 +426,9 @@ namespace Proyecto_Final_PrograIV
                 return;
             }
 
-            // 1️⃣ Clave temporal
-            string claveTemporal = "Temp" + new Random().Next(1000, 9999);
-
-            // 2️⃣ Hash
+            string claveTemporal = Seguridad.GenerarClaveSegura();
             string hash = Seguridad.GenerarHash(claveTemporal);
+
 
             try
             {

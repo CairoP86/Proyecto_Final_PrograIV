@@ -91,8 +91,9 @@ namespace Proyecto_Final_PrograIV
                     int idTiquete = Convert.ToInt32(cmd.ExecuteScalar());
 
                     // Crear notificación automática para el encargado TI
-                    NotificacionesDAO.Crear("0303030003", idTiquete,
-                        "Se ha generado un nuevo ticket en el sistema.");
+                    NotificacionesDAO.CrearParaTodosTI( idTiquete,
+                              "Se ha generado un nuevo ticket en el sistema."
+                    );
                 }
             }
 
