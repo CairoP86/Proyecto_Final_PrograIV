@@ -39,7 +39,6 @@ namespace Proyecto_Final_PrograIV
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            // 1️⃣ Validación básica de campos
             if (string.IsNullOrWhiteSpace(txtCedula.Text) ||
                 string.IsNullOrWhiteSpace(txtClave.Text))
             {
@@ -50,13 +49,10 @@ namespace Proyecto_Final_PrograIV
             string cedula = txtCedula.Text.Trim();
             string clavePlano = txtClave.Text.Trim();
 
-            // 2️⃣ Generar hash de la contraseña ingresada
-            string claveHash = Seguridad.GenerarHash(clavePlano);
-
             UsuarioDAO user = new UsuarioDAO();
 
-            // 3️⃣ Validar credenciales
-            string rol = user.ValidarLogin(cedula, claveHash);
+            // 🔑 Validar credenciales (clave en texto plano)
+            string rol = user.ValidarLogin(cedula, clavePlano);
 
             if (rol == null)
             {
@@ -64,7 +60,6 @@ namespace Proyecto_Final_PrograIV
                 return;
             }
 
-            // 4️⃣ Validar expiración (12 horas en prueba)
             if (user.ClaveExpirada(cedula))
             {
                 MessageBox.Show(
@@ -76,13 +71,13 @@ namespace Proyecto_Final_PrograIV
                 return;
             }
 
-            // 5️⃣ Acceso correcto
             MessageBox.Show("Bienvenido al sistema.");
 
             Principal menu = new Principal(rol, cedula);
             menu.Show();
             this.Hide();
         }
+
 
 
 

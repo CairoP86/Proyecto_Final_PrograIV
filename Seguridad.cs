@@ -10,35 +10,40 @@ namespace Proyecto_Final_PrograIV
 {
     public static class Seguridad
     {
-        public static string GenerarClaveSegura(int longitud = 10)
+
+       
+        public static string GenerarPassword(int longitud = 10)
         {
             const string minusculas = "abcdefghijklmnopqrstuvwxyz";
             const string mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const string numeros = "0123456789";
-            const string especiales = "!@#$%&*?";
+            const string simbolos = "!@#$%&*";
 
-            string todos = minusculas + mayusculas + numeros + especiales;
+            string caracteres = minusculas + mayusculas + numeros + simbolos;
+
             Random rnd = new Random();
+            StringBuilder password = new StringBuilder();
 
-            // Garantizar al menos uno de cada tipo
-            StringBuilder clave = new StringBuilder();
-            clave.Append(minusculas[rnd.Next(minusculas.Length)]);
-            clave.Append(mayusculas[rnd.Next(mayusculas.Length)]);
-            clave.Append(numeros[rnd.Next(numeros.Length)]);
-            clave.Append(especiales[rnd.Next(especiales.Length)]);
+            // Asegurar al menos uno de cada tipo
+            password.Append(minusculas[rnd.Next(minusculas.Length)]);
+            password.Append(mayusculas[rnd.Next(mayusculas.Length)]);
+            password.Append(numeros[rnd.Next(numeros.Length)]);
+            password.Append(simbolos[rnd.Next(simbolos.Length)]);
 
             // Completar el resto
-            for (int i = 4; i < longitud; i++)
+            for (int i = password.Length; i < longitud; i++)
             {
-                clave.Append(todos[rnd.Next(todos.Length)]);
+                password.Append(caracteres[rnd.Next(caracteres.Length)]);
             }
 
-            // Mezclar caracteres
-            return new string(clave
+            // Mezclar el resultado
+            return new string(password
                 .ToString()
-                .OrderBy(c => rnd.Next())
+                .OrderBy(x => rnd.Next())
                 .ToArray());
         }
+
+
 
         public static string GenerarHash(string texto)
         {

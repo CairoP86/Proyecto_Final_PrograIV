@@ -158,7 +158,9 @@ namespace Proyecto_Final_PrograIV
                     conn.Open();
 
                     // 🔐 Contraseña inicial por defecto (solo para pruebas)
-                    string hash = Seguridad.GenerarHash("1234");
+                    string claveGenerada = Seguridad.GenerarPassword(); // letras, números, símbolos
+                    string hash = Seguridad.GenerarHash(claveGenerada);
+
 
                     string insertar = @"INSERT INTO Usuarios 
                                 (Cedula, Nombre, Apellido1, Apellido2, ClaveHash, Rol, FechaCambioClave)
@@ -174,10 +176,20 @@ namespace Proyecto_Final_PrograIV
                         cmd.Parameters.AddWithValue("@rol", cmbRol.Text);
 
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show(
+                                 $"Usuario creado correctamente.\n\n" +
+                                 $"Contraseña inicial:\n{claveGenerada}\n\n" +
+                                 $"⚠️ Copie esta contraseña ahora.\n" +
+                                 $"No se volverá a mostrar.",
+                                  "Contraseña generada",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information
+                        );
+
                     }
                 }
 
-                MessageBox.Show("Usuario agregado con éxito.");
+               
                 dgvDatosUsuario.DataSource = cargarDatos();
                 limpiarCampos();
             }
@@ -426,7 +438,8 @@ namespace Proyecto_Final_PrograIV
                 return;
             }
 
-            string claveTemporal = Seguridad.GenerarClaveSegura();
+            string claveTemporal = Seguridad.GenerarPassword();
+
             string hash = Seguridad.GenerarHash(claveTemporal);
 
 
@@ -472,5 +485,20 @@ namespace Proyecto_Final_PrograIV
             }
         }
 
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+
+            string clavePlano = txtClave.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(clavePlano))
+            {
+                MessageBox.Show("Debe ingresar una contraseña.");
+                return;
+            }
+
+            string hash = Seguridad.GenerarHash(clavePlano);
+
+
+        }
     }
 }

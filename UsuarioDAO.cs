@@ -10,30 +10,35 @@ namespace Proyecto_Final_PrograIV
 {
     public class UsuarioDAO
     {
-        public string ValidarLogin(string cedula, string claveHash)
+        public string ValidarLogin(string cedula, string clavePlano)
         {
-            string rol = null;
-
             using (SqlConnection con = Conexion.ObtenerConexion())
             {
                 con.Open();
 
                 SqlCommand cmd = new SqlCommand(
-                    "SELECT Rol FROM Usuarios WHERE Cedula = @ced AND ClaveHash = @hash",
+                    "SELECT Rol, ClaveHash FROM Usuarios WHERE Cedula = @ced",
                     con
                 );
 
                 cmd.Parameters.AddWithValue("@ced", cedula);
-                cmd.Parameters.AddWithValue("@hash", claveHash);
 
-                var result = cmd.ExecuteScalar();
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (!dr.Read())
+                        return null;
 
-                if (result != null)
-                    rol = result.ToString();
+                    string hashBD = dr["ClaveHash"].ToString();
+                    string hashIngresado = Seguridad.GenerarHash(clavePlano);
+
+                    if (hashBD != hashIngresado)
+                        return null;
+
+                    return dr["Rol"].ToString();
+                }
             }
-
-            return rol;
         }
+
         public bool ClaveExpirada(string cedula)
         {
             using (SqlConnection con = Conexion.ObtenerConexion())
