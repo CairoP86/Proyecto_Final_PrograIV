@@ -79,7 +79,7 @@
             this.txtClave.Margin = new System.Windows.Forms.Padding(4);
             this.txtClave.Multiline = true;
             this.txtClave.Name = "txtClave";
-            this.txtClave.PasswordChar = '*';
+            this.txtClave.PasswordChar = '●';
             this.txtClave.Size = new System.Drawing.Size(384, 37);
             this.txtClave.TabIndex = 3;
             this.txtClave.TextChanged += new System.EventHandler(this.txtClave_TextChanged);

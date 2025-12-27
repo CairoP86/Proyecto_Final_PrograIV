@@ -71,6 +71,12 @@
       <DependentUpon>Asignacion-Software.cs</DependentUpon>
     </Compile>
     <Compile Include="AuditoriaDAO.cs" />
+    <Compile Include="FrmCambioClaveSimple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCambioClaveSimple.Designer.cs">
+      <DependentUpon>FrmCambioClaveSimple.cs</DependentUpon>
+    </Compile>
     <Compile Include="Notificaciones .cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     </Compile>
     <EmbeddedResource Include="Asignacion-Software.resx">
       <DependentUpon>Asignacion-Software.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCambioClaveSimple.resx">
+      <DependentUpon>FrmCambioClaveSimple.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion-Computadoras.resx">
       <DependentUpon>Gestion-Computadoras.cs</DependentUpon>

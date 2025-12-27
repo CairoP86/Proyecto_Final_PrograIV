@@ -162,9 +162,30 @@ namespace Proyecto_Final_PrograIV
                     string hash = Seguridad.GenerarHash(claveGenerada);
 
 
-                    string insertar = @"INSERT INTO Usuarios 
-                                (Cedula, Nombre, Apellido1, Apellido2, ClaveHash, Rol, FechaCambioClave)
-                                VALUES (@ced, @nom, @ape1, @ape2, @hash, @rol, GETDATE())";
+                    string insertar = @"
+                        INSERT INTO Usuarios
+                                (
+                                    Cedula,
+                                    Nombre,
+                                    Apellido1,
+                                    Apellido2,
+                                    ClaveHash,
+                                    Rol,
+                                    FechaCambioClave,
+                                    DebeCambiarClave
+                                )
+                                VALUES
+                                (
+                                    @ced,
+                                    @nom,
+                                    @ape1,
+                                    @ape2,
+                                    @hash,
+                                    @rol,
+                                    GETDATE(),
+                                    1
+                                )";
+
 
                     using (SqlCommand cmd = new SqlCommand(insertar, conn))
                     {
