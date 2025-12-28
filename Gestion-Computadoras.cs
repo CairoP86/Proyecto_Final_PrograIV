@@ -404,5 +404,11 @@ namespace Proyecto_Final_PrograIV
         {
 
         }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            // Limpiar los campos para una nueva entrada
+            limpiarCampos();
+        }
     }
 }

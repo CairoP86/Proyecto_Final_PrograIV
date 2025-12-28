@@ -49,6 +49,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dtvComputadoras = new System.Windows.Forms.DataGridView();
+            this.btnNuevo = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -121,6 +122,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.btnNuevo);
             this.groupBox2.Controls.Add(this.cmbDepartamento);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.cbmAsignado);
@@ -241,7 +243,7 @@
             this.btnEliminar.BackColor = System.Drawing.Color.Red;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(23, 370);
+            this.btnEliminar.Location = new System.Drawing.Point(23, 401);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(280, 30);
@@ -256,7 +258,7 @@
             this.btnActualizar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnActualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualizar.ForeColor = System.Drawing.Color.White;
-            this.btnActualizar.Location = new System.Drawing.Point(23, 338);
+            this.btnActualizar.Location = new System.Drawing.Point(22, 369);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(281, 28);
@@ -271,7 +273,7 @@
             this.btnAgregar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Location = new System.Drawing.Point(23, 304);
+            this.btnAgregar.Location = new System.Drawing.Point(22, 326);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(281, 30);
@@ -313,6 +315,19 @@
             this.dtvComputadoras.Size = new System.Drawing.Size(741, 459);
             this.dtvComputadoras.TabIndex = 6;
             this.dtvComputadoras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvComputadoras_CellClick);
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnNuevo.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevo.ForeColor = System.Drawing.Color.White;
+            this.btnNuevo.Location = new System.Drawing.Point(23, 292);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(280, 29);
+            this.btnNuevo.TabIndex = 19;
+            this.btnNuevo.Text = "Nuevo ";
+            this.btnNuevo.UseVisualStyleBackColor = false;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // compu_mantenimiento
             // 
@@ -362,5 +377,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.DataGridView dtvComputadoras;
+        private System.Windows.Forms.Button btnNuevo;
     }
 }
