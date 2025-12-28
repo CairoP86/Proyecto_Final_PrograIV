@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto_Final_PrograIV
@@ -14,12 +8,16 @@ namespace Proyecto_Final_PrograIV
     public partial class Software : Form
     {
         private int idSoftwareSeleccionado = 0;
+
         public Software()
         {
             InitializeComponent();
         }
 
-        public DataTable CargarSoftware()
+        // =========================
+        // CARGAR SOFTWARE
+        // =========================
+        private DataTable CargarSoftware()
         {
             DataTable dt = new DataTable();
 
@@ -27,13 +25,13 @@ namespace Proyecto_Final_PrograIV
             {
                 conn.Open();
 
-                string consulta = @"SELECT IdSoftware, Nombre, Version, TipoLicencia, 
-                                   StockLicencias, LicenciasDisponibles, LicenciasInstaladas 
-                            FROM Software";
+                string sql = @"
+                    SELECT IdSoftware, Nombre, Version, TipoLicencia,
+                           StockLicencias, LicenciasDisponibles, LicenciasInstaladas
+                    FROM Software";
 
-                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                using (SqlDataAdapter da = new SqlDataAdapter(sql, conn))
                 {
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dt);
                 }
             }
@@ -41,169 +39,44 @@ namespace Proyecto_Final_PrograIV
             return dt;
         }
 
-        public DataTable BuscarSoftware()
-        {
-            DataTable dt = new DataTable();
-
-            using (SqlConnection conn = Conexion.ObtenerConexion())
-            {
-                conn.Open();
-
-                string consulta = @"SELECT Nombre, Version, TipoLicencia, 
-                                   StockLicencias, LicenciasDisponibles, LicenciasInstaladas
-                            FROM Software
-                            WHERE 1 = 1";
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conn;
-
-                if (!string.IsNullOrWhiteSpace(txtNombre.Text))
-                {
-                    consulta += " AND Nombre LIKE @nom";
-                    cmd.Parameters.AddWithValue("@nom", "%" + txtNombre.Text + "%");
-                }
-
-                if (!string.IsNullOrWhiteSpace(txtVersion.Text))
-                {
-                    consulta += " AND Version LIKE @ver";
-                    cmd.Parameters.AddWithValue("@ver", "%" + txtVersion.Text + "%");
-                }
-
-                if (!string.IsNullOrWhiteSpace(cbmTipoLic.Text))
-                {
-                    consulta += " AND TipoLicencia LIKE @tipo";
-                    cmd.Parameters.AddWithValue("@tipo", "%" + cbmTipoLic.Text + "%");
-                }
-
-                if (!string.IsNullOrWhiteSpace(txtStockLic.Text))
-                {
-                    consulta += " AND StockLicencias LIKE @stock";
-                    cmd.Parameters.AddWithValue("@stock", "%" + txtStockLic.Text + "%");
-                }
-
-                cmd.CommandText = consulta;
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-
-            return dt;
-        }
-
+        // =========================
+        // LIMPIAR FORMULARIO
+        // =========================
         private void Limpiar()
         {
             txtNombre.Clear();
             txtVersion.Clear();
             cbmTipoLic.SelectedIndex = -1;
             txtStockLic.Clear();
-
-
             txtLicenDisponibles.Clear();
             txtTipoLicInstalada.Clear();
 
+            idSoftwareSeleccionado = 0;
+            dgvSoftware.ClearSelection();
 
-            cbmCampo.SelectedIndex = -1;
-            
-            
-
-            txtNombre.Focus(); 
+            txtNombre.Focus();
         }
 
-        private void CargarCampos()
+        // =========================
+        // LOAD
+        // =========================
+        private void Software_Load(object sender, EventArgs e)
         {
-            cbmCampo.Items.Clear();
+            dgvSoftware.DataSource = CargarSoftware();
 
-            cbmCampo.Items.Add("Nombre");
-            cbmCampo.Items.Add("Version");
-            cbmCampo.Items.Add("TipoLicencia");
+            cbmTipoLic.Items.Clear();
+            cbmTipoLic.Items.Add("Libre");
+            cbmTipoLic.Items.Add("Pago");
+            cbmTipoLic.SelectedIndex = 0;
+
+            Limpiar();
         }
 
-        private void cbmCampo_SelectedIndexChanged(object sender, EventArgs e)
+        // =========================
+        // SELECCIÓN EN GRID
+        // =========================
+        private void dgvSoftware_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (cbmCampo.SelectedIndex == -1)
-                return;
-
-           
-
-            using (SqlConnection conn = Conexion.ObtenerConexion())
-            {
-                conn.Open();
-
-                string columna = cbmCampo.SelectedItem.ToString();
-                string consulta = $"SELECT DISTINCT {columna} FROM Software ORDER BY {columna}";
-
-                using (SqlCommand cmd = new SqlCommand(consulta, conn))
-                {
-                    SqlDataReader dr = cmd.ExecuteReader();
-
-                    while (dr.Read())
-                    {
-                        
-                    }
-                }
-            }
-        }
-
-        private void cbmDato_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbmCampo.SelectedIndex == -1 )
-                return;
-
-            string campo = cbmCampo.SelectedItem.ToString();
-           
-
-            using (SqlConnection conn = Conexion.ObtenerConexion())
-            {
-                conn.Open();
-
-                string consulta = $"SELECT * FROM Software WHERE {campo} = @val";
-
-                using (SqlCommand cmd = new SqlCommand(consulta, conn))
-                {
-                    
-
-                    DataTable dt = new DataTable();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-
-                    dgvSoftware.DataSource = dt;
-                }
-            }
-        }
-
-        private void cmbNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbVersion_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbmTipoLic_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbmTipoLicInstalada_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbStockLic_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbLicenDisponibles_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvDatosUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
             if (e.RowIndex < 0) return;
 
             DataGridViewRow fila = dgvSoftware.Rows[e.RowIndex];
@@ -218,48 +91,47 @@ namespace Proyecto_Final_PrograIV
             txtTipoLicInstalada.Text = fila.Cells["LicenciasInstaladas"].Value.ToString();
         }
 
+        // =========================
+        // AGREGAR
+        // =========================
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
-        string.IsNullOrWhiteSpace(txtVersion.Text) ||
-        string.IsNullOrWhiteSpace(cbmTipoLic.Text) ||
-        string.IsNullOrWhiteSpace(txtStockLic.Text))
+                string.IsNullOrWhiteSpace(txtVersion.Text) ||
+                string.IsNullOrWhiteSpace(cbmTipoLic.Text) ||
+                !int.TryParse(txtStockLic.Text, out int stock))
             {
-                MessageBox.Show("Complete todos los campos obligatorios.");
+                MessageBox.Show("Complete todos los campos correctamente.");
                 return;
             }
 
-            try
+            using (SqlConnection conn = Conexion.ObtenerConexion())
             {
-                using (SqlConnection conn = Conexion.ObtenerConexion())
-                {
-                    conn.Open();
+                conn.Open();
 
-                    string insertar = @"INSERT INTO Software 
+                string sql = @"
+                    INSERT INTO Software
                     (Nombre, Version, TipoLicencia, StockLicencias, LicenciasDisponibles, LicenciasInstaladas)
                     VALUES (@nom, @ver, @tipo, @stock, @stock, 0)";
 
-                    using (SqlCommand cmd = new SqlCommand(insertar, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
-                        cmd.Parameters.AddWithValue("@ver", txtVersion.Text);
-                        cmd.Parameters.AddWithValue("@tipo", cbmTipoLic.Text);
-                        cmd.Parameters.AddWithValue("@stock", Convert.ToInt32(txtStockLic.Text));
-
-                        cmd.ExecuteNonQuery();
-                    }
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
+                    cmd.Parameters.AddWithValue("@ver", txtVersion.Text);
+                    cmd.Parameters.AddWithValue("@tipo", cbmTipoLic.Text);
+                    cmd.Parameters.AddWithValue("@stock", stock);
+                    cmd.ExecuteNonQuery();
                 }
+            }
 
-                MessageBox.Show("Software agregado correctamente.");
-                dgvSoftware.DataSource = CargarSoftware();
-                Limpiar();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            MessageBox.Show("Software agregado correctamente.");
+            dgvSoftware.DataSource = CargarSoftware();
+            Limpiar();
         }
 
+        // =========================
+        // ACTUALIZAR
+        // =========================
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (idSoftwareSeleccionado == 0)
@@ -270,7 +142,7 @@ namespace Proyecto_Final_PrograIV
 
             if (!int.TryParse(txtStockLic.Text, out int stock))
             {
-                MessageBox.Show("El stock debe ser un número válido.");
+                MessageBox.Show("El stock debe ser numérico.");
                 return;
             }
 
@@ -278,22 +150,22 @@ namespace Proyecto_Final_PrograIV
             {
                 conn.Open();
 
-                string actualizar = @"UPDATE Software SET
-                Nombre = @nom,
-                Version = @ver,
-                TipoLicencia = @tipo,
-                StockLicencias = @stock,
-                LicenciasDisponibles = @stock
-            WHERE IdSoftware = @id";
+                string sql = @"
+                    UPDATE Software SET
+                        Nombre = @nom,
+                        Version = @ver,
+                        TipoLicencia = @tipo,
+                        StockLicencias = @stock,
+                        LicenciasDisponibles = (@stock - LicenciasInstaladas)
+                    WHERE IdSoftware = @id";
 
-                using (SqlCommand cmd = new SqlCommand(actualizar, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
                     cmd.Parameters.AddWithValue("@ver", txtVersion.Text);
                     cmd.Parameters.AddWithValue("@tipo", cbmTipoLic.Text);
                     cmd.Parameters.AddWithValue("@stock", stock);
                     cmd.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
-
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -303,30 +175,50 @@ namespace Proyecto_Final_PrograIV
             Limpiar();
         }
 
+        // =========================
+        // BUSCAR (UN SOLO TEXTO)
+        // =========================
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text) &&
-                string.IsNullOrWhiteSpace(txtVersion.Text) &&
-                string.IsNullOrWhiteSpace(cbmTipoLic.Text) &&
-                string.IsNullOrWhiteSpace(txtStockLic.Text))
+            string texto = txtBuscar.Text.Trim();
+
+            if (string.IsNullOrEmpty(texto))
             {
                 dgvSoftware.DataSource = CargarSoftware();
                 return;
             }
 
-            dgvSoftware.DataSource = BuscarSoftware();
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                conn.Open();
+
+                string sql = @"
+                    SELECT IdSoftware, Nombre, Version, TipoLicencia,
+                           StockLicencias, LicenciasDisponibles, LicenciasInstaladas
+                    FROM Software
+                    WHERE Nombre LIKE @txt OR Version LIKE @txt";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@txt", "%" + texto + "%");
+                    new SqlDataAdapter(cmd).Fill(dt);
+                }
+            }
+
+            dgvSoftware.DataSource = dt;
+            Limpiar();
         }
 
+        // =========================
+        // ELIMINAR
+        // =========================
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (idSoftwareSeleccionado == 0)
             {
-                MessageBox.Show(
-                    "Seleccione un software para eliminar.",
-                    "Advertencia",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                MessageBox.Show("Seleccione un software para eliminar.");
                 return;
             }
 
@@ -334,82 +226,53 @@ namespace Proyecto_Final_PrograIV
             {
                 conn.Open();
 
-                // 1️⃣ Obtener licencias instaladas reales
-                string obtenerLicencias = @"SELECT LicenciasInstaladas
-                                    FROM Software
-                                    WHERE IdSoftware = @id";
+                string sqlLic = "SELECT LicenciasInstaladas FROM Software WHERE IdSoftware = @id";
+                int instaladas;
 
-                int licenciasInstaladas;
-
-                using (SqlCommand cmdLic = new SqlCommand(obtenerLicencias, conn))
+                using (SqlCommand cmd = new SqlCommand(sqlLic, conn))
                 {
-                    cmdLic.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
-                    licenciasInstaladas = Convert.ToInt32(cmdLic.ExecuteScalar());
+                    cmd.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
+                    instaladas = Convert.ToInt32(cmd.ExecuteScalar());
                 }
 
-                // 2️⃣ Bloquear eliminación si hay licencias
-                if (licenciasInstaladas > 0)
+                if (instaladas > 0)
                 {
                     MessageBox.Show(
-                        $"No se puede eliminar el software porque tiene {licenciasInstaladas} licencia(s) instalada(s).",
+                        $"No se puede eliminar.\nLicencias instaladas: {instaladas}",
                         "Eliminación bloqueada",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                    );
+                        MessageBoxIcon.Warning);
                     return;
                 }
 
-                // 3️⃣ Eliminar instalaciones (solo porque no hay licencias)
-                string eliminarInstalaciones = @"DELETE FROM InstalacionesSoftware
-                                         WHERE IdSoftware = @id";
-
-                using (SqlCommand cmdInst = new SqlCommand(eliminarInstalaciones, conn))
-                {
-                    cmdInst.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
-                    cmdInst.ExecuteNonQuery();
-                }
-
-                // 4️⃣ Confirmar eliminación
-                DialogResult confirmacion = MessageBox.Show(
-                    "¿Está seguro de que desea eliminar este software?",
-                    "Confirmar eliminación",
+                DialogResult r = MessageBox.Show(
+                    "¿Desea eliminar este software?",
+                    "Confirmar",
                     MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
+                    MessageBoxIcon.Question);
 
-                if (confirmacion != DialogResult.Yes)
-                    return;
+                if (r != DialogResult.Yes) return;
 
-                // 5️⃣ Eliminar software
-                string eliminarSoftware = "DELETE FROM Software WHERE IdSoftware = @id";
+                string sqlDel = "DELETE FROM Software WHERE IdSoftware = @id";
 
-                using (SqlCommand cmdEliminar = new SqlCommand(eliminarSoftware, conn))
+                using (SqlCommand cmd = new SqlCommand(sqlDel, conn))
                 {
-                    cmdEliminar.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
-                    cmdEliminar.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@id", idSoftwareSeleccionado);
+                    cmd.ExecuteNonQuery();
                 }
             }
 
-            MessageBox.Show(
-                "Software eliminado correctamente.",
-                "Éxito",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-
+            MessageBox.Show("Software eliminado correctamente.");
             dgvSoftware.DataSource = CargarSoftware();
             Limpiar();
-            idSoftwareSeleccionado = 0;
         }
 
-        private void Software_Load(object sender, EventArgs e)
+        // =========================
+        // NUEVO
+        // =========================
+        private void btnNuevo_Click(object sender, EventArgs e)
         {
-            dgvSoftware.DataSource = CargarSoftware();
-            CargarCampos();
-            cbmTipoLic.Items.Clear();
-            cbmTipoLic.Items.Add("Libre");
-            cbmTipoLic.Items.Add("Pago");
-            cbmTipoLic.SelectedIndex = 0;
+            Limpiar();
         }
     }
 }
