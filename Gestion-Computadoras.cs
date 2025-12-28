@@ -13,9 +13,11 @@ namespace Proyecto_Final_PrograIV
 {
     public partial class compu_mantenimiento : Form
     {
+        private bool cargandoDatos = false;
         public compu_mantenimiento()
         {
             InitializeComponent();
+
         }
 
         private void cargarDepartamentos()
@@ -90,70 +92,64 @@ namespace Proyecto_Final_PrograIV
             {
                 da.Fill(dt);
                 dtvComputadoras.DataSource = dt;
+
+                dtvComputadoras.Columns["IdComputadora"].Visible = false;
+                dtvComputadoras.Columns["IdDepartamento"].Visible = false;
+                dtvComputadoras.Columns["IdEmpleado"].Visible = false;
+
+
+                dtvComputadoras.Columns["Marca"].HeaderText = "Marca";
+                dtvComputadoras.Columns["TipoEquipo"].HeaderText = "Tipo";
+                dtvComputadoras.Columns["Serie"].HeaderText = "Serie";
+
+
+                dtvComputadoras.Columns["Marca"].Width = 120;
+                dtvComputadoras.Columns["TipoEquipo"].Width = 100;
+                dtvComputadoras.Columns["Serie"].Width = 150;
             }
+
+            dtvComputadoras.ClearSelection();
+
         }
 
         private void limpiarCampos()
         {
+            cargandoDatos = true;
+
             txtMarca.Clear();
             txtSerie.Clear();
             cbmTipo.SelectedIndex = -1;
             cmbDepartamento.SelectedIndex = -1;
             cbmAsignado.SelectedIndex = -1;
 
-            cbmCampo.SelectedIndex = -1;
-            cbmDato.Items.Clear();
-            cbmDato.SelectedIndex = -1;
+            dtvComputadoras.ClearSelection();
+
+            btnAgregar.Enabled = true;
+            btnActualizar.Enabled = false;
+            btnEliminar.Enabled = false;
+
+            cargandoDatos = false;
         }
+
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            List<string> filtros = new List<string>();
-            List<SqlParameter> parametros = new List<SqlParameter>();
-
-            if (!string.IsNullOrWhiteSpace(txtMarca.Text))
-            {
-                filtros.Add("Marca = @marca");
-                parametros.Add(new SqlParameter("@marca", txtMarca.Text));
-            }
-
-            if (!string.IsNullOrWhiteSpace(txtSerie.Text))
-            {
-                filtros.Add("Serie = @serie");
-                parametros.Add(new SqlParameter("@serie", txtSerie.Text));
-            }
-
-            if (!string.IsNullOrWhiteSpace(cbmTipo.Text))
-            {
-                filtros.Add("TipoEquipo = @tipo");
-                parametros.Add(new SqlParameter("@tipo", cbmTipo.Text));
-            }
-
-            if (!string.IsNullOrWhiteSpace(cmbDepartamento.Text))
-            {
-                filtros.Add("IdDepartamento = @dep");
-                parametros.Add(new SqlParameter("@dep", cmbDepartamento.Text));
-            }
-
-            if (!string.IsNullOrWhiteSpace(cbmAsignado.Text))
-            {
-                filtros.Add("IdEmpleado = @emp");
-                parametros.Add(new SqlParameter("@emp", cbmAsignado.Text));
-            }
-
-            string consulta = "SELECT * FROM Computadoras";
-
-            if (filtros.Count > 0)
-            {
-                consulta += " WHERE " + string.Join(" AND ", filtros);
-            }
+            string texto = txtBuscar.Text.Trim();
 
             DataTable dt = new DataTable();
+
+            string consulta = @"
+        SELECT IdComputadora, Marca, TipoEquipo, Serie, IdDepartamento, IdEmpleado
+        FROM Computadoras
+        WHERE (@texto = '' 
+               OR Marca LIKE '%' + @texto + '%' 
+               OR Serie LIKE '%' + @texto + '%')
+        ORDER BY Marca";
 
             using (SqlConnection con = Conexion.ObtenerConexion())
             using (SqlCommand cmd = new SqlCommand(consulta, con))
             {
-                cmd.Parameters.AddRange(parametros.ToArray());
+                cmd.Parameters.AddWithValue("@texto", texto);
 
                 using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
@@ -162,44 +158,24 @@ namespace Proyecto_Final_PrograIV
             }
 
             dtvComputadoras.DataSource = dt;
+
+           
+
+
         }
 
-        private void cbmCampo_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtBuscar_KeyDown(object sender, KeyEventArgs e)
         {
-            if (cbmCampo.SelectedItem == null)
-                return;
-
-            string columna = cbmCampo.SelectedItem.ToString();
-
-            // Limpiar datos previos
-            cbmDato.Items.Clear();
-            cbmDato.Text = "";
-            cbmDato.SelectedIndex = -1;
-
-            string consulta = $"SELECT DISTINCT {columna} FROM Computadoras ORDER BY {columna}";
-
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                using (SqlConnection con = Conexion.ObtenerConexion())
-                using (SqlCommand cmd = new SqlCommand(consulta, con))
-                {
-                    con.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-
-                    while (dr.Read())
-                    {
-                        if (dr[columna] != DBNull.Value)
-                        {
-                            cbmDato.Items.Add(dr[columna].ToString());
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error cargando datos: " + ex.Message);
+                btnBuscar.PerformClick();
+                e.SuppressKeyPress = true;
             }
         }
+
+
+
+
 
         private void groupBox2_Enter(object sender, EventArgs e)
         {
@@ -214,7 +190,7 @@ namespace Proyecto_Final_PrograIV
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             foreach (DataColumn nombre in dt.Columns) { 
-                cbmCampo.Items.Add(nombre.ColumnName);
+                
             }
 
             
@@ -225,31 +201,21 @@ namespace Proyecto_Final_PrograIV
             cargarDepartamentos();
             cargarComputadoras();
 
+
+            dtvComputadoras.ReadOnly = true;
+            dtvComputadoras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dtvComputadoras.MultiSelect = false;
+
+            dtvComputadoras.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 120, 215);
+            dtvComputadoras.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            // habilitar botones
+            btnAgregar.Enabled = true;
+            btnActualizar.Enabled = false;
+            btnEliminar.Enabled = false;
         }
 
-        private void cbmDato_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbmCampo.SelectedItem == null || cbmDato.SelectedItem == null)
-                return;
 
-            string columna = cbmCampo.SelectedItem.ToString();
-            string valor = cbmDato.SelectedItem.ToString();
-
-            string consulta = $"SELECT * FROM Computadoras WHERE {columna} = @valor";
-
-            DataTable dt = new DataTable();
-
-            using (SqlConnection con = Conexion.ObtenerConexion())
-            using (SqlCommand cmd = new SqlCommand(consulta, con))
-            {
-                cmd.Parameters.AddWithValue("@valor", valor);
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-
-            dtvComputadoras.DataSource = dt;
-        }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -355,22 +321,26 @@ namespace Proyecto_Final_PrograIV
 
         private void dtvComputadoras_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow fila = dtvComputadoras.Rows[e.RowIndex];
+            if (cargandoDatos) return;
+            if (e.RowIndex < 0) return;
 
-                txtMarca.Text = fila.Cells["Marca"].Value.ToString();
-                cbmTipo.Text = fila.Cells["TipoEquipo"].Value.ToString();
-                txtSerie.Text = fila.Cells["Serie"].Value.ToString();
+            DataGridViewRow fila = dtvComputadoras.Rows[e.RowIndex];
 
-                int idDep = Convert.ToInt32(fila.Cells["IdDepartamento"].Value);
-                cmbDepartamento.SelectedValue = idDep;
+            txtMarca.Text = fila.Cells["Marca"].Value.ToString();
+            cbmTipo.Text = fila.Cells["TipoEquipo"].Value.ToString();
+            txtSerie.Text = fila.Cells["Serie"].Value.ToString();
 
-                cargarEmpleadosPorDepartamento(idDep);
+            int idDep = Convert.ToInt32(fila.Cells["IdDepartamento"].Value);
+            cmbDepartamento.SelectedValue = idDep;
 
-                cbmAsignado.SelectedValue = fila.Cells["IdEmpleado"].Value;
-            }
+            cargarEmpleadosPorDepartamento(idDep);
+            cbmAsignado.SelectedValue = fila.Cells["IdEmpleado"].Value;
+
+            btnAgregar.Enabled = false;
+            btnActualizar.Enabled = true;
+            btnEliminar.Enabled = true;
         }
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -428,6 +398,11 @@ namespace Proyecto_Final_PrograIV
 
        
             cargarEmpleadosPorDepartamento(idDep);
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
