@@ -51,6 +51,37 @@ namespace Proyecto_Final_PrograIV
 
         }
 
+        // 🔍 Búsqueda simple por cédula o nombre (nuevo diseño)
+        private DataTable BuscarUsuarios(string texto)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                conn.Open();
+
+                string consulta = @"
+            SELECT Cedula, Nombre, Apellido1, Apellido2, Rol, Fecha_Creacion
+            FROM Usuarios
+            WHERE Cedula LIKE @texto
+               OR Nombre LIKE @texto
+               OR Apellido1 LIKE @texto
+               OR Apellido2 LIKE @texto
+            ORDER BY Nombre";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                {
+                    cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
+
         public DataTable BuscarUsuariosAvanzado()
         {
             DataTable dt = new DataTable();
@@ -379,76 +410,23 @@ namespace Proyecto_Final_PrograIV
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            // Si TODO está vacío → mostrar todos los usuarios
-            if (string.IsNullOrWhiteSpace(txtCedula.Text) &&
-                string.IsNullOrWhiteSpace(txtNombre.Text) &&
-                string.IsNullOrWhiteSpace(txtApellido1.Text) &&
-                string.IsNullOrWhiteSpace(txtApellido2.Text) &&
-                string.IsNullOrWhiteSpace(cmbRol.Text))
+            string texto = txtBuscar.Text.Trim();
+
+            // Si está vacío, muestra todos
+            if (string.IsNullOrWhiteSpace(texto))
             {
                 dgvDatosUsuario.DataSource = cargarDatos();
-                return;
             }
-
-            // Si hay al menos un campo → buscar
-            dgvDatosUsuario.DataSource = BuscarUsuariosAvanzado();
-        }
-
-        private void cbmCampo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbmCampo.SelectedIndex == -1)
-                return;
-
-            cbmDato.Items.Clear();
-
-            using (SqlConnection conn = Conexion.ObtenerConexion())
+            else
             {
-                conn.Open();
-
-                string columna = cbmCampo.SelectedItem.ToString();
-                string consulta = $"SELECT DISTINCT {columna} FROM Usuarios ORDER BY {columna}";
-
-                using (SqlCommand cmd = new SqlCommand(consulta, conn))
-                {
-                    SqlDataReader dr = cmd.ExecuteReader();
-
-                    while (dr.Read())
-                    {
-                        cbmDato.Items.Add(dr[columna].ToString());
-                    }
-                }
+                dgvDatosUsuario.DataSource = BuscarUsuarios(texto);
             }
         }
 
-        private void cbmDato_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbmCampo.SelectedIndex == -1 || cbmDato.SelectedIndex == -1)
-                return;
 
-            string campo = cbmCampo.SelectedItem.ToString();
-            string valor = cbmDato.SelectedItem.ToString();
 
-            using (SqlConnection conn = Conexion.ObtenerConexion())
-            {
-                conn.Open();
 
-                // ⚠️ El nombre del campo NO puede ser parámetro, se interpola
-                string consulta = $@"SELECT Cedula, Nombre, Apellido1, Apellido2, Rol, Fecha_Creacion
-                              FROM Usuarios
-                              WHERE {campo} = @val";
 
-                using (SqlCommand cmd = new SqlCommand(consulta, conn))
-                {
-                    cmd.Parameters.AddWithValue("@val", valor);
-
-                    DataTable dt = new DataTable();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-
-                    dgvDatosUsuario.DataSource = dt;
-                }
-            }
-        }
 
 
         private void btnResetClave_Click(object sender, EventArgs e)
@@ -472,7 +450,8 @@ namespace Proyecto_Final_PrograIV
 
                     string sql = @"UPDATE Usuarios
                                     SET ClaveHash = @hash,
-                                     FechaCambioClave = GETDATE()
+                                     FechaCambioClave = GETDATE(),
+                                        DebeCambiarClave = 1
                                       WHERE Cedula = @ced";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -506,20 +485,6 @@ namespace Proyecto_Final_PrograIV
             }
         }
 
-        private void txtClave_TextChanged(object sender, EventArgs e)
-        {
-
-            string clavePlano = txtClave.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(clavePlano))
-            {
-                MessageBox.Show("Debe ingresar una contraseña.");
-                return;
-            }
-
-            string hash = Seguridad.GenerarHash(clavePlano);
-
-
-        }
+        
     }
 }

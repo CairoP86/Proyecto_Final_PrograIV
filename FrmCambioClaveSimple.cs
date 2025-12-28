@@ -111,6 +111,9 @@ namespace Proyecto_Final_PrograIV
                             "Éxito",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
+            // Volver al Login
+            Login login = new Login();
+            login.Show();
 
             this.Close();
         }

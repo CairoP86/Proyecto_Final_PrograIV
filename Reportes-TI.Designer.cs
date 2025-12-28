@@ -43,18 +43,20 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(297, 28);
+            this.label1.Location = new System.Drawing.Point(396, 34);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(165, 16);
+            this.label1.Size = new System.Drawing.Size(200, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Seleccione el módulo: ";
             // 
             // cbmModulo
             // 
             this.cbmModulo.FormattingEnabled = true;
-            this.cbmModulo.Location = new System.Drawing.Point(283, 47);
+            this.cbmModulo.Location = new System.Drawing.Point(377, 58);
+            this.cbmModulo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbmModulo.Name = "cbmModulo";
-            this.cbmModulo.Size = new System.Drawing.Size(188, 21);
+            this.cbmModulo.Size = new System.Drawing.Size(249, 24);
             this.cbmModulo.TabIndex = 1;
             this.cbmModulo.SelectedIndexChanged += new System.EventHandler(this.cbmModulo_SelectedIndexChanged);
             // 
@@ -63,9 +65,10 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(315, 80);
+            this.label2.Location = new System.Drawing.Point(420, 98);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 16);
+            this.label2.Size = new System.Drawing.Size(149, 20);
             this.label2.TabIndex = 0;
             this.label2.Text = "Tipo de Reporte:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -73,9 +76,10 @@
             // cbmReporte
             // 
             this.cbmReporte.FormattingEnabled = true;
-            this.cbmReporte.Location = new System.Drawing.Point(270, 99);
+            this.cbmReporte.Location = new System.Drawing.Point(360, 122);
+            this.cbmReporte.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbmReporte.Name = "cbmReporte";
-            this.cbmReporte.Size = new System.Drawing.Size(201, 21);
+            this.cbmReporte.Size = new System.Drawing.Size(267, 24);
             this.cbmReporte.TabIndex = 2;
             this.cbmReporte.SelectedIndexChanged += new System.EventHandler(this.cbmReporte_SelectedIndexChanged);
             // 
@@ -85,36 +89,41 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.White;
-            this.dataGridView1.Location = new System.Drawing.Point(55, 153);
+            this.dataGridView1.Location = new System.Drawing.Point(73, 188);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(667, 147);
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.Size = new System.Drawing.Size(1064, 498);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::Proyecto_Final_PrograIV.Properties.Resources.Ilustración_de_Dibujos_Animados_De_Informe_Médico_y_más_Vectores_Libres_de_Derechos_de_Archivo___Archivo__Asistencia_sanitaria_y_medicina__Atención_primaria___iStock;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(64, 71);
+            this.pictureBox1.Size = new System.Drawing.Size(85, 87);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
             // Reportes_TI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Proyecto_Final_PrograIV.Properties.Resources.Imágenes_de_Tecnologia_fondo_blanco___Descarga_gratuita_en_Freepik;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(777, 347);
+            this.ClientSize = new System.Drawing.Size(1170, 723);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cbmReporte);
             this.Controls.Add(this.cbmModulo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Reportes_TI";
             this.Text = "Reportes_TI";
             this.Load += new System.EventHandler(this.Reportes_TI_Load);

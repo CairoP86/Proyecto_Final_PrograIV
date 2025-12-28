@@ -14,8 +14,7 @@ namespace Proyecto_Final_PrograIV
         private string cadenaConexion =
             "Data Source=.\\SQLEXPRESS;Initial Catalog=db_SoporteTI;Integrated Security=True";
 
-        // Se llena cuando el usuario hace login correcto
-        private int idUsuarioActual;
+        
 
         public Login()
         {
