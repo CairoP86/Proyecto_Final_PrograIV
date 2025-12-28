@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto_Final_PrograIV
@@ -14,12 +9,16 @@ namespace Proyecto_Final_PrograIV
     public partial class Asignacion_de_Software : Form
     {
         private string cedulaUsuario;
+
         public Asignacion_de_Software(string cedula)
         {
             InitializeComponent();
             cedulaUsuario = cedula;
         }
 
+        // ===============================
+        // CARGA DE SOFTWARE
+        // ===============================
         private void cargarSoftware()
         {
             try
@@ -29,16 +28,15 @@ namespace Proyecto_Final_PrograIV
                     con.Open();
 
                     string query = "SELECT IdSoftware, Nombre FROM Software";
-
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    SqlDataReader dr = cmd.ExecuteReader();
+                    SqlDataAdapter da = new SqlDataAdapter(query, con);
 
                     DataTable dt = new DataTable();
-                    dt.Load(dr);
+                    da.Fill(dt);
 
                     cbmSoftware.DataSource = dt;
-                    cbmSoftware.DisplayMember = "Nombre";    
-                    cbmSoftware.ValueMember = "IdSoftware";  
+                    cbmSoftware.DisplayMember = "Nombre";
+                    cbmSoftware.ValueMember = "IdSoftware";
+                    cbmSoftware.SelectedIndex = -1; // CLAVE
                 }
             }
             catch (Exception ex)
@@ -47,6 +45,9 @@ namespace Proyecto_Final_PrograIV
             }
         }
 
+        // ===============================
+        // CARGA DE COMPUTADORAS
+        // ===============================
         private void cargarCompus()
         {
             try
@@ -55,79 +56,65 @@ namespace Proyecto_Final_PrograIV
                 {
                     con.Open();
 
-                    string query = "SELECT IdComputadora, IdComputadora FROM Computadoras";
+                    string query = @"
+                SELECT 
+                    IdComputadora,
+                    CONCAT(
+                        'PC-', IdComputadora, ' | ',
+                        Marca, ' | ',
+                        TipoEquipo, ' | ',
+                        Serie
+                    ) AS Descripcion
+                FROM Computadoras
+                ORDER BY IdComputadora";
 
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    SqlDataReader dr = cmd.ExecuteReader();
-
+                    SqlDataAdapter da = new SqlDataAdapter(query, con);
                     DataTable dt = new DataTable();
-                    dt.Load(dr);
+                    da.Fill(dt);
 
                     cbmComputadora.DataSource = dt;
-                    cbmComputadora.DisplayMember = "IdComputadora";
-                    cbmComputadora.ValueMember = "IdComputadora";
+                    cbmComputadora.DisplayMember = "Descripcion";   // 👈 lo que ve el usuario
+                    cbmComputadora.ValueMember = "IdComputadora";   // 👈 lo que usa el sistema
+                    cbmComputadora.SelectedIndex = -1;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error cargando software: " + ex.Message);
+                MessageBox.Show("Error cargando computadoras: " + ex.Message);
             }
         }
 
+
+        // ===============================
+        // LOAD
+        // ===============================
         private void Asignacion_de_Software_Load(object sender, EventArgs e)
         {
             cargarSoftware();
             cargarCompus();
+
             txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
             UsuarioDAO dao = new UsuarioDAO();
-            string nombreUsuario = dao.ObtenerNombreUsuario(cedulaUsuario);
-            txtTecnico.Text = nombreUsuario;
+            txtTecnico.Text = dao.ObtenerNombreUsuario(cedulaUsuario);
 
+            btnInstalar.Enabled = false;
+            lblLicenciasDisponibles.Text = "";
         }
 
-        private void cbmComputadora_SelectedIndexChanged(object sender, EventArgs e)
+        // ===============================
+        // EVENTO COMBO SOFTWARE (CORREGIDO)
+        // ===============================
+        private void cbmSoftware_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-           
-
-        }
-
-        private void btnInstalar_Click(object sender, EventArgs e)
-        {
-           
-            if (cbmSoftware.SelectedValue == null)
-            {
-                MessageBox.Show("Debe seleccionar un software.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            // Protección contra DataRowView
+            if (cbmSoftware.SelectedValue == null ||
+                cbmSoftware.SelectedValue is DataRowView)
                 return;
-            }
 
-            if (cbmComputadora.SelectedValue == null)
-            {
-                MessageBox.Show("Debe seleccionar una computadora.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!int.TryParse(cbmSoftware.SelectedValue.ToString(), out int idSoftware))
                 return;
-            }
 
-            if (string.IsNullOrWhiteSpace(txtFecha.Text))
-            {
-                MessageBox.Show("Debe ingresar la fecha de instalación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(cedulaUsuario))
-            {
-                MessageBox.Show("No se pudo identificar al técnico que está instalando.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            int idSoftware = Convert.ToInt32(cbmSoftware.SelectedValue);
-            int idComputadora = Convert.ToInt32(cbmComputadora.SelectedValue);
-            string fecha = txtFecha.Text;
-
-          
             using (SqlConnection con = Conexion.ObtenerConexion())
             {
                 con.Open();
@@ -140,50 +127,92 @@ namespace Proyecto_Final_PrograIV
 
                 int disponibles = Convert.ToInt32(cmd.ExecuteScalar());
 
+                lblLicenciasDisponibles.Text = $"Licencias disponibles: {disponibles}";
+
                 if (disponibles <= 0)
                 {
-                    MessageBox.Show("No hay licencias disponibles para este software.",
-                        "Sin licencias", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    lblLicenciasDisponibles.ForeColor = Color.Red;
+                    btnInstalar.Enabled = false;
+                }
+                else
+                {
+                    lblLicenciasDisponibles.ForeColor = Color.Green;
+                    btnInstalar.Enabled = true;
                 }
             }
+        }
 
-         
-            // ================================
+        // ===============================
+        // BOTÓN INSTALAR
+        // ===============================
+        private void btnInstalar_Click(object sender, EventArgs e)
+        {
+            if (cbmSoftware.SelectedValue == null ||
+                cbmSoftware.SelectedValue is DataRowView)
+            {
+                MessageBox.Show("Debe seleccionar un software.");
+                return;
+            }
+
+            if (cbmComputadora.SelectedValue == null)
+            {
+                MessageBox.Show("Debe seleccionar una computadora.");
+                return;
+            }
+
+            if (!int.TryParse(cbmSoftware.SelectedValue.ToString(), out int idSoftware))
+                return;
+
+            int idComputadora = Convert.ToInt32(cbmComputadora.SelectedValue);
+            string fecha = txtFecha.Text;
+
+            // Confirmación visual
+            DialogResult confirmacion = MessageBox.Show(
+                $"¿Confirmar instalación?\n\n" +
+                $"Software: {cbmSoftware.Text}\n" +
+                $"Computadora: {cbmComputadora.Text}\n" +
+                $"Fecha: {fecha}\n" +
+                $"Técnico: {txtTecnico.Text}",
+                "Confirmar instalación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (confirmacion != DialogResult.Yes)
+                return;
+
             using (SqlConnection con = Conexion.ObtenerConexion())
             {
                 con.Open();
 
+                // Insert instalación
                 SqlCommand insert = new SqlCommand(
-                    @"INSERT INTO InstalacionesSoftware 
-              (IdSoftware, IdComputadora, FechaInstalacion, TecnicoInstalo)
-              VALUES (@software, @computadora, @fecha, @tecnico)", con);
+                    @"INSERT INTO InstalacionesSoftware
+                      (IdSoftware, IdComputadora, FechaInstalacion, TecnicoInstalo)
+                      VALUES (@software, @computadora, @fecha, @tecnico)", con);
 
                 insert.Parameters.AddWithValue("@software", idSoftware);
                 insert.Parameters.AddWithValue("@computadora", idComputadora);
                 insert.Parameters.AddWithValue("@fecha", fecha);
                 insert.Parameters.AddWithValue("@tecnico", cedulaUsuario);
-
                 insert.ExecuteNonQuery();
-            }
 
-           
-            using (SqlConnection con = Conexion.ObtenerConexion())
-            {
-                con.Open();
-
+                // Update licencias
                 SqlCommand update = new SqlCommand(
                     @"UPDATE Software
-              SET LicenciasDisponibles = LicenciasDisponibles - 1,
-                  LicenciasInstaladas = LicenciasInstaladas + 1
-              WHERE IdSoftware = @id", con);
+                      SET LicenciasDisponibles = LicenciasDisponibles - 1,
+                          LicenciasInstaladas = LicenciasInstaladas + 1
+                      WHERE IdSoftware = @id", con);
 
                 update.Parameters.AddWithValue("@id", idSoftware);
                 update.ExecuteNonQuery();
             }
 
             MessageBox.Show("Software instalado correctamente.",
-                            "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Refresh UI
+            cbmSoftware_SelectedIndexChanged(null, null);
         }
     }
 }

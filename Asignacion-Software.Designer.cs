@@ -41,6 +41,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblLicenciasDisponibles = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +50,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.lblLicenciasDisponibles);
+            this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.txtTecnico);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.cbmSoftware);
@@ -63,19 +67,19 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(546, 278);
+            this.groupBox2.Size = new System.Drawing.Size(546, 313);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             // 
             // txtTecnico
             // 
             this.txtTecnico.Enabled = false;
-            this.txtTecnico.Location = new System.Drawing.Point(259, 137);
-            this.txtTecnico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTecnico.Location = new System.Drawing.Point(259, 186);
+            this.txtTecnico.Margin = new System.Windows.Forms.Padding(4);
             this.txtTecnico.Name = "txtTecnico";
             this.txtTecnico.Size = new System.Drawing.Size(167, 22);
             this.txtTecnico.TabIndex = 17;
-            this.txtTecnico.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+           
             // 
             // label8
             // 
@@ -95,22 +99,23 @@
             this.cbmSoftware.Name = "cbmSoftware";
             this.cbmSoftware.Size = new System.Drawing.Size(167, 24);
             this.cbmSoftware.TabIndex = 13;
+            this.cbmSoftware.SelectedIndexChanged += new System.EventHandler(this.cbmSoftware_SelectedIndexChanged);
             // 
             // cbmComputadora
             // 
             this.cbmComputadora.FormattingEnabled = true;
-            this.cbmComputadora.Location = new System.Drawing.Point(259, 59);
+            this.cbmComputadora.Location = new System.Drawing.Point(258, 63);
             this.cbmComputadora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbmComputadora.Name = "cbmComputadora";
             this.cbmComputadora.Size = new System.Drawing.Size(167, 24);
             this.cbmComputadora.TabIndex = 14;
-            this.cbmComputadora.SelectedIndexChanged += new System.EventHandler(this.cbmComputadora_SelectedIndexChanged);
+            
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(67, 63);
+            this.label6.Location = new System.Drawing.Point(62, 63);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(177, 16);
             this.label6.TabIndex = 15;
@@ -119,7 +124,7 @@
             // txtFecha
             // 
             this.txtFecha.Enabled = false;
-            this.txtFecha.Location = new System.Drawing.Point(259, 95);
+            this.txtFecha.Location = new System.Drawing.Point(258, 147);
             this.txtFecha.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(168, 22);
@@ -130,7 +135,7 @@
             this.btnInstalar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnInstalar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInstalar.ForeColor = System.Drawing.Color.White;
-            this.btnInstalar.Location = new System.Drawing.Point(111, 181);
+            this.btnInstalar.Location = new System.Drawing.Point(109, 233);
             this.btnInstalar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnInstalar.Name = "btnInstalar";
             this.btnInstalar.Size = new System.Drawing.Size(317, 50);
@@ -143,7 +148,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(125, 95);
+            this.label5.Location = new System.Drawing.Point(121, 153);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(118, 16);
             this.label5.TabIndex = 4;
@@ -153,7 +158,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(107, 137);
+            this.label4.Location = new System.Drawing.Point(106, 189);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(133, 16);
             this.label4.TabIndex = 3;
@@ -190,6 +195,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Proceso de Instalacion Software";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(259, 109);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(162, 22);
+            this.textBox1.TabIndex = 18;
+            // 
+            // lblLicenciasDisponibles
+            // 
+            this.lblLicenciasDisponibles.AutoSize = true;
+            this.lblLicenciasDisponibles.Location = new System.Drawing.Point(99, 112);
+            this.lblLicenciasDisponibles.Name = "lblLicenciasDisponibles";
+            this.lblLicenciasDisponibles.Size = new System.Drawing.Size(140, 16);
+            this.lblLicenciasDisponibles.TabIndex = 19;
+            this.lblLicenciasDisponibles.Text = "Licencias disponibles:";
+            // 
             // Asignacion_de_Software
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -225,5 +246,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTecnico;
+        private System.Windows.Forms.Label lblLicenciasDisponibles;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
