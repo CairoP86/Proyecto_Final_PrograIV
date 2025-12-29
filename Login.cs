@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Proyecto_Final_PrograIV
@@ -7,27 +6,39 @@ namespace Proyecto_Final_PrograIV
     public partial class Login : Form
     {
         // ===============================
-        // VARIABLES GLOBALES DEL LOGIN
+        // VARIABLES GLOBALES
         // ===============================
 
-        // Cadena de conexión (ajústala a la real)
+        // Controla si la contraseña está visible
+        private bool mostrarClave = false;
+
+        // Cadena de conexión (usada para el cambio de contraseña)
         private string cadenaConexion =
             "Data Source=.\\SQLEXPRESS;Initial Catalog=db_SoporteTI;Integrated Security=True";
 
-        
-
+        // ===============================
+        // CONSTRUCTOR
+        // ===============================
         public Login()
         {
             InitializeComponent();
+
+            // Contraseña OCULTA por defecto
+            txtClave.PasswordChar = '*';
+
+            // (opcional) si usas multiline
+            txtClave.Multiline = true;
         }
 
         // ===============================
-        // LOAD
+        // BOTÓN VER / OCULTAR CONTRASEÑA 👁️
         // ===============================
-        private void Login_Load(object sender, EventArgs e)
+        private void btnVerClave_Click(object sender, EventArgs e)
         {
-            // Por defecto ocultamos la contraseña
-            txtClave.UseSystemPasswordChar = true;
+            mostrarClave = !mostrarClave;
+
+            // Alterna mostrar / ocultar
+            txtClave.PasswordChar = mostrarClave ? '\0' : '*';
         }
 
         // ===============================
@@ -35,11 +46,16 @@ namespace Proyecto_Final_PrograIV
         // ===============================
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            // 1️⃣ Validación básica
+            // Validación básica
             if (string.IsNullOrWhiteSpace(txtCedula.Text) ||
                 string.IsNullOrWhiteSpace(txtClave.Text))
             {
-                MessageBox.Show("Debe ingresar cédula y contraseña.");
+                MessageBox.Show(
+                    "Debe ingresar cédula y contraseña.",
+                    "Campos obligatorios",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
 
@@ -48,39 +64,36 @@ namespace Proyecto_Final_PrograIV
 
             UsuarioDAO user = new UsuarioDAO();
 
-            // 2️⃣ Validar credenciales
+            // Validar credenciales
             string rol = user.ValidarLogin(cedula, clavePlano);
 
             if (rol == null)
             {
-                MessageBox.Show("Cédula o contraseña incorrecta.");
+                MessageBox.Show(
+                    "Cédula o contraseña incorrecta.",
+                    "Acceso denegado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
                 return;
             }
 
-            // 3️⃣ Obtener el ID del usuario (OBLIGATORIO)
-           
-
-            // 4️⃣ ¿Debe cambiar la clave?
+            // ¿Debe cambiar la contraseña?
             if (user.DebeCambiarClave(cedula))
             {
-                FrmCambioClaveSimple frm = new FrmCambioClaveSimple(cadenaConexion, cedula);
+                FrmCambioClaveSimple frmCambio =
+                    new FrmCambioClaveSimple(cadenaConexion, cedula);
 
-                frm.ShowDialog();
+                frmCambio.ShowDialog();
                 this.Hide();
-                return;
-                // ⛔ no sigue al menú
+                return; // ⛔ no continúa al menú
             }
 
-            // 5️⃣ Login normal
+            // Login exitoso → menú principal
             Principal menu = new Principal(rol, cedula);
             menu.Show();
             this.Hide();
         }
-
-        // validar login 
-
-
-
 
         // ===============================
         // BOTÓN SALIR
@@ -89,25 +102,5 @@ namespace Proyecto_Final_PrograIV
         {
             Application.Exit();
         }
-
-        // ===============================
-        // MOSTRAR / OCULTAR CONTRASEÑA
-        // ===============================
-        private void chkMostrarClave_CheckedChanged(object sender, EventArgs e)
-        {
-            txtClave.UseSystemPasswordChar = !chkMostrarClave.Checked;
-        }
-
-        private void txtCedula_Enter(object sender, EventArgs e) { }
-
-        private void txtClave_TextChanged(object sender, EventArgs e) { }
-
-        private void txtClave_Leave(object sender, EventArgs e) { }
-
-        private void btnSalir_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
     }
 }

@@ -156,5 +156,10 @@ namespace Proyecto_Final_PrograIV
                 return BitConverter.ToString(hash).Replace("-", "").ToLower();
             }
         }
+
+        private void FrmCambioClaveSimple_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

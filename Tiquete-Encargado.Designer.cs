@@ -69,7 +69,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(527, 612);
+            this.groupBox1.Size = new System.Drawing.Size(527, 498);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del tiquete";
@@ -80,14 +80,14 @@
             this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.ForeColor = System.Drawing.Color.White;
-            this.btnBuscar.Location = new System.Drawing.Point(240, 418);
+            this.btnBuscar.Location = new System.Drawing.Point(231, 331);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(108, 46);
+            this.btnBuscar.Size = new System.Drawing.Size(244, 32);
             this.btnBuscar.TabIndex = 11;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+         
             // 
             // btnEliminar
             // 
@@ -95,10 +95,10 @@
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(374, 494);
+            this.btnEliminar.Location = new System.Drawing.Point(231, 454);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(115, 46);
+            this.btnEliminar.Size = new System.Drawing.Size(244, 32);
             this.btnEliminar.TabIndex = 10;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
@@ -110,10 +110,10 @@
             this.btnActualizar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnActualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualizar.ForeColor = System.Drawing.Color.White;
-            this.btnActualizar.Location = new System.Drawing.Point(240, 496);
+            this.btnActualizar.Location = new System.Drawing.Point(231, 407);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(4);
             this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(108, 43);
+            this.btnActualizar.Size = new System.Drawing.Size(244, 28);
             this.btnActualizar.TabIndex = 9;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
@@ -125,10 +125,10 @@
             this.btnIngresar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngresar.ForeColor = System.Drawing.Color.White;
-            this.btnIngresar.Location = new System.Drawing.Point(374, 418);
+            this.btnIngresar.Location = new System.Drawing.Point(231, 371);
             this.btnIngresar.Margin = new System.Windows.Forms.Padding(4);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(115, 46);
+            this.btnIngresar.Size = new System.Drawing.Size(244, 28);
             this.btnIngresar.TabIndex = 8;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = false;
@@ -136,44 +136,44 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(231, 262);
+            this.txtDescripcion.Location = new System.Drawing.Point(241, 201);
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(244, 98);
+            this.txtDescripcion.Size = new System.Drawing.Size(234, 98);
             this.txtDescripcion.TabIndex = 7;
             // 
             // cbmEstado
             // 
             this.cbmEstado.FormattingEnabled = true;
-            this.cbmEstado.Location = new System.Drawing.Point(231, 186);
+            this.cbmEstado.Location = new System.Drawing.Point(241, 152);
             this.cbmEstado.Margin = new System.Windows.Forms.Padding(4);
             this.cbmEstado.Name = "cbmEstado";
-            this.cbmEstado.Size = new System.Drawing.Size(244, 28);
+            this.cbmEstado.Size = new System.Drawing.Size(234, 28);
             this.cbmEstado.TabIndex = 6;
             // 
             // cbmTecnico
             // 
             this.cbmTecnico.FormattingEnabled = true;
-            this.cbmTecnico.Location = new System.Drawing.Point(231, 132);
+            this.cbmTecnico.Location = new System.Drawing.Point(241, 107);
             this.cbmTecnico.Margin = new System.Windows.Forms.Padding(4);
             this.cbmTecnico.Name = "cbmTecnico";
-            this.cbmTecnico.Size = new System.Drawing.Size(244, 28);
+            this.cbmTecnico.Size = new System.Drawing.Size(234, 28);
             this.cbmTecnico.TabIndex = 5;
             // 
             // cbmEmpleado
             // 
             this.cbmEmpleado.FormattingEnabled = true;
-            this.cbmEmpleado.Location = new System.Drawing.Point(231, 58);
+            this.cbmEmpleado.Location = new System.Drawing.Point(241, 58);
             this.cbmEmpleado.Margin = new System.Windows.Forms.Padding(4);
             this.cbmEmpleado.Name = "cbmEmpleado";
-            this.cbmEmpleado.Size = new System.Drawing.Size(244, 28);
+            this.cbmEmpleado.Size = new System.Drawing.Size(234, 28);
             this.cbmEmpleado.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 265);
+            this.label4.Location = new System.Drawing.Point(24, 201);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(116, 20);
@@ -183,7 +183,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 186);
+            this.label3.Location = new System.Drawing.Point(24, 152);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 20);
@@ -193,12 +193,12 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 132);
+            this.label2.Location = new System.Drawing.Point(24, 107);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 20);
+            this.label2.Size = new System.Drawing.Size(162, 20);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Persona Asignada:";
+            this.label2.Text = "Técnico asignado:";
             // 
             // label1
             // 
@@ -206,9 +206,9 @@
             this.label1.Location = new System.Drawing.Point(24, 66);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 20);
+            this.label1.Size = new System.Drawing.Size(249, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Empleado:";
+            this.label1.Text = "Empleado que reporta:";
             // 
             // groupBox2
             // 
@@ -219,7 +219,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(875, 612);
+            this.groupBox2.Size = new System.Drawing.Size(875, 498);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de Tiquetes";
@@ -233,9 +233,9 @@
             this.dgvListaTiquetes.Name = "dgvListaTiquetes";
             this.dgvListaTiquetes.ReadOnly = true;
             this.dgvListaTiquetes.RowHeadersWidth = 51;
-            this.dgvListaTiquetes.Size = new System.Drawing.Size(846, 551);
+            this.dgvListaTiquetes.Size = new System.Drawing.Size(846, 436);
             this.dgvListaTiquetes.TabIndex = 0;
-            this.dgvListaTiquetes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaTiquetes_CellContentClick);
+           
             this.dgvListaTiquetes.SelectionChanged += new System.EventHandler(this.dgvListaTiquetes_SelectionChanged);
             // 
             // label5
@@ -255,7 +255,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1537, 773);
+            this.ClientSize = new System.Drawing.Size(1537, 721);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

@@ -17,71 +17,71 @@ namespace Proyecto_Final_PrograIV
         }
 
         // ===============================
-        // CARGA DE SOFTWARE
+        // CARGAR SOFTWARE
         // ===============================
         private void cargarSoftware()
         {
-            try
+            using (SqlConnection con = Conexion.ObtenerConexion())
             {
-                using (SqlConnection con = Conexion.ObtenerConexion())
-                {
-                    con.Open();
+                con.Open();
 
-                    string query = "SELECT IdSoftware, Nombre FROM Software";
-                    SqlDataAdapter da = new SqlDataAdapter(query, con);
+                SqlDataAdapter da = new SqlDataAdapter(
+                    "SELECT IdSoftware, Nombre FROM Software", con);
 
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                    cbmSoftware.DataSource = dt;
-                    cbmSoftware.DisplayMember = "Nombre";
-                    cbmSoftware.ValueMember = "IdSoftware";
-                    cbmSoftware.SelectedIndex = -1; // CLAVE
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error cargando software: " + ex.Message);
+                cbmSoftware.DataSource = dt;
+                cbmSoftware.DisplayMember = "Nombre";
+                cbmSoftware.ValueMember = "IdSoftware";
+                cbmSoftware.SelectedIndex = -1;
             }
         }
 
         // ===============================
-        // CARGA DE COMPUTADORAS
+        // CARGAR COMPUTADORAS
         // ===============================
         private void cargarCompus()
         {
-            try
+            using (SqlConnection con = Conexion.ObtenerConexion())
             {
-                using (SqlConnection con = Conexion.ObtenerConexion())
-                {
-                    con.Open();
+                con.Open();
 
-                    string query = @"
+                string query = @"
                 SELECT 
                     IdComputadora,
-                    CONCAT(
-                        'PC-', IdComputadora, ' | ',
-                        Marca, ' | ',
-                        TipoEquipo, ' | ',
-                        Serie
-                    ) AS Descripcion
+                    Marca,
+                    TipoEquipo,
+                    Serie
                 FROM Computadoras
                 ORDER BY IdComputadora";
 
-                    SqlDataAdapter da = new SqlDataAdapter(query, con);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
+                SqlDataAdapter da = new SqlDataAdapter(query, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                    cbmComputadora.DataSource = dt;
-                    cbmComputadora.DisplayMember = "Descripcion";   // 👈 lo que ve el usuario
-                    cbmComputadora.ValueMember = "IdComputadora";   // 👈 lo que usa el sistema
-                    cbmComputadora.SelectedIndex = -1;
-                }
+                dgvComputadoras.DataSource = dt;
+
+                dgvComputadoras.Columns["IdComputadora"].HeaderText = "ID";
+                dgvComputadoras.Columns["Marca"].HeaderText = "Marca";
+                dgvComputadoras.Columns["TipoEquipo"].HeaderText = "Tipo";
+                dgvComputadoras.Columns["Serie"].HeaderText = "Serie";
+
+                dgvComputadoras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvComputadoras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvComputadoras.MultiSelect = false;
+                dgvComputadoras.ReadOnly = true;
+
+                dgvComputadoras.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 120, 215);
+                dgvComputadoras.DefaultCellStyle.SelectionForeColor = Color.White;
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error cargando computadoras: " + ex.Message);
-            }
+        }
+
+        private void dgvComputadoras_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && txtLicenciasDisponibles.Text != "0")
+                btnInstalar.Enabled = true;
         }
 
 
@@ -98,16 +98,16 @@ namespace Proyecto_Final_PrograIV
             UsuarioDAO dao = new UsuarioDAO();
             txtTecnico.Text = dao.ObtenerNombreUsuario(cedulaUsuario);
 
+            txtLicenciasDisponibles.ReadOnly = true;
+            txtLicenciasDisponibles.Text = "";
             btnInstalar.Enabled = false;
-            lblLicenciasDisponibles.Text = "";
         }
 
         // ===============================
-        // EVENTO COMBO SOFTWARE (CORREGIDO)
+        // CAMBIO DE SOFTWARE
         // ===============================
         private void cbmSoftware_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Protección contra DataRowView
             if (cbmSoftware.SelectedValue == null ||
                 cbmSoftware.SelectedValue is DataRowView)
                 return;
@@ -120,84 +120,107 @@ namespace Proyecto_Final_PrograIV
                 con.Open();
 
                 SqlCommand cmd = new SqlCommand(
-                    "SELECT LicenciasDisponibles FROM Software WHERE IdSoftware = @id",
-                    con);
+                    "SELECT LicenciasDisponibles FROM Software WHERE IdSoftware = @id", con);
 
                 cmd.Parameters.AddWithValue("@id", idSoftware);
 
                 int disponibles = Convert.ToInt32(cmd.ExecuteScalar());
 
-                lblLicenciasDisponibles.Text = $"Licencias disponibles: {disponibles}";
+                txtLicenciasDisponibles.Text = disponibles.ToString();
 
                 if (disponibles <= 0)
                 {
-                    lblLicenciasDisponibles.ForeColor = Color.Red;
+                    txtLicenciasDisponibles.ForeColor = Color.Red;
                     btnInstalar.Enabled = false;
                 }
                 else
                 {
-                    lblLicenciasDisponibles.ForeColor = Color.Green;
+                    txtLicenciasDisponibles.ForeColor = Color.Green;
                     btnInstalar.Enabled = true;
                 }
             }
         }
 
         // ===============================
-        // BOTÓN INSTALAR
+        // INSTALAR SOFTWARE
         // ===============================
         private void btnInstalar_Click(object sender, EventArgs e)
         {
+            // Validar software
             if (cbmSoftware.SelectedValue == null ||
                 cbmSoftware.SelectedValue is DataRowView)
             {
-                MessageBox.Show("Debe seleccionar un software.");
+                MessageBox.Show("Seleccione un software.");
                 return;
             }
 
-            if (cbmComputadora.SelectedValue == null)
+            // Validar computadora
+            if (dgvComputadoras.CurrentRow == null)
             {
-                MessageBox.Show("Debe seleccionar una computadora.");
+                MessageBox.Show("Seleccione una computadora.");
                 return;
             }
 
-            if (!int.TryParse(cbmSoftware.SelectedValue.ToString(), out int idSoftware))
-                return;
+            int idSoftware = Convert.ToInt32(cbmSoftware.SelectedValue);
+            int idComputadora = Convert.ToInt32(
+                dgvComputadoras.CurrentRow.Cells["IdComputadora"].Value
+            );
+            using (SqlConnection con = Conexion.ObtenerConexion())
+            {
+                con.Open();
 
-            int idComputadora = Convert.ToInt32(cbmComputadora.SelectedValue);
-            string fecha = txtFecha.Text;
+                SqlCommand check = new SqlCommand(
+                    @"SELECT COUNT(*) 
+          FROM InstalacionesSoftware 
+          WHERE IdSoftware = @s AND IdComputadora = @c", con);
 
-            // Confirmación visual
-            DialogResult confirmacion = MessageBox.Show(
+                check.Parameters.AddWithValue("@s", idSoftware);
+                check.Parameters.AddWithValue("@c", idComputadora);
+
+                int yaInstalado = Convert.ToInt32(check.ExecuteScalar());
+
+                if (yaInstalado > 0)
+                {
+                    MessageBox.Show(
+                        "Este software ya está instalado en la computadora seleccionada.",
+                        "Instalación no permitida",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
+            }
+
+
+            DialogResult confirm = MessageBox.Show(
                 $"¿Confirmar instalación?\n\n" +
                 $"Software: {cbmSoftware.Text}\n" +
-                $"Computadora: {cbmComputadora.Text}\n" +
-                $"Fecha: {fecha}\n" +
+                $"Computadora: {dgvComputadoras.CurrentRow.Cells["Marca"].Value} - " +
+                $"{dgvComputadoras.CurrentRow.Cells["Serie"].Value}\n" +
+                $"Fecha: {txtFecha.Text}\n" +
                 $"Técnico: {txtTecnico.Text}",
                 "Confirmar instalación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
 
-            if (confirmacion != DialogResult.Yes)
-                return;
+            if (confirm != DialogResult.Yes) return;
 
             using (SqlConnection con = Conexion.ObtenerConexion())
             {
                 con.Open();
 
-                // Insert instalación
                 SqlCommand insert = new SqlCommand(
                     @"INSERT INTO InstalacionesSoftware
                       (IdSoftware, IdComputadora, FechaInstalacion, TecnicoInstalo)
-                      VALUES (@software, @computadora, @fecha, @tecnico)", con);
+                      VALUES (@s, @c, @f, @t)", con);
 
-                insert.Parameters.AddWithValue("@software", idSoftware);
-                insert.Parameters.AddWithValue("@computadora", idComputadora);
-                insert.Parameters.AddWithValue("@fecha", fecha);
-                insert.Parameters.AddWithValue("@tecnico", cedulaUsuario);
+                insert.Parameters.AddWithValue("@s", idSoftware);
+                insert.Parameters.AddWithValue("@c", idComputadora);
+                insert.Parameters.AddWithValue("@f", txtFecha.Text);
+                insert.Parameters.AddWithValue("@t", cedulaUsuario);
                 insert.ExecuteNonQuery();
 
-                // Update licencias
                 SqlCommand update = new SqlCommand(
                     @"UPDATE Software
                       SET LicenciasDisponibles = LicenciasDisponibles - 1,
@@ -208,10 +231,9 @@ namespace Proyecto_Final_PrograIV
                 update.ExecuteNonQuery();
             }
 
-            MessageBox.Show("Software instalado correctamente.",
-                "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Software instalado correctamente.", "Éxito");
 
-            // Refresh UI
+            // refrescar licencias
             cbmSoftware_SelectedIndexChanged(null, null);
         }
     }

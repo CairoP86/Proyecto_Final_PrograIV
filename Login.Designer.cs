@@ -35,7 +35,7 @@
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.chkMostrarClave = new System.Windows.Forms.CheckBox();
+            this.btnVerClave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -70,8 +70,6 @@
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(384, 41);
             this.txtCedula.TabIndex = 2;
-            this.txtCedula.Enter += new System.EventHandler(this.Login_Load);
-            this.txtCedula.Leave += new System.EventHandler(this.txtCedula_Enter);
             // 
             // txtClave
             // 
@@ -79,12 +77,9 @@
             this.txtClave.Margin = new System.Windows.Forms.Padding(4);
             this.txtClave.Multiline = true;
             this.txtClave.Name = "txtClave";
-            this.txtClave.PasswordChar = '●';
+            this.txtClave.ShortcutsEnabled = false;
             this.txtClave.Size = new System.Drawing.Size(384, 37);
             this.txtClave.TabIndex = 3;
-            this.txtClave.TextChanged += new System.EventHandler(this.txtClave_TextChanged);
-            this.txtClave.Enter += new System.EventHandler(this.txtCedula_Enter);
-            this.txtClave.Leave += new System.EventHandler(this.txtClave_Leave);
             // 
             // btnIniciar
             // 
@@ -114,7 +109,7 @@
             this.btnSalir.TabIndex = 5;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // label3
             // 
@@ -129,16 +124,15 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Login";
             // 
-            // chkMostrarClave
+            // btnVerClave
             // 
-            this.chkMostrarClave.AutoSize = true;
-            this.chkMostrarClave.Location = new System.Drawing.Point(488, 223);
-            this.chkMostrarClave.Name = "chkMostrarClave";
-            this.chkMostrarClave.Size = new System.Drawing.Size(41, 20);
-            this.chkMostrarClave.TabIndex = 7;
-            this.chkMostrarClave.Text = "👁️";
-            this.chkMostrarClave.UseVisualStyleBackColor = true;
-            this.chkMostrarClave.CheckedChanged += new System.EventHandler(this.chkMostrarClave_CheckedChanged);
+            this.btnVerClave.Location = new System.Drawing.Point(489, 215);
+            this.btnVerClave.Name = "btnVerClave";
+            this.btnVerClave.Size = new System.Drawing.Size(33, 30);
+            this.btnVerClave.TabIndex = 8;
+            this.btnVerClave.Text = "👁️";
+            this.btnVerClave.UseVisualStyleBackColor = true;
+            this.btnVerClave.Click += new System.EventHandler(this.btnVerClave_Click);
             // 
             // Login
             // 
@@ -146,7 +140,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(674, 427);
-            this.Controls.Add(this.chkMostrarClave);
+            this.Controls.Add(this.btnVerClave);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnIniciar);
@@ -158,7 +152,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +166,6 @@
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox chkMostrarClave;
+        private System.Windows.Forms.Button btnVerClave;
     }
 }

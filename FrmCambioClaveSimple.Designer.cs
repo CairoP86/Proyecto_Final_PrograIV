@@ -151,6 +151,7 @@
             this.Controls.Add(this.txtClave);
             this.Name = "FrmCambioClaveSimple";
             this.Text = "FrmCambioClaveSimple";
+            this.Load += new System.EventHandler(this.FrmCambioClaveSimple_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
