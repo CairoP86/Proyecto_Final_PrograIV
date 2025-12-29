@@ -185,7 +185,7 @@ namespace Proyecto_Final_PrograIV
         {
             MessageBox.Show(
             "Sistema de Soporte TI\n" +
-            "Proyecto Final - Programación IV\n\n" +
+           
             "Desarrollado por:\n" +
             "• Cairo López\n" +
             "• Kevin Quirós\n" +
