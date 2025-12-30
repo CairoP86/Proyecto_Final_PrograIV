@@ -82,4 +82,4 @@ git clone https://github.com/CairoP86/Proyecto_Final_PrograIV.git
 - **Kevin Quirós Hidalgo** – Ingeniería en Sistemas  
 - **Kevin Morera Mairena** – Ingeniería en Sistemas  
 
-Proyecto desarrollado como trabajo académico y mejorado para fines prácticos y demostrativos.
+
